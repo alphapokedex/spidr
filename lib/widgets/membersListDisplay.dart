@@ -93,7 +93,7 @@ Widget memberList(
                         String userId =
                             snapshot.data.docs[index].data()['userId'];
                         if (edit) {
-                          debugPrint(snapshot.data.docs.length);
+                          print(snapshot.data.docs.length);
                           return snapshot.data.docs.length > 1
                               ? userId != Constants.myUserId &&
                                       (blockList == null ||

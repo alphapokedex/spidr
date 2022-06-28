@@ -117,7 +117,7 @@ class ForgotPasswordScreen extends StatelessWidget {
       } else if (onError
           .toString()
           .contains("The email address is badly formatted.")) {
-        //debugPrint(onError.toString());
+        //print(onError.toString());
         Fluttertoast.showToast(msg: "Email badly formatted");
       } else {
         Fluttertoast.showToast(msg: "Unknown error");

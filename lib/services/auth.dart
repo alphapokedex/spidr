@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:spidr_app/helper/helperFunctions.dart';
 import 'package:spidr_app/model/chatUser.dart';
@@ -22,11 +21,11 @@ class AuthMethods {
       return _userFromFirebaseUser(firebaseUser);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        debugPrint('No user found for that email.');
+        print('No user found for that email.');
       } else if (e.code == 'wrong-password') {
-        debugPrint('Wrong password provided for that user.');
+        print('Wrong password provided for that user.');
       } else {
-        debugPrint(e.code);
+        print(e.code);
       }
     }
   }
@@ -40,7 +39,7 @@ class AuthMethods {
 
       return _userFromFirebaseUser(firebaseUser);
     } catch (e) {
-      debugPrint(e.toString());
+      print(e.toString());
     }
   }
 
@@ -48,7 +47,7 @@ class AuthMethods {
     try {
       return await _auth.sendPasswordResetEmail(email: email);
     } catch (e) {
-      debugPrint(e.toString());
+      print(e.toString());
     }
   }
 
@@ -59,7 +58,7 @@ class AuthMethods {
       await HelperFunctions.saveUserEmailSharedPreference('');
       return await _auth.signOut();
     } catch (e) {
-      debugPrint(e.toString());
+      print(e.toString());
     }
   }
 

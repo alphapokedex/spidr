@@ -50,6 +50,7 @@ viewStoryOnNotif(BuildContext context, storyDS) {
 }
 
 notifOnClickHandler(BuildContext context, Map message) async {
+  if (message = null) return;
   if (message["screen"] == "groupChat") {
     if (message["msgId"].isEmpty && message["data"] != null) {
       Navigator.push(
@@ -67,7 +68,7 @@ notifOnClickHandler(BuildContext context, Map message) async {
       DatabaseMethods()
           .getMsgIndex(message["data"]["groupId"], message["data"]["msgId"])
           .then((int msgIndex) {
-        debugPrint(Constants.myUserId);
+        print(Constants.myUserId);
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -91,7 +92,7 @@ notifOnClickHandler(BuildContext context, Map message) async {
                 fromChat: false,
                 preview: true)));
   } else if (message["screen"] == "personalChat") {
-    debugPrint("testing${message["screen"]}");
+    print("testing${message["screen"]}");
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -218,24 +219,30 @@ Future<void> registerNotification(BuildContext context, String userId) async {
       .getInitialMessage()
       .then((RemoteMessage message) async {
     DatabaseMethods(uid: userId).hopOnNotifSetUp();
-    await notifOnClickHandler(context, message.data);
-    debugPrint('onLaunch: $message');
+    if (message != null) {
+      await notifOnClickHandler(context, message.data);
+    }
+    print('onLaunch: $message');
     return;
   });
 
   // onMessage: When the app is open and it receives a push notification
   FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
     DatabaseMethods(uid: userId).hopOnNotifSetUp();
-    await notifOnClickHandler(context, message.data);
-    debugPrint('onMessage $message');
+    if (message != null) {
+      await notifOnClickHandler(context, message.data);
+    }
+    print('onMessage $message');
     return;
   });
 
   // onResume: When the app is in the background and opened directly from the push notification.
   FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
     DatabaseMethods(uid: userId).hopOnNotifSetUp();
-    debugPrint('onResume: ${message.data}');
-    await notifOnClickHandler(context, message.data);
+    print('onResume: ${message.data}');
+    if (message != null) {
+      await notifOnClickHandler(context, message.data);
+    }
     return;
   });
 
@@ -244,7 +251,7 @@ Future<void> registerNotification(BuildContext context, String userId) async {
     DocumentReference userDocRef = DatabaseMethods().userCollection.doc(userId);
     userDocRef.update({'pushToken': token});
   }).catchError((err) {
-    debugPrint(err.message.toString());
+    print(err.message.toString());
   });
 }
 

@@ -51,7 +51,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onChanged: (value) {
                   setState(() {
                     notifOff = !value;
-                    debugPrint(notifOff.toString());
+                    print(notifOff.toString());
                   });
                   if (notifOff) {
                     DatabaseMethods(uid: Constants.myUserId).turnOffNotif();

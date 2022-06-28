@@ -58,7 +58,7 @@ class DatabaseMethods {
 
   Future<List> getHotTags() async {
     DocumentSnapshot hotTags = await spidrTagsCollection.doc("hotTags").get();
-    debugPrint(hotTags.get("hotTags"));
+    print(hotTags.get("hotTags").toString());
     return hotTags.get("hotTags");
   }
 
@@ -944,7 +944,7 @@ class DatabaseMethods {
         'fileMap': fileMap,
         'mediaGallery': mediaGallery,
       }).catchError((e) {
-        debugPrint(e.toString());
+        print(e.toString());
       });
 
       if (myReply != null) {
@@ -1021,21 +1021,21 @@ class DatabaseMethods {
         .where('deleted', isEqualTo: true)
         .get()
         .then((QuerySnapshot groupQS) {
-      debugPrint("Start Clean Up");
+      print("Start Clean Up");
       for (var groupDS in groupQS.docs) {
         DocumentReference groupDF = groupChatCollection.doc(groupDS.id);
         String profileImg = groupDS.get('profileImg');
 
         if (!profileImg.startsWith('assets', 0)) {
-          debugPrint("0000000000000000000");
-          debugPrint(profileImg);
-          debugPrint("0000000000000000000");
+          print("0000000000000000000");
+          print(profileImg);
+          print("0000000000000000000");
           rmvFileFromStorage(profileImg);
         }
 
-        debugPrint("111111111111111111");
-        debugPrint("GroupId: ${groupDS.id}");
-        debugPrint("111111111111111111");
+        print("111111111111111111");
+        print("GroupId: ${groupDS.id}");
+        print("111111111111111111");
 
         groupDF
             .collection('chats')
@@ -1043,9 +1043,9 @@ class DatabaseMethods {
             .get()
             .then((QuerySnapshot chatQS) {
           Future.forEach(chatQS.docs, (chatDS) async {
-            debugPrint("222222222222222");
-            debugPrint("Delete Chat: ${chatDS.id}");
-            debugPrint("222222222222222");
+            print("222222222222222");
+            print("Delete Chat: ${chatDS.id}");
+            print("222222222222222");
             await deleteConversationMessage(
               groupChatId: groupDS.id,
               chatId: chatDS.id,
@@ -1056,18 +1056,18 @@ class DatabaseMethods {
 
         groupDF.collection('users').get().then((QuerySnapshot userQS) {
           for (var userDS in userQS.docs) {
-            debugPrint("33333333333333333");
-            debugPrint("Delete User: ${userDS.id}");
-            debugPrint("33333333333333333");
+            print("33333333333333333");
+            print("Delete User: ${userDS.id}");
+            print("33333333333333333");
             groupDF.collection('users').doc(userDS.id).delete();
           }
         });
 
         groupDF.collection('stories').get().then((QuerySnapshot storyQS) {
           for (var storyDS in storyQS.docs) {
-            debugPrint("4444444444444444444");
-            debugPrint("Delete Story: ${storyDS.id}");
-            debugPrint("44444444444444444");
+            print("4444444444444444444");
+            print("Delete Story: ${storyDS.id}");
+            print("44444444444444444");
             groupDF.collection('stories').doc(storyDS.id).delete();
           }
         });
@@ -2832,7 +2832,7 @@ class DatabaseMethods {
         break;
       default:
         {
-          debugPrint('No such action');
+          print('No such action');
         }
         break;
     }
@@ -3041,7 +3041,7 @@ class DatabaseMethods {
                       .collection('stories')
                       .doc(story.id)
                       .delete();
-                  debugPrint("$counter:$storyId");
+                  print("$counter:$storyId");
                 }
               },
             ),

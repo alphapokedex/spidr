@@ -63,7 +63,7 @@ class _SignInState extends State<SignIn> {
             MaterialPageRoute(builder: (context) => const PageViewsWrapper()));
       });
     } catch (e) {
-      debugPrint(e);
+      print(e);
     }
   }
 
@@ -72,17 +72,17 @@ class _SignInState extends State<SignIn> {
       //TODO understand errors and adjust error messages - franky
       GoogleSignInAccount googleSignInAccount =
           await _googleSignIn.signIn().catchError((onError) {
-        // debugPrint("1");
-        // debugPrint(onError);
-        // debugPrint(onError.toString());
+        // print("1");
+        // print(onError);
+        // print(onError.toString());
         Fluttertoast.showToast(
             msg: "Google account error. Please try signing in without google.");
       });
 
       GoogleSignInAuthentication googleAuth =
           await googleSignInAccount.authentication.catchError((onError) {
-        // debugPrint("2");
-        // debugPrint(onError.toString());
+        // print("2");
+        // print(onError.toString());
         Fluttertoast.showToast(
             msg: "Google account error. Please try signing in without google.");
       });
@@ -93,8 +93,8 @@ class _SignInState extends State<SignIn> {
       );
       UserCredential result =
           await _auth.signInWithCredential(credential).catchError((onError) {
-        // debugPrint("3");
-        // debugPrint(onError.toString());
+        // print("3");
+        // print(onError.toString());
         Fluttertoast.showToast(
             msg: "Google account error. Please try signing in without google.");
       });
@@ -114,7 +114,7 @@ class _SignInState extends State<SignIn> {
             MaterialPageRoute(builder: (context) => const PageViewsWrapper()));
       });
     } catch (e) {
-      debugPrint(e);
+      print(e);
     }
   }
 

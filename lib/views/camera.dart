@@ -135,7 +135,7 @@ class _AppCameraScreenState extends State<AppCameraScreen>
     });
 
     if (cameraController.value.hasError) {
-      debugPrint('Camera Error ${cameraController.value.errorDescription}');
+      print('Camera Error ${cameraController.value.errorDescription}');
     }
 
     try {
@@ -243,8 +243,8 @@ class _AppCameraScreenState extends State<AppCameraScreen>
           "Demo"; //setting to the name of the animation will trigger it to start
     });
 
-    //debugPrint('camera recording: ${cameraController.value.isRecordingVideo}');
-    //debugPrint("Starting Recording to file $filepath");
+    //print('camera recording: ${cameraController.value.isRecordingVideo}');
+    //print("Starting Recording to file $filepath");
 
     Timer.periodic(const Duration(milliseconds: 10), (timer) {
       if (timer.tick >= AppCameraScreen.MAX_VIDEO_DURATION * 100) {
@@ -253,14 +253,14 @@ class _AppCameraScreenState extends State<AppCameraScreen>
       }
 
       if (!cameraController.value.isRecordingVideo) {
-        //debugPrint('Recorded ~${timer.tick / 100} seconds of video');
+        //print('Recorded ~${timer.tick / 100} seconds of video');
         timer.cancel();
         //push preview here?
         return;
       }
 
       if (timer.tick % 100 == 0) {
-        //debugPrint('seconds recorded: ${timer.tick / 100}');
+        //print('seconds recorded: ${timer.tick / 100}');
       }
       setState(() {
         percentOfMaxVideoDurationRecorded =
@@ -270,7 +270,7 @@ class _AppCameraScreenState extends State<AppCameraScreen>
   }
 
   void stopVideo() async {
-    //debugPrint("STOPPING VIDEO");
+    //print("STOPPING VIDEO");
     if (cameraController.value.isRecordingVideo) {
       if (multiMedia) {
         File videoFile = await CameraMethods.stopVideoForMulti(
@@ -752,9 +752,9 @@ class _AppCameraScreenState extends State<AppCameraScreen>
 
   void logError(String code, String message) {
     if (message != null) {
-      debugPrint('Error: $code\nError Message: $message');
+      print('Error: $code\nError Message: $message');
     } else {
-      debugPrint('Error: $code');
+      print('Error: $code');
     }
   }
 
@@ -1224,10 +1224,10 @@ class _AppCameraScreenState extends State<AppCameraScreen>
         });
         initCamera(cameras[selectedCameraIndex]);
       } else {
-        debugPrint("No camera available");
+        print("No camera available");
       }
     }).catchError((e) {
-      debugPrint('Error: ${e.code}');
+      print('Error: ${e.code}');
     });
   }
 }
