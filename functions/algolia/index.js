@@ -1,0 +1,1 @@
+exports.synchronization = require('./synchronization');
