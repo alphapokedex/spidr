@@ -80,9 +80,7 @@ class _CallScreenState extends State<CallScreen> {
   void _addAgoraEventHandlers() {
     _engine.setEventHandler(RtcEngineEventHandler(
       error: (code) {
-        print("00000000000000000");
-        print("Error: $code");
-        print("000000000000000000");
+        debugPrint(code.name);
       },
       audioVolumeIndication:
           (List<AudioVolumeInfo> audInfoList, int totalVolume) {

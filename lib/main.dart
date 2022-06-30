@@ -1,6 +1,9 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -16,7 +19,10 @@ import './views/pageViewsWrapper.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  FlutterDownloader.initialize(debug: false);
+  await FlutterDownloader.initialize(debug: false);
+  FirebaseAuth.instance.useAuthEmulator('10.0.2.2', 9099);
+  FirebaseStorage.instance.useStorageEmulator('10.0.2.2', 9199);
+  FirebaseFirestore.instance.useFirestoreEmulator('10.0.2.2', 8080);
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool seen = (prefs.getBool('seen') ?? false);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(

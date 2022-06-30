@@ -345,7 +345,7 @@ List<Map> conMediaList(List<SelectedFile> rdyMedia) {
 // }
 
 conGifWidgets(List gifs) {
-  List<Widget> gifsWidgetList = [];
+  List gifsWidgetList = [];
   if (gifsWidgetList != null) {
     for (Map g in gifs) {
       double scale = g["scale"] ??= g["scale"].toDouble();

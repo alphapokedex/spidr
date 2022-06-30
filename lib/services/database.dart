@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:spidr_app/helper/constants.dart';
 import 'package:spidr_app/helper/functions.dart';
 
@@ -1021,21 +1021,13 @@ class DatabaseMethods {
         .where('deleted', isEqualTo: true)
         .get()
         .then((QuerySnapshot groupQS) {
-      print("Start Clean Up");
       for (var groupDS in groupQS.docs) {
         DocumentReference groupDF = groupChatCollection.doc(groupDS.id);
         String profileImg = groupDS.get('profileImg');
 
         if (!profileImg.startsWith('assets', 0)) {
-          print("0000000000000000000");
-          print(profileImg);
-          print("0000000000000000000");
           rmvFileFromStorage(profileImg);
         }
-
-        print("111111111111111111");
-        print("GroupId: ${groupDS.id}");
-        print("111111111111111111");
 
         groupDF
             .collection('chats')
@@ -1043,9 +1035,6 @@ class DatabaseMethods {
             .get()
             .then((QuerySnapshot chatQS) {
           Future.forEach(chatQS.docs, (chatDS) async {
-            print("222222222222222");
-            print("Delete Chat: ${chatDS.id}");
-            print("222222222222222");
             await deleteConversationMessage(
               groupChatId: groupDS.id,
               chatId: chatDS.id,
@@ -1056,18 +1045,12 @@ class DatabaseMethods {
 
         groupDF.collection('users').get().then((QuerySnapshot userQS) {
           for (var userDS in userQS.docs) {
-            print("33333333333333333");
-            print("Delete User: ${userDS.id}");
-            print("33333333333333333");
             groupDF.collection('users').doc(userDS.id).delete();
           }
         });
 
         groupDF.collection('stories').get().then((QuerySnapshot storyQS) {
           for (var storyDS in storyQS.docs) {
-            print("4444444444444444444");
-            print("Delete Story: ${storyDS.id}");
-            print("44444444444444444");
             groupDF.collection('stories').doc(storyDS.id).delete();
           }
         });

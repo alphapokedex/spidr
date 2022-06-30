@@ -408,7 +408,7 @@ Widget mediaAndFilePreview({
                     : mediaUrl != null
                         ? ImageUrlPreview(
                             fileURL: mediaUrl,
-                            gifs: conGifWidgets(gifs),
+                            gifs: List.from(conGifWidgets(gifs)),
                             caption: caption,
                             div: div,
                             numOfLines: numOfLines,
