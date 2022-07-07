@@ -1,0 +1,80 @@
+{
+  "project_info": {
+    "project_number": "282315820927",
+    "firebase_url": "https://spidr-release-default-rtdb.firebaseio.com",
+    "project_id": "spidr-release",
+    "storage_bucket": "spidr-release.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282315820927:android:1d295df29e7de2c1e9544a",
+        "android_client_info": {
+          "package_name": "com.Brane.Spidr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "282315820927-b8rg0d9n3rnlbjmenf353houoeg1r610.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Brane.Spidr",
+            "certificate_hash": "468799783bdc1b45272c0f510db133f2e6d7109c"
+          }
+        },
+        {
+          "client_id": "282315820927-l4p8uiv97t2lgb6s0b6ca9oii861g2j0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Brane.Spidr",
+            "certificate_hash": "2e30492d223c53035f23a9f14a4eac45bf327881"
+          }
+        },
+        {
+          "client_id": "282315820927-mhegftn2jjup057aaqqa6k9j4r4cp7p5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Brane.Spidr",
+            "certificate_hash": "92b5b7c70175927eb51bc8adc1f21f162fc3c01c"
+          }
+        },
+        {
+          "client_id": "282315820927-ufv855d4n5einoh9ba9a4mcgqht3i9n6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Brane.Spidr",
+            "certificate_hash": "668d7252798a89cca216969280dd19ed6f189e54"
+          }
+        },
+        {
+          "client_id": "282315820927-956hft1kotrtpmp1o4cld2rbm17a4t8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_3okXSfEodY1d9ZL_o0forPGqptIGRUA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282315820927-956hft1kotrtpmp1o4cld2rbm17a4t8f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "282315820927-083ljmhd3kjtr4rqonn4ipvfq4jgkdg6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.spidr.brane",
+                "app_store_id": "1547041085"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
