@@ -1,22 +1,22 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:spidr_app/helper/authenticate.dart';
 import 'package:spidr_app/helper/helperFunctions.dart';
 import 'package:spidr_app/services/auth.dart';
 import 'package:spidr_app/views/introScreen.dart';
+import 'package:spidr_app/views/pageViewsWrapper.dart';
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp();
   await FlutterDownloader.initialize(debug: false);
-  // FirebaseAuth.instance.useAuthEmulator('10.0.2.2', 9099);
-  // FirebaseStorage.instance.useStorageEmulator('10.0.2.2', 9199);
-  // FirebaseFirestore.instance.useFirestoreEmulator('10.0.2.2', 8080);
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool seen = prefs.getBool('seen') ?? false;
   SystemChrome.setSystemUIOverlayStyle(
@@ -82,9 +82,9 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           visualDensity: VisualDensity.adaptivePlatformDensity,
           canvasColor: Colors.transparent,
         ),
-        // home: userIsLoggedIn != null && userIsLoggedIn
-        //     ? const PageViewsWrapper()
-        //     : const Center(child: Authenticate()),
+        home: userIsLoggedIn != null && userIsLoggedIn
+            ? const PageViewsWrapper()
+            : const Center(child: Authenticate()),
       ),
     );
   }
