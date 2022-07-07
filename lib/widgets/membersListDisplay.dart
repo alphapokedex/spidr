@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spidr_app/helper/constants.dart';
 import 'package:spidr_app/services/database.dart';
-import "package:spidr_app/widgets/widget.dart";
+import 'package:spidr_app/widgets/widget.dart';
 
 import 'dialogWidgets.dart';
 
@@ -41,10 +41,10 @@ Widget memberTile(
                 children: [
                   Text(
                       editGroup
-                          ? "Ban"
+                          ? 'Ban'
                           : admin
-                              ? "Admin"
-                              : "Mem",
+                              ? 'Admin'
+                              : 'Mem',
                       style: const TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold)),
                   !editGroup && admin
@@ -77,7 +77,7 @@ Widget memberList(
       builder: (context, snapshot) {
         List blockList;
         if (snapshot.hasData && snapshot.data.data() != null) {
-          blockList = snapshot.data.data()["blockList"];
+          blockList = snapshot.data.data()['blockList'];
         }
         return StreamBuilder(
             stream: DatabaseMethods().getGroupMembers(groupId),
@@ -107,7 +107,7 @@ Widget memberList(
                                   : const SizedBox.shrink()
                               : noItems(
                                   icon: Icons.supervised_user_circle_rounded,
-                                  text: "no members yet",
+                                  text: 'no members yet',
                                   mAxAlign: MainAxisAlignment.center);
                         } else {
                           return !Constants.myBlockList.contains(userId)

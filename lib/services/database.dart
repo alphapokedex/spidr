@@ -57,9 +57,9 @@ class DatabaseMethods {
   // }
 
   Future<List> getHotTags() async {
-    DocumentSnapshot hotTags = await spidrTagsCollection.doc("hotTags").get();
-    print(hotTags.get("hotTags").toString());
-    return hotTags.get("hotTags");
+    DocumentSnapshot hotTags = await spidrTagsCollection.doc('hotTags').get();
+    print(hotTags.get('hotTags').toString());
+    return hotTags.get('hotTags');
   }
 
   // Future<List> getGenreTags()async{
@@ -76,7 +76,7 @@ class DatabaseMethods {
         .doc(uid)
         .collection('friends')
         .doc(friendId)
-        .update({"pinned": true});
+        .update({'pinned': true});
   }
 
   unPinMyFriend(String friendId) {
@@ -84,18 +84,18 @@ class DatabaseMethods {
         .doc(uid)
         .collection('friends')
         .doc(friendId)
-        .update({"pinned": false});
+        .update({'pinned': false});
   }
 
   muteMyFriend(String plChatId) {
     userCollection.doc(uid).update({
-      "mutedChats": FieldValue.arrayUnion([plChatId])
+      'mutedChats': FieldValue.arrayUnion([plChatId])
     });
   }
 
   unMuteMyFriend(String plChatId) {
     userCollection.doc(uid).update({
-      "mutedChats": FieldValue.arrayRemove([plChatId])
+      'mutedChats': FieldValue.arrayRemove([plChatId])
     });
   }
 
@@ -145,14 +145,14 @@ class DatabaseMethods {
       'friends': FieldValue.arrayUnion([uid])
     });
     userCollection.doc(friendId).collection('friends').doc(uid).set({
-      "friendId": uid,
+      'friendId': uid,
     });
     userCollection.doc(uid).update({
       'friends': FieldValue.arrayUnion([friendId])
     });
     userCollection.doc(uid).collection('friends').doc(friendId).set({
-      "acceptor": Constants.myName,
-      "friendId": friendId,
+      'acceptor': Constants.myName,
+      'friendId': friendId,
     });
   }
 
@@ -167,11 +167,11 @@ class DatabaseMethods {
   }
 
   hopOffNotifSetUp() {
-    userCollection.doc(uid).update({"hoppedOn": false});
+    userCollection.doc(uid).update({'hoppedOn': false});
   }
 
   hopOnNotifSetUp() {
-    userCollection.doc(uid).update({"hoppedOn": true});
+    userCollection.doc(uid).update({'hoppedOn': true});
   }
 
   // searchMediaStories(List<String> tags) async{
@@ -189,11 +189,11 @@ class DatabaseMethods {
     // List mdIndices
   }) {
     switch (type) {
-      case "Media":
+      case 'Media':
         return AlgoliaMethods.getMedia(searchTxt);
-      case "Audio":
+      case 'Audio':
         return AlgoliaMethods.getMediaAud(searchTxt);
-      case "PDF":
+      case 'PDF':
         return AlgoliaMethods.getMediaPDF(searchTxt);
     }
 
@@ -210,7 +210,7 @@ class DatabaseMethods {
   }
 
   getUserByUserEmail(String userEmail) async {
-    return await userCollection.where("email", isEqualTo: userEmail).get();
+    return await userCollection.where('email', isEqualTo: userEmail).get();
   }
 
   getUserById() async {
@@ -227,7 +227,7 @@ class DatabaseMethods {
 
     DocumentSnapshot groupDS = await groupDF.get();
     if (groupDS.exists) {
-      groupDF.update({"inChat": true, "newMsg": [], "numOfNewMsg": 0});
+      groupDF.update({'inChat': true, 'newMsg': [], 'numOfNewMsg': 0});
     }
   }
 
@@ -237,7 +237,7 @@ class DatabaseMethods {
 
     DocumentSnapshot groupDS = await groupDF.get();
 
-    if (groupDS.exists) groupDF.update({"inChat": false});
+    if (groupDS.exists) groupDF.update({'inChat': false});
   }
 
   openSpecChat(String groupId) async {
@@ -247,7 +247,7 @@ class DatabaseMethods {
     DocumentSnapshot specDS = await specDF.get();
 
     if (specDS.exists) {
-      specDF.update({"inChat": true, "newMsg": [], 'numOfNewMsg': 0});
+      specDF.update({'inChat': true, 'newMsg': [], 'numOfNewMsg': 0});
     }
   }
 
@@ -256,7 +256,7 @@ class DatabaseMethods {
         userCollection.doc(uid).collection('groups').doc(groupId);
 
     DocumentSnapshot specDS = await specDF.get();
-    if (specDS.exists) specDF.update({"inChat": false});
+    if (specDS.exists) specDF.update({'inChat': false});
   }
 
   openPersonalChat(String personalChatId, String friendId, bool friend) {
@@ -319,8 +319,8 @@ class DatabaseMethods {
       'senderId': senderId,
       'saveTime': DateTime.now().microsecondsSinceEpoch,
       'media': imgObj != null || mediaGallery != null,
-      'audio': fileObj != null && audioChecker(fileObj["fileName"]),
-      'pdf': fileObj != null && pdfChecker(fileObj["fileName"]),
+      'audio': fileObj != null && audioChecker(fileObj['fileName']),
+      'pdf': fileObj != null && pdfChecker(fileObj['fileName']),
       'anon': anon
     });
 
@@ -354,14 +354,14 @@ class DatabaseMethods {
         delStory(mediaId);
         delMedia(mediaId);
         if (imgObj != null &&
-            imgObj["gif"] == null &&
-            imgObj["sticker"] == null) {
-          rmvFileFromStorage(imgObj["imgUrl"]);
+            imgObj['gif'] == null &&
+            imgObj['sticker'] == null) {
+          rmvFileFromStorage(imgObj['imgUrl']);
         } else if (fileObj != null) {
-          rmvFileFromStorage(fileObj["fileUrl"]);
+          rmvFileFromStorage(fileObj['fileUrl']);
         } else if (mediaGallery != null) {
           for (Map m in mediaGallery) {
-            rmvFileFromStorage(m["imgUrl"]);
+            rmvFileFromStorage(m['imgUrl']);
           }
         }
       } else {
@@ -404,17 +404,17 @@ class DatabaseMethods {
         .get();
 
     for (var itemDS in itemQS.docs) {
-      String groupId = itemDS.get("groupId");
+      String groupId = itemDS.get('groupId');
       if (groupId != null) {
-        if (itemDS.get("media") != null && itemDS.get("media")) {
+        if (itemDS.get('media') != null && itemDS.get('media')) {
           if (!mdGroupIds.contains(groupId)) {
             mdGroupIds.add(groupId);
           }
-        } else if (itemDS.get("audio") != null && itemDS.get("audio")) {
+        } else if (itemDS.get('audio') != null && itemDS.get('audio')) {
           if (!adGroupIds.contains(groupId)) {
             adGroupIds.add(groupId);
           }
-        } else if (itemDS.get("pdf") != null && itemDS.get("pdf")) {
+        } else if (itemDS.get('pdf') != null && itemDS.get('pdf')) {
           if (!pdfGroupIds.contains(groupId)) {
             pdfGroupIds.add(groupId);
           }
@@ -428,7 +428,7 @@ class DatabaseMethods {
     return userCollection
         .doc(uid)
         .collection('backpack')
-        .where("media", isEqualTo: true)
+        .where('media', isEqualTo: true)
         .where('groupId', isEqualTo: groupId)
         .snapshots();
   }
@@ -437,7 +437,7 @@ class DatabaseMethods {
     return userCollection
         .doc(uid)
         .collection('backpack')
-        .where("media", isEqualTo: true)
+        .where('media', isEqualTo: true)
         .orderBy('saveTime', descending: true)
         .snapshots();
   }
@@ -446,7 +446,7 @@ class DatabaseMethods {
     return userCollection
         .doc(uid)
         .collection('backpack')
-        .where("audio", isEqualTo: true)
+        .where('audio', isEqualTo: true)
         .where('groupId', isEqualTo: groupId)
         .snapshots();
   }
@@ -455,7 +455,7 @@ class DatabaseMethods {
     return userCollection
         .doc(uid)
         .collection('backpack')
-        .where("audio", isEqualTo: true)
+        .where('audio', isEqualTo: true)
         .orderBy('saveTime', descending: true)
         .snapshots();
   }
@@ -464,7 +464,7 @@ class DatabaseMethods {
     return userCollection
         .doc(uid)
         .collection('backpack')
-        .where("pdf", isEqualTo: true)
+        .where('pdf', isEqualTo: true)
         .where('groupId', isEqualTo: groupId)
         .snapshots();
   }
@@ -473,7 +473,7 @@ class DatabaseMethods {
     return userCollection
         .doc(uid)
         .collection('backpack')
-        .where("pdf", isEqualTo: true)
+        .where('pdf', isEqualTo: true)
         .orderBy('saveTime', descending: true)
         .snapshots();
   }
@@ -493,11 +493,11 @@ class DatabaseMethods {
     }
 
     if (numOfUploads == null) {
-      contactDF.update({"numOfUploads": numOfFiles ?? 1});
+      contactDF.update({'numOfUploads': numOfFiles ?? 1});
     } else {
       numOfUploads =
           numOfFiles != null ? numOfUploads + numOfFiles : numOfUploads + 1;
-      contactDF.update({"numOfUploads": numOfUploads});
+      contactDF.update({'numOfUploads': numOfUploads});
     }
   }
 
@@ -506,20 +506,20 @@ class DatabaseMethods {
         userCollection.doc(uid).collection('friends').doc(friendId);
     DocumentSnapshot friendDS = await friendDF.get();
     int numOfUploads = friendDS.data().toString().contains('numofUploads')
-        ? friendDS.get("numOfUploads")
+        ? friendDS.get('numOfUploads')
         : null;
 
     try {
-      numOfUploads = friendDS.get("numOfUploads");
+      numOfUploads = friendDS.get('numOfUploads');
     } on StateError {
       numOfUploads = null;
     }
     if (numOfUploads == null) {
-      friendDF.update({"numOfUploads": numOfFiles ?? 1});
+      friendDF.update({'numOfUploads': numOfFiles ?? 1});
     } else {
       numOfUploads =
           numOfFiles != null ? numOfUploads + numOfFiles : numOfUploads + 1;
-      friendDF.update({"numOfUploads": numOfUploads});
+      friendDF.update({'numOfUploads': numOfUploads});
     }
   }
 
@@ -553,12 +553,12 @@ class DatabaseMethods {
 
     DocumentReference personalChatDF = await personalChatCollection
         .doc(personalChatId)
-        .collection("messages")
+        .collection('messages')
         .add({
       'sendTo': contactId,
       'personalChatId': personalChatId,
       'text': '',
-      'sender': anon == null || !anon ? Constants.myName : "Anonymous",
+      'sender': anon == null || !anon ? Constants.myName : 'Anonymous',
       'senderId': uid,
       'sendTime': time,
       'imgMap': imgMap,
@@ -597,10 +597,10 @@ class DatabaseMethods {
     if (chatId == null) {
       DocumentReference chatDF = await personalChatCollection
           .doc(personalChatId)
-          .collection("messages")
+          .collection('messages')
           .add({
         'text': text,
-        'sender': anon == null || !anon ? userName : "Anonymous",
+        'sender': anon == null || !anon ? userName : 'Anonymous',
         'senderId': uid,
         'sendTime': sendTime,
         'personalChatId': personalChatId,
@@ -660,7 +660,7 @@ class DatabaseMethods {
     }
     if (numOfUploads > 0) {
       numOfUploads = numOfUploads - 1;
-      contactDF.update({"numOfUploads": numOfUploads});
+      contactDF.update({'numOfUploads': numOfUploads});
     }
   }
 
@@ -680,7 +680,7 @@ class DatabaseMethods {
     }
     if (numOfUploads > 0) {
       numOfUploads = numOfUploads - 1;
-      friendDF.update({"numOfUploads": numOfUploads});
+      friendDF.update({'numOfUploads': numOfUploads});
     }
   }
 
@@ -807,7 +807,7 @@ class DatabaseMethods {
   deletePersonalMessage(String personalChatId, String textId) async {
     DocumentReference textDocRef = personalChatCollection
         .doc(personalChatId)
-        .collection("messages")
+        .collection('messages')
         .doc(textId);
 
     DocumentSnapshot textSnapshot = await textDocRef.get();
@@ -891,7 +891,7 @@ class DatabaseMethods {
             messageId: chatId,
             personalChatId: personalChatId,
             userId: contactId,
-            actionType: "DELETE_REPLY");
+            actionType: 'DELETE_REPLY');
       }
     }
   }
@@ -915,9 +915,9 @@ class DatabaseMethods {
     DocumentReference perChatDocRef;
     int replyTime = DateTime.now().microsecondsSinceEpoch;
 
-    if (actionType == "REPLY_CHAT") {
-      bool audio = fileMap != null && audioChecker(fileMap["fileName"]);
-      bool pdf = fileMap != null && pdfChecker(fileMap["fileName"]);
+    if (actionType == 'REPLY_CHAT') {
+      bool audio = fileMap != null && audioChecker(fileMap['fileName']);
+      bool pdf = fileMap != null && pdfChecker(fileMap['fileName']);
       bool media = imgMap != null || mediaGallery != null;
 
       perChatDocRef = await personalChatCollection.add({
@@ -933,7 +933,7 @@ class DatabaseMethods {
         addFileCopies(mediaId: ogMediaId ?? messageId);
       }
 
-      await perChatDocRef.collection("messages").add({
+      await perChatDocRef.collection('messages').add({
         'text': text,
         'senderId': userId,
         'formattedDateTime': dateTime,
@@ -948,7 +948,7 @@ class DatabaseMethods {
       });
 
       if (myReply != null) {
-        await perChatDocRef.collection("messages").add(myReply);
+        await perChatDocRef.collection('messages').add(myReply);
       }
 
       DocumentReference userGroupDocRef =
@@ -960,24 +960,24 @@ class DatabaseMethods {
 
       userGroupDocRef.update({'replies': replies});
       userCollection.doc(uid).collection('replies').doc(perChatDocRef.id).set({
-        "contactId": userId,
-        "newMsg": [],
-        "numOfNewMsg": 0,
-        "openByOther": false,
-        "inChat": true,
-        "replyTime": replyTime,
+        'contactId': userId,
+        'newMsg': [],
+        'numOfNewMsg': 0,
+        'openByOther': false,
+        'inChat': true,
+        'replyTime': replyTime,
       });
-    } else if (actionType == "START_CONVO") {
+    } else if (actionType == 'START_CONVO') {
       perChatDocRef = await personalChatCollection
           .add({'to': userId, 'from': uid, 'anon': anon});
 
       userCollection.doc(uid).collection('replies').doc(perChatDocRef.id).set({
-        "contactId": userId,
-        "newMsg": [],
-        "numOfNewMsg": 0,
-        "openByOther": true,
-        "inChat": true,
-        "replyTime": replyTime,
+        'contactId': userId,
+        'newMsg': [],
+        'numOfNewMsg': 0,
+        'openByOther': true,
+        'inChat': true,
+        'replyTime': replyTime,
         'chatStartTime': replyTime,
       });
 
@@ -986,31 +986,31 @@ class DatabaseMethods {
           .collection('replies')
           .doc(perChatDocRef.id)
           .set({
-        "contactId": uid,
-        "newMsg": [],
-        "numOfNewMsg": 0,
-        "openByOther": true,
-        "inChat": false,
-        "replyTime": replyTime,
+        'contactId': uid,
+        'newMsg': [],
+        'numOfNewMsg': 0,
+        'openByOther': true,
+        'inChat': false,
+        'replyTime': replyTime,
         'chatStartTime': replyTime,
       });
-    } else if (actionType == "FRIEND_CHAT") {
+    } else if (actionType == 'FRIEND_CHAT') {
       perChatDocRef = await personalChatCollection.add({
         'to': userId,
         'from': uid,
       });
 
       userCollection.doc(uid).collection('friends').doc(userId).update({
-        "personalChatId": perChatDocRef.id,
-        "newMsg": [],
-        "numOfNewMsg": 0,
-        "inChat": false
+        'personalChatId': perChatDocRef.id,
+        'newMsg': [],
+        'numOfNewMsg': 0,
+        'inChat': false
       });
       userCollection.doc(userId).collection('friends').doc(uid).update({
-        "personalChatId": perChatDocRef.id,
-        "newMsg": [],
-        "numOfNewMsg": 0,
-        "inChat": true
+        'personalChatId': perChatDocRef.id,
+        'newMsg': [],
+        'numOfNewMsg': 0,
+        'inChat': true
       });
     }
     return perChatDocRef.id;
@@ -1031,7 +1031,7 @@ class DatabaseMethods {
 
         groupDF
             .collection('chats')
-            .orderBy("time")
+            .orderBy('time')
             .get()
             .then((QuerySnapshot chatQS) {
           Future.forEach(chatQS.docs, (chatDS) async {
@@ -1068,7 +1068,7 @@ class DatabaseMethods {
   deleteGroupChat(String groupId) {
     deleteMyGroup(groupId);
     DocumentReference groupDF = groupChatCollection.doc(groupId);
-    groupDF.update({"deleted": true});
+    groupDF.update({'deleted': true});
   }
 
   Future<String> createGroupChat(
@@ -1099,7 +1099,7 @@ class DatabaseMethods {
       'waitList': {},
       'groupCapacity': groupCapacity,
       'tags': tags,
-      'about': "",
+      'about': '',
       'anon': anon,
       'oneDay': oneDay,
       'deleted': false
@@ -1109,7 +1109,7 @@ class DatabaseMethods {
         .doc(groupChatDocRef.id)
         .update({'groupId': groupChatDocRef.id});
 
-    userCollection.doc(uid).collection("groups").doc(groupChatDocRef.id).set({
+    userCollection.doc(uid).collection('groups').doc(groupChatDocRef.id).set({
       'groupId': groupChatDocRef.id,
       'joinRequests': {},
       'replies': {},
@@ -1123,7 +1123,7 @@ class DatabaseMethods {
 
     groupChatCollection
         .doc(groupChatDocRef.id)
-        .collection("users")
+        .collection('users')
         .doc(uid)
         .set({'userId': uid, 'hashTag': hashTag});
 
@@ -1139,24 +1139,24 @@ class DatabaseMethods {
     String actionType,
   }) async {
     DocumentReference chatDocRef =
-        groupChatCollection.doc(groupChatId).collection("chats").doc(messageId);
+        groupChatCollection.doc(groupChatId).collection('chats').doc(messageId);
 
     switch (actionType) {
-      case "ADD_REPLY":
+      case 'ADD_REPLY':
         {
           await chatDocRef.update({
-            "replies": FieldValue.arrayUnion([
+            'replies': FieldValue.arrayUnion([
               {
-                "userId": uid,
-                "personalChatId": personalChatId,
-                "open": false,
-                "username": username
+                'userId': uid,
+                'personalChatId': personalChatId,
+                'open': false,
+                'username': username
               }
             ])
           });
         }
         break;
-      case "OPEN_REPLY":
+      case 'OPEN_REPLY':
         {
           int openTime = DateTime.now().microsecondsSinceEpoch;
 
@@ -1176,12 +1176,12 @@ class DatabaseMethods {
               .collection('replies')
               .doc(personalChatId)
               .set({
-            "contactId": userId,
-            "newMsg": [],
-            "numOfNewMsg": 0,
-            "openByOther": true,
-            "inChat": true,
-            "replyTime": openTime,
+            'contactId': userId,
+            'newMsg': [],
+            'numOfNewMsg': 0,
+            'openByOther': true,
+            'inChat': true,
+            'replyTime': openTime,
             'chatStartTime': openTime,
           });
 
@@ -1196,18 +1196,18 @@ class DatabaseMethods {
           }
 
           DocumentSnapshot chatSnapshot = await chatDocRef.get();
-          List replies = chatSnapshot.get("replies");
+          List replies = chatSnapshot.get('replies');
 
           for (Map reply in replies) {
-            if (reply["userId"] == userId) {
-              reply["open"] = true;
+            if (reply['userId'] == userId) {
+              reply['open'] = true;
               break;
             }
           }
-          await chatDocRef.update({"replies": replies});
+          await chatDocRef.update({'replies': replies});
         }
         break;
-      case "DELETE_REPLY":
+      case 'DELETE_REPLY':
         {
           DocumentSnapshot chatSnapshot = await chatDocRef.get();
           if (chatSnapshot.exists) {
@@ -1215,7 +1215,7 @@ class DatabaseMethods {
             int index;
             bool opened = true;
             for (int i = 0; i < replies.length; i++) {
-              if (replies[i]["personalChatId"] == personalChatId) {
+              if (replies[i]['personalChatId'] == personalChatId) {
                 opened = replies[i]['open'];
                 index = opened ? i : -1;
                 break;
@@ -1245,7 +1245,7 @@ class DatabaseMethods {
   Future<int> getNumOfFiles(String groupId, String mediaId) async {
     QuerySnapshot chatQS = await groupChatCollection
         .doc(groupId)
-        .collection("chats")
+        .collection('chats')
         .where('ogMediaId', isEqualTo: mediaId)
         .get();
 
@@ -1255,7 +1255,7 @@ class DatabaseMethods {
   deleteConversationMessage(
       {String groupChatId, String chatId, bool delGroup = false}) async {
     DocumentReference chatDocRef =
-        groupChatCollection.doc(groupChatId).collection("chats").doc(chatId);
+        groupChatCollection.doc(groupChatId).collection('chats').doc(chatId);
 
     DocumentSnapshot chatSnapshot = await chatDocRef.get();
     chatDocRef.delete();
@@ -1288,13 +1288,13 @@ class DatabaseMethods {
           mediaGallery: mediaGallery,
           numOfFiles: numOfFiles);
     } else if (chatSnapshot.get('inChatReply') != null &&
-        chatSnapshot.get('inChatReply' "msgReplyTo") is! String) {
-      var msgReplyTo = chatSnapshot.get('inChatReply' "msgReplyTo");
-      if (chatSnapshot.get('inChatReply' "msgReplyTo") is Map) {
+        chatSnapshot.get('inChatReply' 'msgReplyTo') is! String) {
+      var msgReplyTo = chatSnapshot.get('inChatReply' 'msgReplyTo');
+      if (chatSnapshot.get('inChatReply' 'msgReplyTo') is Map) {
         imgObj = msgReplyTo['imgName'] != null ? msgReplyTo : null;
         fileObj = msgReplyTo['fileName'] != null ? msgReplyTo : null;
-      } else if (chatSnapshot.get('inChatReply' "msgReplyTo") is List) {
-        mediaGallery = chatSnapshot.get('inChatReply' "msgReplyTo");
+      } else if (chatSnapshot.get('inChatReply' 'msgReplyTo') is List) {
+        mediaGallery = chatSnapshot.get('inChatReply' 'msgReplyTo');
       }
 
       await delFileCopies(
@@ -1385,18 +1385,18 @@ class DatabaseMethods {
     }
 
     if (numOfUploads == null) {
-      userGroupDF.update({"numOfUploads": numOfFiles ?? 1});
+      userGroupDF.update({'numOfUploads': numOfFiles ?? 1});
     } else {
       numOfUploads =
           numOfFiles == null ? numOfUploads + 1 : numOfUploads + numOfFiles;
-      userGroupDF.update({"numOfUploads": numOfUploads});
+      userGroupDF.update({'numOfUploads': numOfUploads});
     }
 
     DocumentSnapshot groupDS = await groupChatCollection.doc(groupChatId).get();
     String hashTag = groupDS.get('hashTag');
 
     DocumentReference chatDocRef =
-        await groupChatCollection.doc(groupChatId).collection("chats").add({
+        await groupChatCollection.doc(groupChatId).collection('chats').add({
       'message': '',
       'sendBy': Constants.myName,
       'userId': uid,
@@ -1424,7 +1424,7 @@ class DatabaseMethods {
   ) {
     fileCopiesCollection.doc(chatId).set({'numOfCopies': 1});
 
-    if (groupState == "public") {
+    if (groupState == 'public') {
       Map mediaObj = imgObj ?? fileObj;
       addMediaItem(
         groupChatId,
@@ -1458,16 +1458,16 @@ class DatabaseMethods {
     bool anon = groupDS.get('anon') != null && groupDS.get('anon');
 
     bool audio = fileObj != null &&
-        audioChecker(fileObj["fileName"]) &&
+        audioChecker(fileObj['fileName']) &&
         ogMediaId == null;
     bool pdf =
-        fileObj != null && pdfChecker(fileObj["fileName"]) && ogMediaId == null;
+        fileObj != null && pdfChecker(fileObj['fileName']) && ogMediaId == null;
     bool media = (imgObj != null || mediaGallery != null) && ogMediaId == null;
     bool url = urlRegExp.hasMatch(message);
 
     if (chatId == null) {
       DocumentReference chatDocRef =
-          await groupChatCollection.doc(groupChatId).collection("chats").add({
+          await groupChatCollection.doc(groupChatId).collection('chats').add({
         'message': message,
         'sendBy': username,
         'userId': userId,
@@ -1525,7 +1525,7 @@ class DatabaseMethods {
           : 0;
       if (numOfUploads > 0) {
         numOfUploads = numOfUploads - 1;
-        groupDF.update({"numOfUploads": numOfUploads});
+        groupDF.update({'numOfUploads': numOfUploads});
       }
 
       if (media || audio || pdf) {
@@ -1597,7 +1597,7 @@ class DatabaseMethods {
       await groupChatCollection
           .doc(groupId)
           .collection('chats')
-          .orderBy("time", descending: true)
+          .orderBy('time', descending: true)
           .endAtDocument(chatSnapshot)
           .get()
           .then((value) => chatIndex = value.docs.length - 1);
@@ -1608,17 +1608,17 @@ class DatabaseMethods {
   getConversationMessages(String groupChatId) {
     return groupChatCollection
         .doc(groupChatId)
-        .collection("chats")
-        .orderBy("time", descending: true)
+        .collection('chats')
+        .orderBy('time', descending: true)
         .snapshots();
   }
 
   getPersonalChatMedia(String personalChatId) {
     return personalChatCollection
         .doc(personalChatId)
-        .collection("messages")
+        .collection('messages')
         .orderBy('sendTime', descending: true)
-        .where("media", isEqualTo: true)
+        .where('media', isEqualTo: true)
         .snapshots();
   }
 
@@ -1627,7 +1627,7 @@ class DatabaseMethods {
         .doc(uid)
         .collection('groups')
         .doc(groupId)
-        .update({"pinned": true});
+        .update({'pinned': true});
   }
 
   unPinMyGroup(String groupId) {
@@ -1635,7 +1635,7 @@ class DatabaseMethods {
         .doc(uid)
         .collection('groups')
         .doc(groupId)
-        .update({"pinned": false});
+        .update({'pinned': false});
   }
 
   getGroupStory(String groupId) {
@@ -1651,53 +1651,53 @@ class DatabaseMethods {
   getGroupFeed(String groupChatId) async {
     return await groupChatCollection
         .doc(groupChatId)
-        .collection("chats")
+        .collection('chats')
         .orderBy('time', descending: true)
-        .where("feed", isEqualTo: true)
+        .where('feed', isEqualTo: true)
         .get();
   }
 
   getGroupMedia(String groupChatId) async {
     return await groupChatCollection
         .doc(groupChatId)
-        .collection("chats")
+        .collection('chats')
         .orderBy('time', descending: true)
-        .where("media", isEqualTo: true)
+        .where('media', isEqualTo: true)
         .get();
   }
 
   getGroupAudio(String groupChatId) async {
     return await groupChatCollection
         .doc(groupChatId)
-        .collection("chats")
+        .collection('chats')
         .orderBy('time', descending: true)
-        .where("audio", isEqualTo: true)
+        .where('audio', isEqualTo: true)
         .get();
   }
 
   getGroupPDF(String groupChatId) async {
     return await groupChatCollection
         .doc(groupChatId)
-        .collection("chats")
+        .collection('chats')
         .orderBy('time', descending: true)
-        .where("pdf", isEqualTo: true)
+        .where('pdf', isEqualTo: true)
         .get();
   }
 
   getGroupURL(String groupChatId) async {
     return await groupChatCollection
         .doc(groupChatId)
-        .collection("chats")
+        .collection('chats')
         .orderBy('time', descending: true)
-        .where("url", isEqualTo: true)
+        .where('url', isEqualTo: true)
         .get();
   }
 
   getPersonalMessages(String personalChatId) {
     return personalChatCollection
         .doc(personalChatId)
-        .collection("messages")
-        .orderBy("sendTime", descending: true)
+        .collection('messages')
+        .orderBy('sendTime', descending: true)
         .snapshots();
   }
 
@@ -1715,13 +1715,13 @@ class DatabaseMethods {
 
   muteMyGroup(String groupId) {
     userCollection.doc(uid).update({
-      "mutedChats": FieldValue.arrayUnion([groupId])
+      'mutedChats': FieldValue.arrayUnion([groupId])
     });
   }
 
   unMuteMyGroup(String groupId) {
     userCollection.doc(uid).update({
-      "mutedChats": FieldValue.arrayRemove([groupId])
+      'mutedChats': FieldValue.arrayRemove([groupId])
     });
   }
 
@@ -1772,33 +1772,33 @@ class DatabaseMethods {
         await groupChatCollection.doc(groupId).get();
     DocumentSnapshot userSnapshot = await userCollection.doc(senderId).get();
     List blockedBy = groupSnapshot.data().toString().contains('blockedBy')
-        ? userSnapshot.get("blockedBy")
+        ? userSnapshot.get('blockedBy')
         : [];
     List tags = groupSnapshot.data().toString().contains('tags')
         ? groupSnapshot.get('tags')
         : [];
     String hashTag = groupSnapshot.data().toString().contains('hashTag')
-        ? groupSnapshot.get("hashTag")
+        ? groupSnapshot.get('hashTag')
         : null;
 
     mediaCollection.doc(chatId).set({
-      "sendBy": sendBy,
-      "senderId": senderId,
-      "sendTime": sendTime,
-      "mediaObj": mediaObj,
-      "mediaGallery": mediaGallery,
-      "groupId": groupId,
+      'sendBy': sendBy,
+      'senderId': senderId,
+      'sendTime': sendTime,
+      'mediaObj': mediaObj,
+      'mediaGallery': mediaGallery,
+      'groupId': groupId,
       'hashTag': hashTag,
-      "tags": tags,
-      "anon": anon,
-      'media': (mediaObj != null && mediaObj["imgName"] != null) ||
+      'tags': tags,
+      'anon': anon,
+      'media': (mediaObj != null && mediaObj['imgName'] != null) ||
           mediaGallery != null,
       'audio': mediaObj != null &&
-          mediaObj["fileName"] != null &&
-          audioChecker(mediaObj["fileName"]),
+          mediaObj['fileName'] != null &&
+          audioChecker(mediaObj['fileName']),
       'pdf': mediaObj != null &&
-          mediaObj["fileName"] != null &&
-          pdfChecker(mediaObj["fileName"]),
+          mediaObj['fileName'] != null &&
+          pdfChecker(mediaObj['fileName']),
       'notVisibleTo': blockedBy
     });
   }
@@ -1821,12 +1821,12 @@ class DatabaseMethods {
     DocumentReference mediaDF = mediaCommentCollection.doc(mediaId);
 
     DocumentSnapshot mediaDS = await mediaDF.get();
-    if (!mediaDS.exists) await mediaDF.set({"mediaId": mediaId});
+    if (!mediaDS.exists) await mediaDF.set({'mediaId': mediaId});
 
     mediaDF.collection('comments').add({
-      "senderId": uid,
-      "comment": comment,
-      "sendTime": DateTime.now().microsecondsSinceEpoch
+      'senderId': uid,
+      'comment': comment,
+      'sendTime': DateTime.now().microsecondsSinceEpoch
     });
   }
 
@@ -1852,7 +1852,7 @@ class DatabaseMethods {
     return mediaCommentCollection
         .doc(mediaId)
         .collection('comments')
-        .orderBy("sendTime", descending: true)
+        .orderBy('sendTime', descending: true)
         .snapshots();
   }
 
@@ -2001,7 +2001,7 @@ class DatabaseMethods {
     return storyCommentsCollection
         .doc(storyId)
         .collection('comments')
-        .orderBy("sendTime")
+        .orderBy('sendTime')
         .snapshots();
   }
 
@@ -2018,11 +2018,11 @@ class DatabaseMethods {
   addStoryComment(String storyId, String storySenderId, String comment) async {
     DocumentReference storyDocRef = storyCommentsCollection.doc(storyId);
     await storyDocRef.collection('comments').add({
-      "senderId": uid,
-      "comment": comment,
-      "storySenderId": storySenderId,
-      "storyId": storyId,
-      "sendTime": DateTime.now().microsecondsSinceEpoch
+      'senderId': uid,
+      'comment': comment,
+      'storySenderId': storySenderId,
+      'storyId': storyId,
+      'sendTime': DateTime.now().microsecondsSinceEpoch
     });
   }
 
@@ -2031,11 +2031,11 @@ class DatabaseMethods {
         .doc(storyId)
         .collection('comments')
         .doc(commentId)
-        .collection("replies")
+        .collection('replies')
         .add({
-      "replierId": uid,
-      "reply": reply,
-      "sendTime": DateTime.now().microsecondsSinceEpoch
+      'replierId': uid,
+      'reply': reply,
+      'sendTime': DateTime.now().microsecondsSinceEpoch
     });
   }
 
@@ -2132,18 +2132,18 @@ class DatabaseMethods {
       numOfUploads = null;
     }
     if (numOfUploads == null) {
-      await userDF.update({"numOfUploads": 1});
+      await userDF.update({'numOfUploads': 1});
     } else {
       numOfUploads = numOfUploads + 1;
-      await userDF.update({"numOfUploads": numOfUploads});
+      await userDF.update({'numOfUploads': numOfUploads});
     }
 
     DocumentReference storyDF =
         await userCollection.doc(uid).collection('stories').add({
-      "mediaObj": mediaObj,
-      "mediaGallery": mediaGallery,
-      "sendTime": sendTime,
-      "type": type,
+      'mediaObj': mediaObj,
+      'mediaGallery': mediaGallery,
+      'sendTime': sendTime,
+      'type': type,
     });
 
     return storyDF.id;
@@ -2170,44 +2170,44 @@ class DatabaseMethods {
 
     if (storyId == null) {
       DocumentReference storyDS = await senderDS.collection('stories').add({
-        "mediaObj": mediaObj,
-        "mediaGallery": mediaGallery,
-        "sendTime": sendTime,
-        "senderId": uid,
-        "seenList": [],
-        "anon": anon,
-        "type": type,
+        'mediaObj': mediaObj,
+        'mediaGallery': mediaGallery,
+        'sendTime': sendTime,
+        'senderId': uid,
+        'seenList': [],
+        'anon': anon,
+        'type': type,
       });
       storyInfo = {
-        "mediaObj": mediaObj,
-        "mediaGallery": mediaGallery,
-        "senderId": uid,
-        "sender": Constants.myName,
-        "sendTime": sendTime,
-        "anon": anon,
-        "type": type,
-        "storyId": storyDS.id,
+        'mediaObj': mediaObj,
+        'mediaGallery': mediaGallery,
+        'senderId': uid,
+        'sender': Constants.myName,
+        'sendTime': sendTime,
+        'anon': anon,
+        'type': type,
+        'storyId': storyDS.id,
       };
       fileCopiesCollection.doc(storyDS.id).set({'numOfCopies': 1});
     } else {
       senderDS.collection('stories').doc(storyId).set({
-        "mediaObj": mediaObj,
-        "mediaGallery": mediaGallery,
-        "sendTime": sendTime,
-        "senderId": uid,
-        "seenList": [],
-        "anon": anon,
-        "type": type,
+        'mediaObj': mediaObj,
+        'mediaGallery': mediaGallery,
+        'sendTime': sendTime,
+        'senderId': uid,
+        'seenList': [],
+        'anon': anon,
+        'type': type,
       });
       storyInfo = {
-        "mediaObj": mediaObj,
-        "mediaGallery": mediaGallery,
-        "senderId": uid,
-        "sender": Constants.myName,
-        "sendTime": sendTime,
-        "anon": anon,
-        "type": type,
-        "storyId": storyId,
+        'mediaObj': mediaObj,
+        'mediaGallery': mediaGallery,
+        'senderId': uid,
+        'sender': Constants.myName,
+        'sendTime': sendTime,
+        'anon': anon,
+        'type': type,
+        'storyId': storyId,
       };
 
       fileCopiesCollection.doc(storyId).set({'numOfCopies': 1});
@@ -2218,13 +2218,13 @@ class DatabaseMethods {
           : 0;
       if (numOfUploads > 0) {
         numOfUploads = numOfUploads - 1;
-        await userDF.update({"numOfUploads": numOfUploads});
+        await userDF.update({'numOfUploads': numOfUploads});
       }
     }
 
-    if (type == "regular") {
+    if (type == 'regular') {
       sendMediaReg(storyInfo, sendTo);
-    } else if (type == "friends") {
+    } else if (type == 'friends') {
       sendMediaFriends(storyInfo);
     } else {
       sendMediaSnippet(
@@ -2233,17 +2233,17 @@ class DatabaseMethods {
   }
 
   sendMediaReg(Map<String, dynamic> storyInfo, Map sendTo) {
-    String senderId = storyInfo["senderId"];
-    String storyId = storyInfo["storyId"];
+    String senderId = storyInfo['senderId'];
+    String storyId = storyInfo['storyId'];
     storyInfo.remove('sender');
     List<String> friendIds = [];
     List<String> groupIds = [];
 
     for (String sendToId in sendTo.keys) {
-      if (sendTo[sendToId]['type'] == "group") {
+      if (sendTo[sendToId]['type'] == 'group') {
         groupIds.add(sendToId);
-        storyInfo["anon"] = sendTo[sendToId]['anon'];
-        storyInfo["groupId"] = sendToId;
+        storyInfo['anon'] = sendTo[sendToId]['anon'];
+        storyInfo['groupId'] = sendToId;
         groupChatCollection
             .doc(sendToId)
             .collection('stories')
@@ -2251,8 +2251,8 @@ class DatabaseMethods {
             .set(storyInfo);
       } else {
         friendIds.add(sendToId);
-        storyInfo["anon"] = false;
-        storyInfo["friendId"] = sendToId;
+        storyInfo['anon'] = false;
+        storyInfo['friendId'] = sendToId;
         userCollection
             .doc(sendToId)
             .collection('friends')
@@ -2267,12 +2267,12 @@ class DatabaseMethods {
         .doc(senderId)
         .collection('stories')
         .doc(storyId)
-        .update({"recGroups": groupIds, "recFriends": friendIds});
+        .update({'recGroups': groupIds, 'recFriends': friendIds});
   }
 
   sendMediaFriends(Map<String, dynamic> storyInfo) {
-    String storyId = storyInfo["storyId"];
-    storyInfo["anon"] = false;
+    String storyId = storyInfo['storyId'];
+    storyInfo['anon'] = false;
 
     userCollection
         .doc(uid)
@@ -2280,7 +2280,7 @@ class DatabaseMethods {
         .get()
         .then((QuerySnapshot friendQS) {
       for (var friendDS in friendQS.docs) {
-        storyInfo["toId"] = friendDS.id;
+        storyInfo['toId'] = friendDS.id;
         userCollection
             .doc(friendDS.id)
             .collection('recStories')
@@ -2297,12 +2297,12 @@ class DatabaseMethods {
     AsyncSnapshot userSnapshot,
     List rmvUsers,
   ) {
-    String storyId = storyInfo["storyId"];
-    String senderId = storyInfo["senderId"];
+    String storyId = storyInfo['storyId'];
+    String senderId = storyInfo['senderId'];
     List groupIds = [];
     List userIds = [];
 
-    storyInfo.remove("sender");
+    storyInfo.remove('sender');
     for (int i = 0; i < (groupSnapshot.data.hits.length as int); i++) {
       if (!rmvGroups.contains(groupSnapshot.data.hits[i].objectID)) {
         groupIds.add(groupSnapshot.data.hits[i].objectID);
@@ -2327,7 +2327,7 @@ class DatabaseMethods {
         .doc(senderId)
         .collection('stories')
         .doc(storyId)
-        .update({"recGroups": groupIds, "recUsers": userIds});
+        .update({'recGroups': groupIds, 'recUsers': userIds});
   }
 
   deleteSenderStory(String storyId, Map mediaObj, List mediaGallery) async {
@@ -2348,14 +2348,14 @@ class DatabaseMethods {
       return userCollection
           .doc(uid)
           .collection('stories')
-          .orderBy("sendTime", descending: true)
+          .orderBy('sendTime', descending: true)
           .snapshots();
     } else {
       return userCollection
           .doc(uid)
           .collection('stories')
-          .where('type', isEqualTo: "snippet")
-          .orderBy("sendTime", descending: true)
+          .where('type', isEqualTo: 'snippet')
+          .orderBy('sendTime', descending: true)
           .snapshots();
     }
   }
@@ -2387,14 +2387,14 @@ class DatabaseMethods {
   markSeenStory(String senderId, String storyId) async {
     if (senderId != uid) {
       userCollection.doc(senderId).collection('stories').doc(storyId).update({
-        "seenList": FieldValue.arrayUnion([uid])
+        'seenList': FieldValue.arrayUnion([uid])
       });
     }
   }
 
   deleteReceiverStory(
       String storyId, String friendId, String groupId, String type) {
-    if (type == "regular") {
+    if (type == 'regular') {
       if (groupId != null) {
         groupChatCollection
             .doc(groupId)
@@ -2411,7 +2411,7 @@ class DatabaseMethods {
             .doc(storyId)
             .delete();
       }
-    } else if (type == "friends") {
+    } else if (type == 'friends') {
       userCollection.doc(uid).collection('recStories').doc(storyId).delete();
     } else {
       if (groupId != null) {
@@ -2433,7 +2433,7 @@ class DatabaseMethods {
     return userCollection
         .doc(uid)
         .collection('recStories')
-        .orderBy("sendTime", descending: true)
+        .orderBy('sendTime', descending: true)
         .snapshots();
 
     // return receiverStoriesCollection
@@ -2466,12 +2466,12 @@ class DatabaseMethods {
 
   inviteUser(String groupId, String hashTag, String groupState) async {
     userCollection.doc(uid).collection('invites').doc(groupId).set({
-      "invitorName": Constants.myName,
-      "invitorId": Constants.myUserId,
-      "groupState": groupState,
-      "inviteTime": DateTime.now().microsecondsSinceEpoch,
-      "toId": uid,
-      "hashTag": hashTag
+      'invitorName': Constants.myName,
+      'invitorId': Constants.myUserId,
+      'groupState': groupState,
+      'inviteTime': DateTime.now().microsecondsSinceEpoch,
+      'toId': uid,
+      'hashTag': hashTag
     });
 
     DocumentReference groupDocRef = groupChatCollection.doc(groupId);
@@ -2503,9 +2503,9 @@ class DatabaseMethods {
 
     if (!joinRequests.containsKey(userId)) {
       joinRequests[userId] = {
-        "username": username,
-        "email": email,
-        "imgObj": imgObj
+        'username': username,
+        'email': email,
+        'imgObj': imgObj
       };
       await groupDocRef.update({'joinRequests': joinRequests});
     }
@@ -2522,9 +2522,9 @@ class DatabaseMethods {
 
     if (!joinReq.containsKey(userId)) {
       joinReq[userId] = {
-        "username": username,
-        "email": email,
-        "imgObj": imgObj
+        'username': username,
+        'email': email,
+        'imgObj': imgObj
       };
       userGroupDocRef.update({'joinRequests': joinReq});
     }
@@ -2584,8 +2584,8 @@ class DatabaseMethods {
 
     if (!waitList.containsKey(userId)) {
       waitList[userId] = {
-        "username": username,
-        "email": email,
+        'username': username,
+        'email': email,
         'imgObj': imgObj,
         'time': DateTime.now().microsecondsSinceEpoch
       };
@@ -2613,13 +2613,13 @@ class DatabaseMethods {
           .doc(groupId)
           .collection('spectators')
           .doc(userId)
-          .set({'userId': userId, "groupId": groupId});
+          .set({'userId': userId, 'groupId': groupId});
     }
   }
 
   Future joinGroupChat(String groupId, String hashTag, String userId,
       String actionType, bool oneDay, int createdAt) async {
-    bool inChat = actionType == "JOIN_PUB_GROUP_CHAT";
+    bool inChat = actionType == 'JOIN_PUB_GROUP_CHAT';
 
     removeInvite(groupId);
 
@@ -2658,14 +2658,14 @@ class DatabaseMethods {
         : 0;
 
     switch (actionType) {
-      case "JOIN_PUB_GROUP_CHAT":
+      case 'JOIN_PUB_GROUP_CHAT':
         {
           await joinGroupChat(
               groupId, hashTag, uid, actionType, oneDay, createdAt);
         }
         break;
-      case "LEAVE_GROUP":
-      case "BAN_USER":
+      case 'LEAVE_GROUP':
+      case 'BAN_USER':
         {
           Map waitList = groupDocSnapshot.get('waitList');
           String groupState = groupDocSnapshot.get('chatRoomState');
@@ -2674,7 +2674,7 @@ class DatabaseMethods {
             'members': FieldValue.arrayRemove([uid])
           });
 
-          if (actionType == "LEAVE_GROUP") {
+          if (actionType == 'LEAVE_GROUP') {
             await groupDocRef.update({
               'leftUsers': FieldValue.arrayUnion([uid])
             });
@@ -2689,11 +2689,11 @@ class DatabaseMethods {
                 (x, y) => waitList[x]['time'].compareTo(waitList[y]['time']));
 
             String userId = sortedWL.keys.elementAt(0);
-            String username = waitList[userId]["username"];
-            String email = waitList[userId]["email"];
-            Map imgObj = waitList[userId]["imgObj"];
+            String username = waitList[userId]['username'];
+            String email = waitList[userId]['email'];
+            Map imgObj = waitList[userId]['imgObj'];
 
-            if (groupState != "private") {
+            if (groupState != 'private') {
               await userCollection
                   .doc(userId)
                   .collection('groups')
@@ -2734,11 +2734,11 @@ class DatabaseMethods {
               .delete();
         }
         break;
-      case "ACCEPT_JOIN_REQ":
+      case 'ACCEPT_JOIN_REQ':
         {
-          Map joinRequests = groupDocSnapshot.get("joinRequests");
-          Map imgObj = joinRequests[uid]["imgObj"];
-          String username = joinRequests[uid]["username"];
+          Map joinRequests = groupDocSnapshot.get('joinRequests');
+          Map imgObj = joinRequests[uid]['imgObj'];
+          String username = joinRequests[uid]['username'];
 
           joinRequests.remove(uid);
           await groupDocRef.update({'joinRequests': joinRequests});
@@ -2770,12 +2770,12 @@ class DatabaseMethods {
           }
         }
         break;
-      case "ACCEPT_REQ_BUT_FULL":
+      case 'ACCEPT_REQ_BUT_FULL':
         {
-          Map joinRequests = groupDocSnapshot.get("joinRequests");
-          Map imgObj = joinRequests[uid]["imgObj"];
-          String username = joinRequests[uid]["username"];
-          String email = joinRequests[uid]["email"];
+          Map joinRequests = groupDocSnapshot.get('joinRequests');
+          Map imgObj = joinRequests[uid]['imgObj'];
+          String username = joinRequests[uid]['username'];
+          String email = joinRequests[uid]['email'];
 
           joinRequests.remove(uid);
           await groupDocRef.update({'joinRequests': joinRequests});
@@ -2794,12 +2794,12 @@ class DatabaseMethods {
           putOnWaitList(groupId, username, uid, email, imgObj);
         }
         break;
-      case "ADD_USER":
+      case 'ADD_USER':
         {
           await joinGroupChat(groupId, hashTag, uid, admin, oneDay, createdAt);
         }
         break;
-      case "QUIT_SPECTATING":
+      case 'QUIT_SPECTATING':
         {
           userCollection.doc(uid).collection('groups').doc(groupId).delete();
           groupChatCollection
@@ -2858,20 +2858,20 @@ class DatabaseMethods {
   blockUser(String userId) async {
     Constants.myBlockList.add(userId);
     userCollection.doc(uid).update({
-      "blockList": FieldValue.arrayUnion([userId]),
+      'blockList': FieldValue.arrayUnion([userId]),
     });
     userCollection.doc(userId).update({
-      "blockedBy": FieldValue.arrayUnion([uid])
+      'blockedBy': FieldValue.arrayUnion([uid])
     });
   }
 
   unBlockUser(String userId) async {
     Constants.myBlockList.remove(userId);
     userCollection.doc(uid).update({
-      "blockList": FieldValue.arrayRemove([userId]),
+      'blockList': FieldValue.arrayRemove([userId]),
     });
     userCollection.doc(userId).update({
-      "blockedBy": FieldValue.arrayRemove([uid])
+      'blockedBy': FieldValue.arrayRemove([uid])
     });
   }
 
@@ -2889,14 +2889,14 @@ class DatabaseMethods {
           .collection('chats')
           .doc(contentId)
           .update({
-        "reportedBy": FieldValue.arrayUnion([uid])
+        'reportedBy': FieldValue.arrayUnion([uid])
       });
     } else if (personalChatId != null) {
       personalChatCollection
           .doc(personalChatId)
           .collection('messages')
           .doc(contentId)
-          .update({"reported": true});
+          .update({'reported': true});
     } else if (storyId != null) {
       if (commentId != null) {
         storyCommentsCollection
@@ -2906,7 +2906,7 @@ class DatabaseMethods {
             .collection('replies')
             .doc(contentId)
             .update({
-          "reportedBy": FieldValue.arrayUnion([uid])
+          'reportedBy': FieldValue.arrayUnion([uid])
         });
       } else {
         storyCommentsCollection
@@ -2914,23 +2914,23 @@ class DatabaseMethods {
             .collection('comments')
             .doc(contentId)
             .update({
-          "reportedBy": FieldValue.arrayUnion([uid])
+          'reportedBy': FieldValue.arrayUnion([uid])
         });
       }
     }
 
     DocumentReference contentDF = reportedContentCollection.doc(contentId);
     await contentDF.set({
-      "senderId": senderId,
-      "groupId": groupId,
-      "personalChatId": personalChatId,
-      "storyId": storyId,
-      "commentId": commentId
+      'senderId': senderId,
+      'groupId': groupId,
+      'personalChatId': personalChatId,
+      'storyId': storyId,
+      'commentId': commentId
     });
 
-    contentDF.collection("reporters").doc(uid).set({
-      "reportReason": reportReason,
-      "reportTime": DateTime.now().microsecondsSinceEpoch,
+    contentDF.collection('reporters').doc(uid).set({
+      'reportReason': reportReason,
+      'reportTime': DateTime.now().microsecondsSinceEpoch,
     });
   }
 
@@ -2941,10 +2941,10 @@ class DatabaseMethods {
   }) async {
     DocumentReference contentDF = reportedUsersCollection.doc(userReportedId);
     await contentDF.set({
-      "senderId": senderId,
-      "reportReason": reportReason,
-      "reportTime": DateTime.now().microsecondsSinceEpoch,
-      "userReportedId": userReportedId
+      'senderId': senderId,
+      'reportReason': reportReason,
+      'reportTime': DateTime.now().microsecondsSinceEpoch,
+      'userReportedId': userReportedId
     });
   }
 
@@ -2952,7 +2952,7 @@ class DatabaseMethods {
     // Constants.myRemovedMedia.add(mediaId);
     // userCollection.doc(uid).update({"removedMedia":FieldValue.arrayUnion([mediaId])});
     mediaCollection.doc(mediaId).update({
-      "notVisibleTo": FieldValue.arrayUnion([uid])
+      'notVisibleTo': FieldValue.arrayUnion([uid])
     });
   }
 
@@ -2960,7 +2960,7 @@ class DatabaseMethods {
     // Constants.myRemovedMedia.remove(mediaId);
     // userCollection.doc(uid).update({"removedMedia":FieldValue.arrayRemove([mediaId])});
     mediaCollection.doc(mediaId).update({
-      "notVisibleTo": FieldValue.arrayRemove([uid])
+      'notVisibleTo': FieldValue.arrayRemove([uid])
     });
   }
 
@@ -2981,15 +2981,15 @@ class DatabaseMethods {
   }
 
   clearRecentSearch() {
-    userCollection.doc(uid).update({"reUserSearch": [], "reGroupSearch": []});
+    userCollection.doc(uid).update({'reUserSearch': [], 'reGroupSearch': []});
   }
 
   turnOffNotif() {
-    userCollection.doc(uid).update({"notifOff": true});
+    userCollection.doc(uid).update({'notifOff': true});
   }
 
   turnOnNotif() {
-    userCollection.doc(uid).update({"notifOff": false});
+    userCollection.doc(uid).update({'notifOff': false});
   }
 
   storyCleanUp() async {
@@ -3024,7 +3024,7 @@ class DatabaseMethods {
                       .collection('stories')
                       .doc(story.id)
                       .delete();
-                  print("$counter:$storyId");
+                  print('$counter:$storyId');
                 }
               },
             ),

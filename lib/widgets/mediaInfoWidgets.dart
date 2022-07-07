@@ -11,7 +11,7 @@ import 'package:spidr_app/views/conversationScreen.dart';
 import 'package:spidr_app/views/groupProfilePage.dart';
 import 'package:spidr_app/views/personalChatScreen.dart';
 import 'package:spidr_app/views/sendMedia.dart';
-import "package:spidr_app/widgets/widget.dart";
+import 'package:spidr_app/widgets/widget.dart';
 
 import 'bottomSheetWidgets.dart';
 
@@ -65,9 +65,9 @@ Widget groupIcon(
 Widget userIcon(BuildContext context, String senderId, String sendBy,
     String profileImg, String anonImg, bool anon, bool blocked) {
   sendBy = senderId == Constants.myUserId
-      ? "Me"
+      ? 'Me'
       : anon != null && anon
-          ? "Anonymous"
+          ? 'Anonymous'
           : sendBy;
   DateTime now = DateTime.now();
   return GestureDetector(
@@ -90,7 +90,7 @@ Widget userIcon(BuildContext context, String senderId, String sendBy,
           userId: senderId,
           sendTime: now.microsecondsSinceEpoch,
           anon: true,
-          actionType: "START_CONVO",
+          actionType: 'START_CONVO',
         )
             .then((personalChatId) {
           Navigator.pushReplacement(
@@ -202,7 +202,7 @@ Widget imgToChatBtt(BuildContext context, String groupState, String groupId,
     String messageId, bool isMember) {
   return GestureDetector(
       onTap: () {
-        if (groupState == "public" || isMember) {
+        if (groupState == 'public' || isMember) {
           DatabaseMethods().getMsgIndex(groupId, messageId).then((val) {
             if (val != -1) {
               Navigator.push(
@@ -218,7 +218,7 @@ Widget imgToChatBtt(BuildContext context, String groupState, String groupId,
                           )));
             } else {
               Fluttertoast.showToast(
-                  msg: "Sorry, this message has been deleted");
+                  msg: 'Sorry, this message has been deleted');
             }
           });
         }
@@ -244,10 +244,10 @@ Widget sendMediaBtt(
             MaterialPageRoute(
                 builder: (context) => SendMediaScreen(
                       ogSenderId: senderId,
-                      imgObj: mediaObj != null && mediaObj["imgName"] != null
+                      imgObj: mediaObj != null && mediaObj['imgName'] != null
                           ? mediaObj
                           : null,
-                      fileObj: mediaObj != null && mediaObj["fileName"] != null
+                      fileObj: mediaObj != null && mediaObj['fileName'] != null
                           ? mediaObj
                           : null,
                       messageId: mediaId,
@@ -379,11 +379,11 @@ class GroupIconWithId extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data.data() != null &&
-                (snapshot.data.data()["deleted"] == null ||
-                    !snapshot.data.data()["deleted"])) {
+                (snapshot.data.data()['deleted'] == null ||
+                    !snapshot.data.data()['deleted'])) {
               var gcDS = snapshot.data;
-              String profileImg = gcDS.data()["profileImg"];
-              String hashTag = gcDS.data()["hashTag"];
+              String profileImg = gcDS.data()['profileImg'];
+              String hashTag = gcDS.data()['hashTag'];
               return Container(
                   margin: const EdgeInsets.symmetric(horizontal: 5),
                   child: Column(
@@ -398,7 +398,7 @@ class GroupIconWithId extends StatelessWidget {
                   child: Column(
                     children: [
                       const Icon(Icons.timer, color: Colors.grey),
-                      gcHashTag("Expired", 10),
+                      gcHashTag('Expired', 10),
                     ],
                   ));
             }
@@ -420,8 +420,8 @@ class UserIconWithId extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data.data() != null) {
             var userDS = snapshot.data;
-            String profileImg = userDS.data()["profileImg"];
-            String username = userDS.data()["name"];
+            String profileImg = userDS.data()['profileImg'];
+            String username = userDS.data()['name'];
             return Container(
                 margin: const EdgeInsets.symmetric(horizontal: 5),
                 child: Column(

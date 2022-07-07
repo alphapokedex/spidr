@@ -85,7 +85,7 @@ class _DocViewScreenState extends State<DocViewScreen> {
     bool success = await DownloadMethods.openDownloadedFile(taskId);
     if (!success) {
       Fluttertoast.showToast(
-          msg: "Sorry, please try again",
+          msg: 'Sorry, please try again',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.SNACKBAR,
           timeInSecForIosWeb: 3,
@@ -219,7 +219,7 @@ class DocDisplay extends StatelessWidget {
     return Stack(
       children: [
         filePreview(
-            context, "assets/images/docImage.png", fileName, fullScreen),
+            context, 'assets/images/docImage.png', fileName, fullScreen),
         auxiliaryDisplay(
             context: context,
             gifs: gifs,

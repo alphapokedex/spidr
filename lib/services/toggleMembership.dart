@@ -16,7 +16,7 @@ class ToggleMemMethods {
   joinChat(
       String hashTag, String groupId, String username, String admin) async {
     await DatabaseMethods(uid: userId)
-        .toggleGroupMembership(groupId, "JOIN_PUB_GROUP_CHAT");
+        .toggleGroupMembership(groupId, 'JOIN_PUB_GROUP_CHAT');
 
     // Navigator.pushReplacement(context, MaterialPageRoute(
     //     builder: (context) => ConversationScreen(
@@ -66,10 +66,10 @@ class ToggleMemMethods {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text("Hey!", style: TextStyle(color: Colors.orange)),
+            title: const Text('Hey!', style: TextStyle(color: Colors.orange)),
             content: Text(groupState == 'public'
-                ? "This group you are trying to join has reached its full capacity. Do you want to be on the waitlist and spectate?"
-                : "This group you are requesting to join has reached its full capacity. Do you want to be on the waitlist?"),
+                ? 'This group you are trying to join has reached its full capacity. Do you want to be on the waitlist and spectate?'
+                : 'This group you are requesting to join has reached its full capacity. Do you want to be on the waitlist?'),
             actions: [
               TextButton(
                   onPressed: () {
@@ -78,12 +78,12 @@ class ToggleMemMethods {
                         groupId, hashTag, admin, groupState);
                   },
                   child:
-                      const Text("YES", style: TextStyle(color: Colors.green))),
+                      const Text('YES', style: TextStyle(color: Colors.green))),
               TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text("NO", style: TextStyle(color: Colors.red)))
+                  child: const Text('NO', style: TextStyle(color: Colors.red)))
             ],
           );
         });

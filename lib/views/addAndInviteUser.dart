@@ -59,19 +59,19 @@ class _AddAndInviteUserScreenState extends State<AddAndInviteUserScreen> {
   addUser(String userId, String username) async {
     DocumentSnapshot groupSnapshot =
         await DatabaseMethods().getGroupChatById(widget.groupId);
-    int numOfGroupMem = groupSnapshot.get("members").length;
+    int numOfGroupMem = groupSnapshot.get('members').length;
 
-    double groupCap = groupSnapshot.get("groupCapacity");
+    double groupCap = groupSnapshot.get('groupCapacity');
 
     if (numOfGroupMem < groupCap) {
       setState(() {
         members.add(userId);
       });
       DatabaseMethods(uid: userId)
-          .toggleGroupMembership(widget.groupId, "ADD_USER");
+          .toggleGroupMembership(widget.groupId, 'ADD_USER');
     } else {
       showAlertDialog(
-          "Your group has already reached its full capacity.", context);
+          'Your group has already reached its full capacity.', context);
     }
   }
 
@@ -144,18 +144,18 @@ class _AddAndInviteUserScreenState extends State<AddAndInviteUserScreen> {
                       const EdgeInsets.symmetric(horizontal: 13.5, vertical: 9),
                   child: Text(
                     gotBanned
-                        ? "Banned"
+                        ? 'Banned'
                         : invited
-                            ? "Invited"
+                            ? 'Invited'
                             : joined
-                                ? "Joined"
+                                ? 'Joined'
                                 : onWaitList
-                                    ? "Waitlisted"
+                                    ? 'Waitlisted'
                                     : onRequest
-                                        ? "On Request"
+                                        ? 'On Request'
                                         : widget.isAdmin
-                                            ? "Add"
-                                            : "Invite",
+                                            ? 'Add'
+                                            : 'Invite',
                     style: simpleTextStyle(),
                   ),
                 ),
@@ -181,8 +181,8 @@ class _AddAndInviteUserScreenState extends State<AddAndInviteUserScreen> {
                           !Constants.myBlockList.contains(userId)
                       ? userTile(
                           userId,
-                          docData["name"],
-                          docData["profileImg"],
+                          docData['name'],
+                          docData['profileImg'],
                         )
                       : const SizedBox.shrink();
                 });
@@ -228,7 +228,7 @@ class _AddAndInviteUserScreenState extends State<AddAndInviteUserScreen> {
             decoration: const InputDecoration(
                 icon: Icon(Icons.search),
                 border: InputBorder.none,
-                hintText: "Search user",
+                hintText: 'Search user',
                 hintStyle: TextStyle(color: Colors.grey)),
           ),
         ),

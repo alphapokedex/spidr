@@ -32,7 +32,7 @@ class _CallScreenState extends State<CallScreen> {
   String loudUid;
 
   Map users = {};
-  String myUid = "";
+  String myUid = '';
   bool muted = false;
   bool deafen = false;
   RtcEngine _engine;
@@ -87,7 +87,7 @@ class _CallScreenState extends State<CallScreen> {
         List tmp = [];
         for (AudioVolumeInfo audInfo in audInfoList) {
           if (audInfo.volume > 0) {
-            String uid = audInfo.uid == 0 ? myUid : "${audInfo.uid}";
+            String uid = audInfo.uid == 0 ? myUid : '${audInfo.uid}';
             tmp.add(uid);
           }
         }
@@ -112,22 +112,22 @@ class _CallScreenState extends State<CallScreen> {
         setState(() {
           selUid = myUid;
         });
-        users[myUid] = {"userId": Constants.myUserId};
-        chatDofRef.update({"inCallUsers": users});
+        users[myUid] = {'userId': Constants.myUserId};
+        chatDofRef.update({'inCallUsers': users});
       },
       leaveChannel: (stats) {
         Globals.inCall = false;
         users.remove(myUid);
         chatDofRef.update({
-          "inCallUsers": users,
-          "loudUser": loudUid == myUid ? "" : loudUid
+          'inCallUsers': users,
+          'loudUser': loudUid == myUid ? '' : loudUid
         });
         _engine.destroy();
       },
       userJoined: (uid, elapsed) {},
       userOffline: (uid, elapsed) {
         users.remove(uid);
-        chatDofRef.update({"inCallUsers": users});
+        chatDofRef.update({'inCallUsers': users});
       },
     ));
   }
@@ -145,7 +145,7 @@ class _CallScreenState extends State<CallScreen> {
       double avatarSize = 24,
       double fontSize,
       double iconSize = 18}) {
-    String userId = users[uid]["userId"];
+    String userId = users[uid]['userId'];
     bool mute = uid == myUid ? muted : mutedUsers.contains(uid);
     bool active = activeUsers.contains(uid) ? !mute : false;
 

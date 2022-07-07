@@ -28,11 +28,11 @@ import 'package:url_launcher/url_launcher.dart';
 import 'globals.dart';
 
 viewStoryOnNotif(BuildContext context, storyDS) {
-  bool anon = storyDS.data()["anon"];
-  List mediaGallery = storyDS.data()["mediaGallery"];
-  Map mediaObj = storyDS.data()["mediaObj"];
+  bool anon = storyDS.data()['anon'];
+  List mediaGallery = storyDS.data()['mediaGallery'];
+  Map mediaObj = storyDS.data()['mediaObj'];
   String storyId = storyDS.id;
-  String senderId = storyDS.data()["senderId"];
+  String senderId = storyDS.data()['senderId'];
 
   Navigator.push(
       context,
@@ -51,13 +51,13 @@ viewStoryOnNotif(BuildContext context, storyDS) {
 
 notifOnClickHandler(BuildContext context, Map message) async {
   if (message = null) return;
-  if (message["screen"] == "groupChat") {
-    if (message["msgId"].isEmpty && message["data"] != null) {
+  if (message['screen'] == 'groupChat') {
+    if (message['msgId'].isEmpty && message['data'] != null) {
       Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => ConversationScreen(
-                    groupChatId: message["data"]["groupId"],
+                    groupChatId: message['data']['groupId'],
                     uid: Constants.myUserId,
                     spectate: false,
                     preview: false,
@@ -66,14 +66,14 @@ notifOnClickHandler(BuildContext context, Map message) async {
                   )));
     } else {
       DatabaseMethods()
-          .getMsgIndex(message["data"]["groupId"], message["data"]["msgId"])
+          .getMsgIndex(message['data']['groupId'], message['data']['msgId'])
           .then((int msgIndex) {
         print(Constants.myUserId);
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => ConversationScreen(
-                      groupChatId: message["data"]["groupId"],
+                      groupChatId: message['data']['groupId'],
                       uid: Constants.myUserId,
                       spectate: false,
                       preview: false,
@@ -82,27 +82,27 @@ notifOnClickHandler(BuildContext context, Map message) async {
                     )));
       });
     }
-  } else if (message["screen"] == "groupProfile") {
+  } else if (message['screen'] == 'groupProfile') {
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => GroupProfileScreen(
-                groupId: message["groupId"],
-                admin: message["adminId"],
+                groupId: message['groupId'],
+                admin: message['adminId'],
                 fromChat: false,
                 preview: true)));
-  } else if (message["screen"] == "personalChat") {
+  } else if (message['screen'] == 'personalChat') {
     print("testing${message["screen"]}");
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => PersonalChatScreen(
-                personalChatId: message["personalChatId"],
-                contactId: message["contactId"],
+                personalChatId: message['personalChatId'],
+                contactId: message['contactId'],
                 openByOther: true,
                 friend: true)));
-  } else if (message["screen"] == "snippet_comment") {
-    String storyId = message["storyId"];
+  } else if (message['screen'] == 'snippet_comment') {
+    String storyId = message['storyId'];
 
     DocumentSnapshot storyDS = await DatabaseMethods()
         .userCollection
@@ -120,9 +120,9 @@ notifOnClickHandler(BuildContext context, Map message) async {
   //   ));
   // }
 
-  else if (message["screen"] == "groupSnippet") {
-    String groupId = message["groupId"];
-    String storyId = message["storyId"];
+  else if (message['screen'] == 'groupSnippet') {
+    String groupId = message['groupId'];
+    String storyId = message['storyId'];
 
     DocumentSnapshot storyDS = await DatabaseMethods()
         .userCollection
@@ -141,9 +141,9 @@ notifOnClickHandler(BuildContext context, Map message) async {
     //     .get();
 
     viewStoryOnNotif(context, storyDS);
-  } else if (message["screen"] == "friendSnippet") {
-    String friendId = message["senderId"];
-    String storyId = message["storyId"];
+  } else if (message['screen'] == 'friendSnippet') {
+    String friendId = message['senderId'];
+    String storyId = message['storyId'];
     DocumentSnapshot storyDS = await DatabaseMethods()
         .userCollection
         .doc(Constants.myUserId)
@@ -154,8 +154,8 @@ notifOnClickHandler(BuildContext context, Map message) async {
         .get();
 
     viewStoryOnNotif(context, storyDS);
-  } else if (message["screen"] == "personalSnippet") {
-    String storyId = message["storyId"];
+  } else if (message['screen'] == 'personalSnippet') {
+    String storyId = message['storyId'];
     DocumentSnapshot storyDS = await DatabaseMethods()
         .userCollection
         .doc(Constants.myUserId)
@@ -164,10 +164,10 @@ notifOnClickHandler(BuildContext context, Map message) async {
         .get();
 
     viewStoryOnNotif(context, storyDS);
-  } else if (message["screen"] == "callScreen") {
-    String groupId = message["groupId"];
-    String personalChatId = message["personalChatId"];
-    bool anon = message["anon"] == 'false' ? false : true;
+  } else if (message['screen'] == 'callScreen') {
+    String groupId = message['groupId'];
+    String personalChatId = message['personalChatId'];
+    bool anon = message['anon'] == 'false' ? false : true;
     final TargetPlatform platform = Theme.of(context).platform;
 
     bool ready = await checkCamPermission(platform) &&
@@ -187,7 +187,7 @@ notifOnClickHandler(BuildContext context, Map message) async {
         );
       } else {
         Fluttertoast.showToast(
-            msg: "Sorry, you are currently in call",
+            msg: 'Sorry, you are currently in call',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.SNACKBAR,
             timeInSecForIosWeb: 3,
@@ -278,10 +278,10 @@ List conGifMap(List gifyStickers) {
   for (DynamicStackItem gs in gifyStickers) {
     if (!gs.deleted) {
       gifs.add({
-        "gifUrl": gs.gifUrl,
-        "xPos": gs.xPos,
-        "yPos": gs.yPos,
-        "scale": gs.scale
+        'gifUrl': gs.gifUrl,
+        'xPos': gs.xPos,
+        'yPos': gs.yPos,
+        'scale': gs.scale
       });
     }
   }
@@ -312,12 +312,12 @@ List<Map> conMediaList(List<SelectedFile> rdyMedia) {
 
   for (SelectedFile sm in rdyMedia) {
     mediaList.add({
-      "imgPath": sm.filePath,
-      "imgName": sm.fileName,
-      "caption": sm.caption,
-      "link": sm.link,
-      "gifs": sm.gifs != null ? conGifMap(sm.gifs) : [],
-      "mature": sm.mature
+      'imgPath': sm.filePath,
+      'imgName': sm.fileName,
+      'caption': sm.caption,
+      'link': sm.link,
+      'gifs': sm.gifs != null ? conGifMap(sm.gifs) : [],
+      'mature': sm.mature
     });
   }
   return mediaList;
@@ -348,12 +348,12 @@ conGifWidgets(List gifs) {
   List gifsWidgetList = [];
   if (gifsWidgetList != null) {
     for (Map g in gifs) {
-      double scale = g["scale"] ??= g["scale"].toDouble();
+      double scale = g['scale'] ??= g['scale'].toDouble();
       gifsWidgetList.add(
         StaticStackItem(
-          g["gifUrl"],
-          g["xPos"].toDouble(),
-          g["yPos"].toDouble(),
+          g['gifUrl'],
+          g['xPos'].toDouble(),
+          g['yPos'].toDouble(),
           scale,
         ),
       );
@@ -377,7 +377,7 @@ getNumOfReplies(List replies) {
   int numOfReplies = 0;
   if (replies != null) {
     for (var reply in replies) {
-      if (!reply["open"]) {
+      if (!reply['open']) {
         numOfReplies++;
       }
     }
@@ -386,7 +386,7 @@ getNumOfReplies(List replies) {
 }
 
 final urlRegExp = RegExp(
-    r"((https?:www\.)|(https?://)|(www\.))[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9]{1,6}(/[-a-zA-Z0-9()@:%_+.~#?&/=]*)?");
+    r'((https?:www\.)|(https?://)|(www\.))[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9]{1,6}(/[-a-zA-Z0-9()@:%_+.~#?&/=]*)?');
 
 void openUrl(String url) async {
   Uri uri = Uri.tryParse(url);
@@ -414,7 +414,7 @@ String extractUrl(String text) {
       return e.url;
     }
   }
-  return "";
+  return '';
 }
 
 String extractSiteName(String text) {
@@ -426,12 +426,12 @@ String extractSiteName(String text) {
       return e.text;
     }
   }
-  return "";
+  return '';
 }
 
-final empStrRegExp = RegExp(r"(^\s*$)");
+final empStrRegExp = RegExp(r'(^\s*$)');
 
-final youTubeSURLRegExp = RegExp(r"^(https?://)?(www\.)?(youtu\.?be)/(.+$)");
+final youTubeSURLRegExp = RegExp(r'^(https?://)?(www\.)?(youtu\.?be)/(.+$)');
 
 String repYouTubeUrl(String url) {
   String regularUrl = url.replaceFirstMapped(youTubeSURLRegExp,
@@ -457,7 +457,7 @@ emptyStrChecker(String s) {
 }
 
 videoChecker(String fileName) {
-  return path.extension(fileName) == ".mp4";
+  return path.extension(fileName) == '.mp4';
 }
 
 audioChecker(String fileName) {
@@ -468,7 +468,7 @@ audioChecker(String fileName) {
 }
 
 pdfChecker(String fileName) {
-  bool document = path.extension(fileName) == ".pdf";
+  bool document = path.extension(fileName) == '.pdf';
   return document;
 }
 

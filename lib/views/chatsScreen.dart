@@ -55,8 +55,8 @@ class _ChatsScreenState extends State<ChatsScreen>
             List mutedChats = [];
             List receivedFdReq = [];
             if (snapshot.hasData && snapshot.data.data() != null) {
-              mutedChats = snapshot.data.data()["mutedChats"] ?? [];
-              receivedFdReq = snapshot.data.data()["receivedFdReq"];
+              mutedChats = snapshot.data.data()['mutedChats'] ?? [];
+              receivedFdReq = snapshot.data.data()['receivedFdReq'];
               receivedFdReq = receivedFdReq != null
                   ? receivedFdReq
                       .where(
@@ -76,7 +76,7 @@ class _ChatsScreenState extends State<ChatsScreen>
                             backgroundColor: Colors.white,
                             elevation: 0.0,
                             centerTitle: true,
-                            title: Text("SpIdr",
+                            title: Text('SpIdr',
                                 style: GoogleFonts.varelaRound(
                                     color: Colors.orange,
                                     fontWeight: FontWeight.bold,
@@ -110,7 +110,7 @@ class _ChatsScreenState extends State<ChatsScreen>
                                       Stack(
                                         children: [
                                           tabItem(Icons.donut_large_rounded,
-                                              "Circles", 0),
+                                              'Circles', 0),
                                           StreamBuilder(
                                               stream: DatabaseMethods()
                                                   .userCollection
@@ -141,7 +141,7 @@ class _ChatsScreenState extends State<ChatsScreen>
                                       Stack(
                                         children: [
                                           tabItem(Icons.people_alt_rounded,
-                                              "Friends", 1),
+                                              'Friends', 1),
                                           StreamBuilder(
                                               stream: DatabaseMethods()
                                                   .userCollection

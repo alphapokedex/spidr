@@ -1,5 +1,4 @@
-
-class Globals{
+class Globals {
   static bool onFeed = true;
   static bool onStream = true;
   static bool isMuted = false;

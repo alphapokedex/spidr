@@ -82,7 +82,7 @@ class _GetStartedDialogState extends State<GetStartedDialog> {
                         height: 5,
                       ),
                       const Text(
-                          "Add 3-5 Spidr Tags of your interests to receive broadcasts and discover circles!",
+                          'Add 3-5 Spidr Tags of your interests to receive broadcasts and discover circles!',
                           style: TextStyle(
                               color: Colors.grey,
                               fontWeight: FontWeight.w600,
@@ -109,7 +109,7 @@ class _GetStartedDialogState extends State<GetStartedDialog> {
                                   icon: Icon(Icons.tag),
                                   border: InputBorder.none,
                                   hintText:
-                                      "UofG,Parties,Toronto,Music,Sports...",
+                                      'UofG,Parties,Toronto,Music,Sports...',
                                   hintStyle: TextStyle(
                                       color: Colors.black54,
                                       fontStyle: FontStyle.italic,
@@ -127,10 +127,10 @@ class _GetStartedDialogState extends State<GetStartedDialog> {
                                   setState(() {
                                     tags = [tag] + tags;
                                   });
-                                  tagController.text = "";
+                                  tagController.text = '';
                                 } else {
                                   Fluttertoast.showToast(
-                                    msg: "Sorry, tag length exceeds 18",
+                                    msg: 'Sorry, tag length exceeds 18',
                                     toastLength: Toast.LENGTH_SHORT,
                                     gravity: ToastGravity.SNACKBAR,
                                     timeInSecForIosWeb: 3,
@@ -164,9 +164,9 @@ class _GetStartedDialogState extends State<GetStartedDialog> {
                                       ),
                                       child: Center(
                                           child: Text(
-                                              tags[index].startsWith("#")
+                                              tags[index].startsWith('#')
                                                   ? tags[index]
-                                                  : "#" + tags[index],
+                                                  : '#' + tags[index],
                                               style: const TextStyle(
                                                   color: Colors.black)))),
                                   Positioned(
@@ -225,7 +225,7 @@ class _GetStartedDialogState extends State<GetStartedDialog> {
                                         children: [
                                           Flexible(
                                             child: Text(
-                                              "#" + tag,
+                                              '#' + tag,
                                               style: const TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 13),
@@ -254,11 +254,11 @@ class _GetStartedDialogState extends State<GetStartedDialog> {
                               .userCollection
                               .doc(Constants.myUserId)
                               .update({
-                            "getStarted": false,
+                            'getStarted': false,
                           });
                           Navigator.of(context, rootNavigator: true).pop();
                         },
-                        child: const Text("skip",
+                        child: const Text('skip',
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.w600)),
@@ -269,7 +269,7 @@ class _GetStartedDialogState extends State<GetStartedDialog> {
                               DatabaseMethods()
                                   .userCollection
                                   .doc(Constants.myUserId)
-                                  .update({"getStarted": false, "tags": tags});
+                                  .update({'getStarted': false, 'tags': tags});
                               Navigator.of(context, rootNavigator: true).pop();
                             }
                           },
@@ -296,7 +296,7 @@ class _GetStartedDialogState extends State<GetStartedDialog> {
                   child: CircleAvatar(
                       radius: 27,
                       backgroundImage:
-                          AssetImage("assets/images/SpidrNet.png")))
+                          AssetImage('assets/images/SpidrNet.png')))
             ],
           ),
         ));
@@ -356,7 +356,7 @@ class _ReplyBoxDialogState extends State<ReplyBoxDialog> {
         'text': replyMsg,
         'sender': widget.anon == null || !widget.anon
             ? Constants.myName
-            : "Anonymous",
+            : 'Anonymous',
         'senderId': Constants.myUserId,
         'sendTime': now.microsecondsSinceEpoch,
         'sendTo': widget.userId,
@@ -382,7 +382,7 @@ class _ReplyBoxDialogState extends State<ReplyBoxDialog> {
         hashTag: widget.hashTag,
         anon: widget.anon,
         messageId: widget.messageId,
-        actionType: "REPLY_CHAT",
+        actionType: 'REPLY_CHAT',
         ogMediaId: widget.ogMediaId,
       )
           .then((personalChatId) {
@@ -393,8 +393,8 @@ class _ReplyBoxDialogState extends State<ReplyBoxDialog> {
           userId: widget.userId,
           username: widget.anon == null || !widget.anon
               ? Constants.myName
-              : "Anonymous",
-          actionType: "ADD_REPLY",
+              : 'Anonymous',
+          actionType: 'ADD_REPLY',
         );
 
         Navigator.pushReplacement(
@@ -409,7 +409,7 @@ class _ReplyBoxDialogState extends State<ReplyBoxDialog> {
                     )));
       });
 
-      replyEditingController.text = "";
+      replyEditingController.text = '';
     }
   }
 
@@ -418,13 +418,13 @@ class _ReplyBoxDialogState extends State<ReplyBoxDialog> {
     return AlertDialog(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30))),
-      title: iconTextTitle(icon: Icons.maps_ugc, text: "Private Chat"),
+      title: iconTextTitle(icon: Icons.maps_ugc, text: 'Private Chat'),
       content: Form(
         key: formKey,
         child: TextFormField(
           autofocus: true,
           validator: (val) {
-            return emptyStrChecker(val) ? "Hey! type something in" : null;
+            return emptyStrChecker(val) ? 'Hey! type something in' : null;
           },
           controller: replyEditingController,
           style: const TextStyle(color: Colors.black, fontSize: 14),
@@ -435,12 +435,12 @@ class _ReplyBoxDialogState extends State<ReplyBoxDialog> {
             onPressed: () {
               Navigator.of(context, rootNavigator: true).pop();
             },
-            child: const Text("CANCEL")),
+            child: const Text('CANCEL')),
         TextButton(
             onPressed: () {
               replyMessage();
             },
-            child: const Text("SEND")),
+            child: const Text('SEND')),
       ],
     );
   }
@@ -522,7 +522,7 @@ class _AddTagOnCreateDialogState extends State<AddTagOnCreateDialog> {
           borderRadius: BorderRadius.all(Radius.circular(30))),
       titlePadding: const EdgeInsets.fromLTRB(24, 27, 0, 14),
       contentPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-      title: Text(!noTag ? "Add Tags" : "Sorry, one more tag is required",
+      title: Text(!noTag ? 'Add Tags' : 'Sorry, one more tag is required',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: !noTag ? Colors.black : Colors.redAccent,
@@ -556,7 +556,7 @@ class _AddTagOnCreateDialogState extends State<AddTagOnCreateDialog> {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text("CANCEL",
+          child: const Text('CANCEL',
               style: TextStyle(
                 color: Colors.redAccent,
                 fontWeight: FontWeight.bold,
@@ -572,7 +572,7 @@ class _AddTagOnCreateDialogState extends State<AddTagOnCreateDialog> {
               Navigator.pop(context, tags);
             }
           },
-          child: const Text("OK",
+          child: const Text('OK',
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -600,7 +600,7 @@ class _ReportContentDialogState extends State<ReportContentDialog> {
           icon: platform == TargetPlatform.android
               ? Icons.flag_rounded
               : CupertinoIcons.flag_fill,
-          text: "Report Content"),
+          text: 'Report Content'),
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30))),
       contentPadding: const EdgeInsets.all(12),
@@ -630,7 +630,7 @@ class _ReportContentDialogState extends State<ReportContentDialog> {
             Navigator.pop(context);
           },
           child: const Text(
-            "CANCEL",
+            'CANCEL',
             style:
                 TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
           ),
@@ -642,7 +642,7 @@ class _ReportContentDialogState extends State<ReportContentDialog> {
             }
           },
           child: Text(
-            "REPORT",
+            'REPORT',
             style: TextStyle(
                 color: selectedIndex != -1 ? Colors.black : Colors.grey,
                 fontWeight: FontWeight.bold),
@@ -674,7 +674,7 @@ class _ShareMediaGalleryDialogState extends State<ShareMediaGalleryDialog> {
           icon: platform == TargetPlatform.android
               ? Icons.share
               : CupertinoIcons.share,
-          text: "Share Media"),
+          text: 'Share Media'),
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30))),
       titlePadding: const EdgeInsets.all(18),
@@ -737,7 +737,7 @@ class _ShareMediaGalleryDialogState extends State<ShareMediaGalleryDialog> {
             Navigator.pop(context);
           },
           child: const Text(
-            "CANCEL",
+            'CANCEL',
             style:
                 TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
           ),
@@ -749,7 +749,7 @@ class _ShareMediaGalleryDialogState extends State<ShareMediaGalleryDialog> {
             }
           },
           child: const Text(
-            "OK",
+            'OK',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
@@ -769,7 +769,7 @@ showBanMemberDialog(
           // contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 24),
           title: iconTextTitle(
               icon: Icons.do_disturb_on_rounded,
-              text: "Ban User",
+              text: 'Ban User',
               color: Colors.red),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -791,7 +791,7 @@ showBanMemberDialog(
                       ),
                     ),
                     const TextSpan(
-                      text: " will be banned from ",
+                      text: ' will be banned from ',
                       style: TextStyle(color: Colors.black),
                     ),
                     TextSpan(
@@ -805,15 +805,15 @@ showBanMemberDialog(
           actions: [
             TextButton(
                 onPressed: () {
-                  Navigator.pop(context, "LEAVE_GROUP");
+                  Navigator.pop(context, 'LEAVE_GROUP');
                 },
-                child: const Text("Just Once",
+                child: const Text('Just Once',
                     style: TextStyle(color: Colors.orange))),
             TextButton(
                 onPressed: () {
-                  Navigator.pop(context, "BAN_USER");
+                  Navigator.pop(context, 'BAN_USER');
                 },
-                child: const Text("Permanently",
+                child: const Text('Permanently',
                     style: TextStyle(color: Colors.black)))
           ],
         );
@@ -827,14 +827,14 @@ showAlertDialog(String text, BuildContext context) {
         return AlertDialog(
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(30))),
-          title: const Text("Sorry", style: TextStyle(color: Colors.orange)),
+          title: const Text('Sorry', style: TextStyle(color: Colors.orange)),
           content: Text(text),
           actions: [
             TextButton(
                 onPressed: () {
                   Navigator.of(context, rootNavigator: true).pop();
                 },
-                child: const Text("OK", style: TextStyle(color: Colors.blue)))
+                child: const Text('OK', style: TextStyle(color: Colors.blue)))
           ],
         );
       });
@@ -848,7 +848,7 @@ showLogOutDialog(BuildContext context) async {
           backgroundColor: Colors.white,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(30))),
-          title: iconTextTitle(icon: Icons.logout, text: "Hop Off"),
+          title: iconTextTitle(icon: Icons.logout, text: 'Hop Off'),
           content: RichText(
             text: const TextSpan(
               text: 'Are you sure you want to hop off?',
@@ -862,7 +862,7 @@ showLogOutDialog(BuildContext context) async {
                 Navigator.pop(context, false);
               },
               child: const Text(
-                "CANCEL",
+                'CANCEL',
                 style:
                     TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
               ),
@@ -891,7 +891,7 @@ showClearSearchDialog(BuildContext context) async {
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(30))),
           title: iconTextTitle(
-              icon: Icons.history_rounded, text: "Clear Search History"),
+              icon: Icons.history_rounded, text: 'Clear Search History'),
           content: RichText(
             text: const TextSpan(
               text: 'Are you sure you want to clear your search history?',
@@ -905,7 +905,7 @@ showClearSearchDialog(BuildContext context) async {
                 Navigator.pop(context, false);
               },
               child: const Text(
-                "CANCEL",
+                'CANCEL',
                 style:
                     TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
               ),
@@ -939,10 +939,10 @@ showRepliedUsersDialog(List replies, String messageId, String groupId,
                 shrinkWrap: true,
                 itemCount: replies.length,
                 itemBuilder: (context, index) {
-                  String userId = replies[index]["userId"];
-                  String personalChatId = replies[index]["personalChatId"];
-                  String username = replies[index]["username"];
-                  bool opened = replies[index]["open"];
+                  String userId = replies[index]['userId'];
+                  String personalChatId = replies[index]['personalChatId'];
+                  String username = replies[index]['username'];
+                  bool opened = replies[index]['open'];
                   return !opened
                       ? Card(
                           elevation: 0.0,
@@ -957,7 +957,7 @@ showRepliedUsersDialog(List replies, String messageId, String groupId,
                                         messageId: messageId,
                                         personalChatId: personalChatId,
                                         userId: userId,
-                                        actionType: "OPEN_REPLY");
+                                        actionType: 'OPEN_REPLY');
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
@@ -973,7 +973,7 @@ showRepliedUsersDialog(List replies, String messageId, String groupId,
                               child: ListTile(
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 20.0, vertical: 10.0),
-                                title: Text("From $username"),
+                                title: Text('From $username'),
                                 trailing: const Icon(
                                   Icons.keyboard_arrow_right,
                                   size: 30.0,
@@ -995,18 +995,18 @@ showJoinGroupAlertDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Hey!", style: TextStyle(color: Colors.orange)),
+          title: const Text('Hey!', style: TextStyle(color: Colors.orange)),
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(30))),
           content: Text(groupState == 'public' || groupState == 'invisible'
-              ? "This group you are trying to join has reached its full capacity. Do you want to be on the waitlist and spectate?"
-              : "This group you are requesting to join has reached its full capacity. Do you want to be on the waitlist?"),
+              ? 'This group you are trying to join has reached its full capacity. Do you want to be on the waitlist and spectate?'
+              : 'This group you are requesting to join has reached its full capacity. Do you want to be on the waitlist?'),
           actions: [
             FlatButton(
                 onPressed: () {
                   Navigator.of(context, rootNavigator: true).pop();
                 },
-                child: const Text("NO", style: TextStyle(color: Colors.red))),
+                child: const Text('NO', style: TextStyle(color: Colors.red))),
             FlatButton(
                 onPressed: () {
                   Navigator.of(context, rootNavigator: true).pop();
@@ -1018,7 +1018,7 @@ showJoinGroupAlertDialog(
                       null);
                 },
                 child:
-                    const Text("YES", style: TextStyle(color: Colors.green))),
+                    const Text('YES', style: TextStyle(color: Colors.green))),
           ],
         );
       });
@@ -1078,7 +1078,7 @@ class _SelectAnonImgDialogState extends State<SelectAnonImgDialog> {
                             ],
                           ),
                           child: Image.asset(
-                              "assets/icon/icons8-anonymous-mask-50.png",
+                              'assets/icon/icons8-anonymous-mask-50.png',
                               scale: 2.25)),
                     )
                   ],
@@ -1176,7 +1176,7 @@ class _DeleteGroupDialogState extends State<DeleteGroupDialog> {
           borderRadius: BorderRadius.all(Radius.circular(30))),
       title: iconTextTitle(
           icon: Icons.delete_forever_outlined,
-          text: "Delete Circle",
+          text: 'Delete Circle',
           color: Colors.red),
       content: SizedBox(
         height: MediaQuery.of(context).size.height * 0.2,
@@ -1206,7 +1206,7 @@ class _DeleteGroupDialogState extends State<DeleteGroupDialog> {
                     autofocus: true,
                     textCapitalization: TextCapitalization.characters,
                     validator: (val) {
-                      return val != widget.hashTag ? "Incorrect hashtag" : null;
+                      return val != widget.hashTag ? 'Incorrect hashtag' : null;
                     },
                     controller: hashTagConfirmController,
                     style: const TextStyle(color: Colors.black),
@@ -1225,7 +1225,7 @@ class _DeleteGroupDialogState extends State<DeleteGroupDialog> {
             Navigator.pop(context, false);
           },
           child: const Text(
-            "CANCEL",
+            'CANCEL',
             style:
                 TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
           ),
@@ -1255,7 +1255,7 @@ List<Widget> recTagButtons(TextEditingController editor, List tags) {
             editor.text = tag;
           },
           child: Text(
-            "#" + tag,
+            '#' + tag,
           )))
       .toList();
 }
@@ -1284,11 +1284,11 @@ showTextBoxDialog(
                 validator: (val) {
                   if (emptyStrChecker(val)) {
                     return errorText;
-                  } else if ((text == "About Me" || text == "About Circle") &&
+                  } else if ((text == 'About Me' || text == 'About Circle') &&
                       val.length > 100) {
-                    return "Content > 100 characters";
-                  } else if (text == "Tag" && val.length > 18) {
-                    return "Tag > 18 characters";
+                    return 'Content > 100 characters';
+                  } else if (text == 'Tag' && val.length > 18) {
+                    return 'Tag > 18 characters';
                   }
                   return null;
                 },
@@ -1296,7 +1296,7 @@ showTextBoxDialog(
                 controller: textEditingController,
               ),
             ),
-            text == "Tag"
+            text == 'Tag'
                 ? FutureBuilder(
                     future: DatabaseMethods().getSugTags(),
                     builder: (context, snapshot) {
@@ -1322,7 +1322,7 @@ showTextBoxDialog(
                   Navigator.of(context).pop();
                 },
                 child: const Text(
-                  "CANCEL",
+                  'CANCEL',
                   style:
                       TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
                 )),
@@ -1337,7 +1337,7 @@ showTextBoxDialog(
                   }
                 },
                 child: const Text(
-                  "SAVE",
+                  'SAVE',
                   style: TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ))
@@ -1375,9 +1375,9 @@ class _CreateHashTagDialogState extends State<CreateHashTagDialog> {
           },
           validator: (val) {
             if (emptyStrChecker(val)) {
-              return "Please enter a hashTag";
+              return 'Please enter a hashTag';
             } else if (val.length > 18) {
-              return "Maximum length 18";
+              return 'Maximum length 18';
             }
             return null;
           },
@@ -1393,7 +1393,7 @@ class _CreateHashTagDialogState extends State<CreateHashTagDialog> {
               Navigator.of(context).pop();
             },
             child: const Text(
-              "CANCEL",
+              'CANCEL',
               style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
             )),
         FlatButton(
@@ -1403,7 +1403,7 @@ class _CreateHashTagDialogState extends State<CreateHashTagDialog> {
               }
             },
             child: const Text(
-              "CREATE",
+              'CREATE',
               style:
                   TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
             ))
@@ -1434,7 +1434,7 @@ showSpidrIdBoxDialog(
                 children: <Widget>[
                   const SizedBox(height: 24),
                   const Text(
-                    "Update your Spidr ID",
+                    'Update your Spidr ID',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.black,
@@ -1450,9 +1450,9 @@ showSpidrIdBoxDialog(
                         child: TextFormField(
                           validator: (val) {
                             return val.length > 18
-                                ? "Max length 18"
+                                ? 'Max length 18'
                                 : emptyStrChecker(val)
-                                    ? "Sorry, Spidr ID can not be empty"
+                                    ? 'Sorry, Spidr ID can not be empty'
                                     : null;
                           },
                           controller: spidrIdEditingController,
@@ -1460,8 +1460,8 @@ showSpidrIdBoxDialog(
                           cursorColor: Colors.orangeAccent,
                           maxLines: 1,
                           decoration: const InputDecoration(
-                            hintText: "Enter a Username",
-                            labelText: "Spidr ID",
+                            hintText: 'Enter a Username',
+                            labelText: 'Spidr ID',
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.orange),
                             ),
@@ -1480,7 +1480,7 @@ showSpidrIdBoxDialog(
                               Navigator.of(context, rootNavigator: true).pop();
                             }
                           },
-                          child: const Text("Continue")),
+                          child: const Text('Continue')),
                     ],
                   ),
                 ],

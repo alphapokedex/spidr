@@ -5,7 +5,7 @@ class GroupChatsScreen extends StatefulWidget {
   final String uid;
   final int page;
   final snapshot;
-  GroupChatsScreen(this.uid, this.page, this.snapshot);
+  const GroupChatsScreen(this.uid, this.page, this.snapshot);
   @override
   _GroupChatsScreenState createState() => _GroupChatsScreenState();
 }

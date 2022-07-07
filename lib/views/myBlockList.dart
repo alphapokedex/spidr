@@ -38,7 +38,7 @@ class _MyBlockListState extends State<MyBlockList> {
                       DatabaseMethods(uid: Constants.myUserId).getMyStream(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData && snapshot.data.data() != null) {
-                      List blockList = snapshot.data.data()["blockList"];
+                      List blockList = snapshot.data.data()['blockList'];
                       // List anonIndices = snapshot.data.data()["anonIndices"];
                       return blockList != null && blockList.isNotEmpty
                           ? ListView.builder(
@@ -73,7 +73,7 @@ class _MyBlockListState extends State<MyBlockList> {
                               })
                           : noItems(
                               icon: Icons.block_rounded,
-                              text: "no blocked users",
+                              text: 'no blocked users',
                               mAxAlign: MainAxisAlignment.center);
                     } else {
                       return sectionLoadingIndicator();

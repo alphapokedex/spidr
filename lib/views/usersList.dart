@@ -35,7 +35,7 @@ class _UsersListState extends State<UsersList> {
       onTap: () {
         if (!recent) {
           DatabaseMethods(uid: Constants.myUserId)
-              .addRecentSearch("reUserSearch", userId);
+              .addRecentSearch('reUserSearch', userId);
         }
         Navigator.push(
             context,
@@ -128,7 +128,7 @@ class _UsersListState extends State<UsersList> {
                             snapshot.data.hits[index].objectID, false);
                       })
                   : noItems(
-                      icon: Icons.search_rounded, text: "search not found");
+                      icon: Icons.search_rounded, text: 'search not found');
             } else {
               return const SizedBox.shrink();
             }
@@ -168,11 +168,11 @@ class _UsersListState extends State<UsersList> {
         stream: DatabaseMethods(uid: Constants.myUserId).getMyStream(),
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data.data() != null) {
-            friends = snapshot.data.data()["friends"];
-            sentFdReq = snapshot.data.data()["sentFdReq"];
-            receivedFdReq = snapshot.data.data()["receivedFdReq"];
-            blockList = snapshot.data.data()["blockList"];
-            recentSearch = snapshot.data.data()["reUserSearch"];
+            friends = snapshot.data.data()['friends'];
+            sentFdReq = snapshot.data.data()['sentFdReq'];
+            receivedFdReq = snapshot.data.data()['receivedFdReq'];
+            blockList = snapshot.data.data()['blockList'];
+            recentSearch = snapshot.data.data()['reUserSearch'];
             return widget.searchText.isNotEmpty
                 ? searchUserList()
                 : recentSearchList();

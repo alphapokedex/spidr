@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:spidr_app/decorations/widgetDecorations.dart';
 import 'package:spidr_app/helper/constants.dart';
@@ -65,7 +64,7 @@ class _BannerScreenState extends State<BannerScreen> {
                   });
 
                   String imgUrl = await UploadMethods()
-                      .pickAndUploadMedia("USER_BANNER", false);
+                      .pickAndUploadMedia('USER_BANNER', false);
 
                   setState(() {
                     uploading = false;
@@ -81,7 +80,7 @@ class _BannerScreenState extends State<BannerScreen> {
           height: 10,
         ),
         const Text(
-          "Upload Media",
+          'Upload Media',
           style: TextStyle(
             fontSize: 22.5,
             color: Colors.white,
@@ -192,19 +191,19 @@ class _BannerScreenState extends State<BannerScreen> {
                                                 onTap: () {
                                                   showTextBoxDialog(
                                                       context: context,
-                                                      text: "About Me",
+                                                      text: 'About Me',
                                                       textEditingController:
                                                           widget
                                                               .quoteController,
                                                       errorText:
-                                                          "Sorry, about me can not be empty",
+                                                          'Sorry, about me can not be empty',
                                                       editQuote:
                                                           widget.editAboutMe,
                                                       formKey: widget.formKey);
                                                 },
                                                 child: infoEditBtt(
                                                     context: context,
-                                                    text: "About Me ",
+                                                    text: 'About Me ',
                                                     bgColor: Colors.white,
                                                     fgColor: Colors.black),
                                               )
@@ -229,12 +228,12 @@ class _BannerScreenState extends State<BannerScreen> {
                                                                 context:
                                                                     context,
                                                                 text:
-                                                                    "About Me",
+                                                                    'About Me',
                                                                 textEditingController:
                                                                     widget
                                                                         .quoteController,
                                                                 errorText:
-                                                                    "Sorry, about me can not be empty",
+                                                                    'Sorry, about me can not be empty',
                                                                 editQuote: widget
                                                                     .editAboutMe,
                                                                 formKey: widget
@@ -309,9 +308,6 @@ class _BannerScreenState extends State<BannerScreen> {
   }
 }
 
-
-
-
 // class AboutMe extends StatefulWidget {
 //   AboutMe();
 //
@@ -326,7 +322,7 @@ class _BannerScreenState extends State<BannerScreen> {
 //
 //   @override
 //   void initState() {
-//     
+//
 //     super.initState();
 //     quoteController = TextEditingController(text: Constants.myQuote);
 //   }

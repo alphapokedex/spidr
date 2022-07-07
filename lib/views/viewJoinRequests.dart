@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:spidr_app/helper/constants.dart';
@@ -32,7 +31,7 @@ class _JoinRequestsScreenState extends State<JoinRequestsScreen> {
         loading = true;
       });
       await DatabaseMethods(uid: userId)
-          .toggleGroupMembership(groupId, "ACCEPT_JOIN_REQ");
+          .toggleGroupMembership(groupId, 'ACCEPT_JOIN_REQ');
       setState(() {
         joinRequests.remove(userId);
         loading = false;
@@ -148,7 +147,7 @@ class _JoinRequestsScreenState extends State<JoinRequestsScreen> {
         ),
         backgroundColor: Colors.white,
         centerTitle: true,
-        title: Text("Join Requests",
+        title: Text('Join Requests',
             style: GoogleFonts.varelaRound(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -161,8 +160,8 @@ class _JoinRequestsScreenState extends State<JoinRequestsScreen> {
               itemCount: joinRequests.length,
               itemBuilder: (context, index) {
                 String userId = joinRequests.keys.elementAt(index);
-                String username = joinRequests[userId]["username"];
-                Map imgObj = joinRequests[userId]["imgObj"];
+                String username = joinRequests[userId]['username'];
+                Map imgObj = joinRequests[userId]['imgObj'];
                 return !Constants.myBlockList.contains(userId)
                     ? joinRequestTile(widget.groupId, widget.hashTag, userId,
                         username, imgObj)
@@ -179,9 +178,9 @@ class _JoinRequestsScreenState extends State<JoinRequestsScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text("Sorry", style: TextStyle(color: Colors.orange)),
+            title: const Text('Sorry', style: TextStyle(color: Colors.orange)),
             content: Text(
-                "Your group has reached its full capacity. Do you want to put $username on the waitlist?"),
+                'Your group has reached its full capacity. Do you want to put $username on the waitlist?'),
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(30))),
             actions: [
@@ -189,11 +188,11 @@ class _JoinRequestsScreenState extends State<JoinRequestsScreen> {
                   onPressed: () {
                     Navigator.of(context, rootNavigator: true).pop();
                   },
-                  child: const Text("NO", style: TextStyle(color: Colors.red))),
+                  child: const Text('NO', style: TextStyle(color: Colors.red))),
               TextButton(
                   onPressed: () async {
                     await DatabaseMethods(uid: userId)
-                        .toggleGroupMembership(groupId, "ACCEPT_REQ_BUT_FULL");
+                        .toggleGroupMembership(groupId, 'ACCEPT_REQ_BUT_FULL');
                     setState(() {
                       joinRequests.remove(userId);
                     });
@@ -204,7 +203,7 @@ class _JoinRequestsScreenState extends State<JoinRequestsScreen> {
                     Navigator.of(context, rootNavigator: true).pop();
                   },
                   child:
-                      const Text("YES", style: TextStyle(color: Colors.green))),
+                      const Text('YES', style: TextStyle(color: Colors.green))),
             ],
           );
         });

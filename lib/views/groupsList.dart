@@ -42,7 +42,7 @@ class _GroupsListState extends State<GroupsList> {
     bool expired = oneDay && timeElapsed / Duration.secondsPerDay >= 1;
     if (expired && recent) {
       DatabaseMethods(uid: Constants.myUserId)
-          .removeRecentSearch("reGroupSearch", groupId);
+          .removeRecentSearch('reGroupSearch', groupId);
     }
 
     return !expired
@@ -50,7 +50,7 @@ class _GroupsListState extends State<GroupsList> {
             onTap: () {
               if (!recent) {
                 DatabaseMethods(uid: Constants.myUserId)
-                    .addRecentSearch("reGroupSearch", groupId);
+                    .addRecentSearch('reGroupSearch', groupId);
               }
               Navigator.push(
                   context,
@@ -86,7 +86,7 @@ class _GroupsListState extends State<GroupsList> {
                               )),
                           anon == null || !anon
                               ? Text(
-                                  "Admin: $adminName",
+                                  'Admin: $adminName',
                                   style: const TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -127,7 +127,7 @@ class _GroupsListState extends State<GroupsList> {
                             onTap: () {
                               if (!recent) {
                                 DatabaseMethods(uid: Constants.myUserId)
-                                    .addRecentSearch("reGroupSearch", groupId);
+                                    .addRecentSearch('reGroupSearch', groupId);
                               }
                               Navigator.push(
                                   context,
@@ -164,21 +164,21 @@ class _GroupsListState extends State<GroupsList> {
                             snapshot.data.hits[index].data;
                         return searchGroupTile(
                             groupId: snapshot.data.hits[index].objectID,
-                            hashTag: docData["hashTag"],
-                            admin: docData["admin"],
-                            profileImg: docData["profileImg"],
-                            adminName: docData["adminName"],
-                            chatRoomState: docData["chatRoomState"],
-                            anon: docData["anon"],
+                            hashTag: docData['hashTag'],
+                            admin: docData['admin'],
+                            profileImg: docData['profileImg'],
+                            adminName: docData['adminName'],
+                            chatRoomState: docData['chatRoomState'],
+                            anon: docData['anon'],
                             index: index,
                             snapshot: snapshot,
                             oneDay:
-                                docData['oneDay'] != null && docData["oneDay"],
-                            createdAt: docData["createdAt"],
+                                docData['oneDay'] != null && docData['oneDay'],
+                            createdAt: docData['createdAt'],
                             recent: false);
                       })
                   : noItems(
-                      icon: Icons.search_rounded, text: "search not found");
+                      icon: Icons.search_rounded, text: 'search not found');
             } else {
               return const SizedBox.shrink();
             }
@@ -204,19 +204,19 @@ class _GroupsListState extends State<GroupsList> {
                         var docData = snapshot.data.data();
                         return searchGroupTile(
                             groupId: groupId,
-                            hashTag: docData["hashTag"],
-                            admin: docData["admin"],
-                            profileImg: docData["profileImg"],
-                            adminName: docData["adminName"],
-                            chatRoomState: docData["chatRoomState"],
-                            anon: docData["anon"],
+                            hashTag: docData['hashTag'],
+                            admin: docData['admin'],
+                            profileImg: docData['profileImg'],
+                            adminName: docData['adminName'],
+                            chatRoomState: docData['chatRoomState'],
+                            anon: docData['anon'],
                             oneDay:
-                                docData['oneDay'] != null && docData["oneDay"],
-                            createdAt: docData["createdAt"],
+                                docData['oneDay'] != null && docData['oneDay'],
+                            createdAt: docData['createdAt'],
                             recent: true);
                       } else {
                         DatabaseMethods(uid: Constants.myUserId)
-                            .removeRecentSearch("reGroupSearch", groupId);
+                            .removeRecentSearch('reGroupSearch', groupId);
                         return const SizedBox.shrink();
                       }
                     } else {
@@ -248,7 +248,7 @@ class _GroupsListState extends State<GroupsList> {
         stream: DatabaseMethods(uid: Constants.myUserId).getMyStream(),
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data.data() != null) {
-            recentSearch = snapshot.data.data()["reGroupSearch"];
+            recentSearch = snapshot.data.data()['reGroupSearch'];
             return widget.searchText.isNotEmpty
                 ? searchGroupList()
                 : recentSearchList();

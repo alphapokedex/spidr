@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:spidr_app/helper/constants.dart';
 import 'package:spidr_app/helper/functions.dart';
@@ -32,7 +31,7 @@ class SendMediaScreen extends StatefulWidget {
 class _SendMediaScreenState extends State<SendMediaScreen> {
   Map<String, dynamic> fdChats = {};
   Map<String, dynamic> gcChats = {};
-  final List<String> categories = ["Circles", "Friends"];
+  final List<String> categories = ['Circles', 'Friends'];
   int selectedIndex = 0;
   Stream fdStream;
   Stream gcStream;
@@ -47,19 +46,19 @@ class _SendMediaScreenState extends State<SendMediaScreen> {
     bool attachMsg = !emptyStrChecker(msg);
 
     if (widget.fileObj != null) {
-      widget.fileObj["ogSenderId"] = widget.ogSenderId;
-      widget.fileObj["ogChatId"] = widget.messageId;
-      widget.fileObj["ogGroupId"] = widget.groupId;
-      widget.fileObj["anon"] = widget.anon;
+      widget.fileObj['ogSenderId'] = widget.ogSenderId;
+      widget.fileObj['ogChatId'] = widget.messageId;
+      widget.fileObj['ogGroupId'] = widget.groupId;
+      widget.fileObj['anon'] = widget.anon;
     } else if (widget.imgObj != null || widget.mediaGallery != null) {
       Map imgObj = widget.imgObj ?? widget.mediaGallery[0];
-      imgObj["ogSenderId"] = widget.ogSenderId;
-      imgObj["anon"] = widget.anon;
+      imgObj['ogSenderId'] = widget.ogSenderId;
+      imgObj['anon'] = widget.anon;
       if (widget.storyId != null) {
-        imgObj["ogStoryId"] = widget.storyId;
+        imgObj['ogStoryId'] = widget.storyId;
       } else {
-        imgObj["ogChatId"] = widget.messageId;
-        imgObj["ogGroupId"] = widget.groupId;
+        imgObj['ogChatId'] = widget.messageId;
+        imgObj['ogGroupId'] = widget.groupId;
       }
     }
 
@@ -124,7 +123,7 @@ class _SendMediaScreenState extends State<SendMediaScreen> {
                   itemBuilder: (context, index) {
                     String friendId = snapshot.data.docs[index].id;
                     String personalChatId =
-                        snapshot.data.docs[index].data()["personalChatId"];
+                        snapshot.data.docs[index].data()['personalChatId'];
                     return !Constants.myBlockList.contains(friendId)
                         ? CheckboxListTile(
                             contentPadding: EdgeInsets.zero,
@@ -152,7 +151,7 @@ class _SendMediaScreenState extends State<SendMediaScreen> {
                   })
               : noItems(
                   icon: Icons.auto_awesome,
-                  text: "no friends yet",
+                  text: 'no friends yet',
                   mAxAlign: MainAxisAlignment.center);
         });
   }
@@ -169,9 +168,9 @@ class _SendMediaScreenState extends State<SendMediaScreen> {
                   itemBuilder: (context, index) {
                     String groupId = snapshot.data.docs[index].id;
                     String hashTag =
-                        snapshot.data.docs[index].data()["hashTag"];
+                        snapshot.data.docs[index].data()['hashTag'];
                     String profileImg =
-                        snapshot.data.docs[index].data()["profileImg"];
+                        snapshot.data.docs[index].data()['profileImg'];
 
                     return groupId != widget.groupId
                         ? CheckboxListTile(
@@ -197,7 +196,7 @@ class _SendMediaScreenState extends State<SendMediaScreen> {
                 )
               : noItems(
                   icon: Icons.donut_large_rounded,
-                  text: "no circles yet",
+                  text: 'no circles yet',
                   mAxAlign: MainAxisAlignment.center);
         });
   }
@@ -320,9 +319,9 @@ class _SendMediaScreenState extends State<SendMediaScreen> {
                           Icons.message_rounded,
                           color: Colors.orange,
                         ),
-                        hintText: "Add a message",
+                        hintText: 'Add a message',
                         hintStyle: TextStyle(color: Colors.black54),
-                        labelText: "Message",
+                        labelText: 'Message',
                         labelStyle: TextStyle(color: Colors.orange),
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.orangeAccent),
@@ -345,7 +344,7 @@ class _SendMediaScreenState extends State<SendMediaScreen> {
                   Navigator.pop(context);
                 },
                 child: const Text(
-                  "CANCEL",
+                  'CANCEL',
                   style: TextStyle(
                       color: Colors.redAccent, fontWeight: FontWeight.bold),
                 ),
@@ -362,7 +361,7 @@ class _SendMediaScreenState extends State<SendMediaScreen> {
                   Navigator.pop(context);
                 },
                 child: const Text(
-                  "SEND",
+                  'SEND',
                   style: TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),

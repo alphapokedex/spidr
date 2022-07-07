@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:spidr_app/helper/globals.dart';
@@ -89,7 +88,7 @@ class ImageFilePreview extends StatelessWidget {
               fit: fullScreen ? BoxFit.contain : BoxFit.cover,
               errorBuilder: (BuildContext context, Object exception,
                   StackTrace stackTrace) {
-                return Image.asset("assets/images/imageLoading.png",
+                return Image.asset('assets/images/imageLoading.png',
                     fit: BoxFit.cover);
               },
             )),
@@ -143,7 +142,7 @@ class ImageUrlPreview extends StatelessWidget {
         !fullScreen
             ? SizedBox.expand(
                 child: FadeInImage.assetNetwork(
-                  placeholder: "assets/images/imageLoading.png",
+                  placeholder: 'assets/images/imageLoading.png',
                   image: fileURL,
                   imageScale: 2,
                   fit: boxFit,
@@ -155,7 +154,7 @@ class ImageUrlPreview extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
                   child: Image.asset(
-                    "assets/images/imageLoading.png",
+                    'assets/images/imageLoading.png',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -258,11 +257,11 @@ class _VideoAudioFilePreviewState extends State<VideoAudioFilePreview> {
                                 height: _controller.value.size?.height ?? 0,
                                 child: VideoPlayer(_controller)),
                           )
-                        : filePreview(context, "assets/images/audiofile.png",
+                        : filePreview(context, 'assets/images/audiofile.png',
                             widget.audioName, widget.fullScreen),
                   )
                 : widget.audioName == null
-                    ? thumbnailPreview("assets/images/videofile.png")
+                    ? thumbnailPreview('assets/images/videofile.png')
                     : const SizedBox.shrink(),
             auxiliaryDisplay(
                 context: context,
@@ -323,16 +322,17 @@ class _VideoAudioUrlPreviewState extends State<VideoAudioUrlPreview>
   bool isMuted = Globals.isMuted;
   bool isPaused = false;
   String fileURL;
-  String audioName = "";
+  String audioName = '';
 
   bool init = true;
 
   setUpPlayer() {
     if (mounted) {
-      if (!widget.video)
+      if (!widget.video) {
         setState(() {
           audioName = widget.audioName;
         });
+      }
 
       _controller = VideoPlayerController.network(fileURL);
       _controller.addListener(() {
@@ -429,7 +429,7 @@ class _VideoAudioUrlPreviewState extends State<VideoAudioUrlPreview>
   Widget vidAudDisplay() {
     return SizedBox.expand(
       child: !widget.video
-          ? filePreview(context, "assets/images/audiofile.png",
+          ? filePreview(context, 'assets/images/audiofile.png',
               widget.audioName, widget.fullScreen)
           : FittedBox(
               fit: !widget.fullScreen ? BoxFit.cover : BoxFit.contain,
@@ -466,8 +466,8 @@ class _VideoAudioUrlPreviewState extends State<VideoAudioUrlPreview>
               _controller.value.isInitialized
                   ? vidAudDisplay()
                   : thumbnailPreview(widget.video
-                      ? "assets/images/videofile.png"
-                      : "assets/images/audiofile.png"),
+                      ? 'assets/images/videofile.png'
+                      : 'assets/images/audiofile.png'),
               auxiliaryDisplay(
                   context: context,
                   gifs: widget.gifs,

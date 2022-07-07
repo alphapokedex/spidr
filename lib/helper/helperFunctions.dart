@@ -1,11 +1,13 @@
-import  'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
+import 'package:shared_preferences/shared_preferences.dart'
+    show SharedPreferences;
 
-class HelperFunctions{
+class HelperFunctions {
   static String sharedPreferenceUserLoggedInKey = 'ISLOGGEDIN';
   static String sharedPreferenceUserNameKey = 'USERNAMEKEY';
   static String sharedPreferenceUserEmailKey = 'USEREMAILKEY';
 
-  static Future<bool> saveUserLoggedInSharedPreference(bool isUserLoggedIn) async {
+  static Future<bool> saveUserLoggedInSharedPreference(
+      bool isUserLoggedIn) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return await prefs.setBool(sharedPreferenceUserLoggedInKey, isUserLoggedIn);
   }
@@ -24,13 +26,14 @@ class HelperFunctions{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getBool(sharedPreferenceUserLoggedInKey);
   }
+
   static Future<String> getUserNameInSharedPreference() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString(sharedPreferenceUserNameKey);
   }
+
   static Future<String> getUserEmailInSharedPreference() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString(sharedPreferenceUserEmailKey);
   }
-
 }

@@ -57,7 +57,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return SpecGroupTile(
-                      snapshot.data.docs[index].data()["groupId"],
+                      snapshot.data.docs[index].data()['groupId'],
                       snapshot.data.docs[index].data()['numOfNewMsg'],
                       snapshot.data.docs[index].data()['createdAt'],
                     );
@@ -67,7 +67,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: noItems(
                       icon: Icons.donut_small,
-                      text: "no spectating circles yet",
+                      text: 'no spectating circles yet',
                       mAxAlign: MainAxisAlignment.start));
             }
           } else {
@@ -89,9 +89,9 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     String groupId =
-                        snapshot.data.docs[index].data()["groupId"];
-                    return snapshot.data.docs[index].data()["pinned"] != null &&
-                            snapshot.data.docs[index].data()["pinned"]
+                        snapshot.data.docs[index].data()['groupId'];
+                    return snapshot.data.docs[index].data()['pinned'] != null &&
+                            snapshot.data.docs[index].data()['pinned']
                         ? MyGroupTile(
                             groupId,
                             snapshot.data.docs[index].data()['joinRequests'],
@@ -126,9 +126,9 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     String groupId =
-                        snapshot.data.docs[index].data()["groupId"];
-                    return snapshot.data.docs[index].data()["pinned"] == null ||
-                            !snapshot.data.docs[index].data()["pinned"]
+                        snapshot.data.docs[index].data()['groupId'];
+                    return snapshot.data.docs[index].data()['pinned'] == null ||
+                            !snapshot.data.docs[index].data()['pinned']
                         ? MyGroupTile(
                             groupId,
                             snapshot.data.docs[index].data()['joinRequests'],
@@ -147,7 +147,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: noItems(
                       icon: Icons.donut_large_rounded,
-                      text: "no joined circles yet",
+                      text: 'no joined circles yet',
                       mAxAlign: MainAxisAlignment.start));
             }
           } else {
@@ -164,7 +164,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
 
     if (numOfMem < groupCap) {
       DatabaseMethods(uid: Constants.myUserId)
-          .toggleGroupMembership(groupId, "JOIN_PUB_GROUP_CHAT");
+          .toggleGroupMembership(groupId, 'JOIN_PUB_GROUP_CHAT');
     } else {
       showJoinGroupAlertDialog(context, groupState, groupId, hashTag);
     }
@@ -202,7 +202,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                 Text(hashTag,
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.white)),
-                Text("From: $invitorName",
+                Text('From: $invitorName',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.white)),
                 Text(
@@ -210,9 +210,9 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: groupState == "invisible"
+                      color: groupState == 'invisible'
                           ? Colors.black
-                          : groupState == "public"
+                          : groupState == 'public'
                               ? Colors.green
                               : Colors.red),
                 ),
@@ -221,7 +221,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
             const Spacer(),
             GestureDetector(
               onTap: () {
-                if (groupState != "private") {
+                if (groupState != 'private') {
                   acceptGroupInvite(groupId, hashTag, groupState);
                 } else {
                   requestJoinPvtGroup(groupId, hashTag, groupState);
@@ -233,7 +233,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                       borderRadius: BorderRadius.circular(30)),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  child: Text(groupState != "private" ? "Join" : "Request",
+                  child: Text(groupState != 'private' ? 'Join' : 'Request',
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.white))),
             ),
@@ -245,7 +245,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                 DatabaseMethods(uid: Constants.myUserId).removeInvite(groupId);
               },
               child: Container(
-                  child: const Text("Ignore",
+                  child: const Text('Ignore',
                       style: TextStyle(
                           fontWeight: FontWeight.normal, color: Colors.black))),
             )
@@ -265,9 +265,9 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                 itemBuilder: (context, index) {
                   return inviteTile(
                     snapshot.data.docs[index].id,
-                    snapshot.data.docs[index].data()["groupState"],
-                    snapshot.data.docs[index].data()["invitorName"],
-                    snapshot.data.docs[index].data()["hashTag"],
+                    snapshot.data.docs[index].data()['groupState'],
+                    snapshot.data.docs[index].data()['invitorName'],
+                    snapshot.data.docs[index].data()['hashTag'],
                   );
                 });
           } else {
@@ -321,10 +321,10 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                     builder: (context, snapshot) {
                       if (snapshot.hasData && snapshot.data.data() != null) {
                         bool onRequest = snapshot.data
-                            .data()["joinRequests"]
+                            .data()['joinRequests']
                             .containsKey(Constants.myUserId);
                         bool waitlisted = snapshot.data
-                            .data()["waitList"]
+                            .data()['waitList']
                             .containsKey(Constants.myUserId);
                         return borderedText(
                             hashTag,
@@ -337,7 +337,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                         return borderedText(hashTag, Colors.black);
                       }
                     })
-                : borderedText("Expired", Colors.grey),
+                : borderedText('Expired', Colors.grey),
           ]),
         ],
       ),
@@ -356,22 +356,22 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
               Map<String, dynamic> docData = suggestedGroups[index].data;
               return sugGroupTile(
                   groupId: suggestedGroups[index].objectID,
-                  hashTag: docData["hashTag"],
-                  admin: docData["admin"],
-                  groupState: docData["chatRoomState"],
-                  profileImg: docData["profileImg"],
-                  anon: docData["anon"] != null && docData["anon"],
+                  hashTag: docData['hashTag'],
+                  admin: docData['admin'],
+                  groupState: docData['chatRoomState'],
+                  profileImg: docData['profileImg'],
+                  anon: docData['anon'] != null && docData['anon'],
                   preview: true,
                   context: context,
-                  createdAt: docData["createdAt"],
-                  oneDay: docData["oneDay"] != null && docData["oneDay"]);
+                  createdAt: docData['createdAt'],
+                  oneDay: docData['oneDay'] != null && docData['oneDay']);
             });
       } else {
         return Container(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: noItems(
                 icon: Icons.edit,
-                text: "add or edit your tags",
+                text: 'add or edit your tags',
                 mAxAlign: MainAxisAlignment.start));
       }
     } else {
@@ -424,7 +424,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
         context,
         targets: targets,
         colorShadow: Colors.red,
-        textSkip: "SKIP",
+        textSkip: 'SKIP',
         paddingFocus: 10,
         opacityShadow: 0.8,
         onFinish: () {
@@ -442,7 +442,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
   void initTargets() {
     targets.add(
       TargetFocus(
-        identify: "Avatar Selector",
+        identify: 'Avatar Selector',
         keyTarget: key1,
         color: Colors.deepOrangeAccent,
         contents: [
@@ -453,7 +453,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    "Select an Avatar !",
+                    'Select an Avatar !',
                     style: GoogleFonts.varelaRound(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -462,7 +462,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: Text(
-                      "Represent your group chat with an anonymous MIYU avatar ",
+                      'Represent your group chat with an anonymous MIYU avatar ',
                       style: GoogleFonts.varelaRound(
                         color: Colors.white,
                       ),
@@ -479,7 +479,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
     );
 
     targets.add(TargetFocus(
-      identify: "Circle Name",
+      identify: 'Circle Name',
       keyTarget: key2,
       color: Colors.orange,
       contents: [
@@ -492,7 +492,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
                     child: Text(
-                      "Circle Name",
+                      'Circle Name',
                       style: GoogleFonts.varelaRound(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -500,7 +500,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                     ),
                   ),
                   Text(
-                    "Give your group a unique name!",
+                    'Give your group a unique name!',
                     style: GoogleFonts.varelaRound(
                       color: Colors.white,
                     ),
@@ -512,7 +512,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
       shape: ShapeLightFocus.RRect,
     ));
     targets.add(TargetFocus(
-      identify: "Toggles",
+      identify: 'Toggles',
       keyTarget: key3,
       color: Colors.orange,
       contents: [
@@ -525,7 +525,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10.0),
                     child: Text(
-                      "24 Hours / Anon Mode",
+                      '24 Hours / Anon Mode',
                       style: GoogleFonts.varelaRound(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -533,7 +533,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                     ),
                   ),
                   Text(
-                    "Turn these on to make your circle only exist for 24 hours, You can also choose to make your circle Anonymous",
+                    'Turn these on to make your circle only exist for 24 hours, You can also choose to make your circle Anonymous',
                     style: GoogleFonts.varelaRound(
                       color: Colors.white,
                     ),
@@ -546,7 +546,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
     ));
     targets.add(
       TargetFocus(
-        identify: "Circle Privacy",
+        identify: 'Circle Privacy',
         keyTarget: key4,
         color: Colors.orange,
         contents: [
@@ -557,7 +557,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    "Choose your Circle privacy",
+                    'Choose your Circle privacy',
                     style: GoogleFonts.varelaRound(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -566,7 +566,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: Text(
-                      "Choose how intimate you want your Circle to be ",
+                      'Choose how intimate you want your Circle to be ',
                       style: GoogleFonts.varelaRound(
                         color: Colors.white,
                       ),
@@ -583,7 +583,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
     );
     targets.add(
       TargetFocus(
-        identify: "Circle Limit",
+        identify: 'Circle Limit',
         keyTarget: key5,
         color: Colors.orange,
         contents: [
@@ -594,7 +594,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    "Circle Limit",
+                    'Circle Limit',
                     style: GoogleFonts.varelaRound(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -603,7 +603,7 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: Text(
-                      "Choose how many users can join your Circle ",
+                      'Choose how many users can join your Circle ',
                       style: GoogleFonts.varelaRound(
                         color: Colors.white,
                       ),
@@ -660,15 +660,15 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    sectionLabel("Suggestions", Colors.black, Colors.white),
+                    sectionLabel('Suggestions', Colors.black, Colors.white),
                     Container(
                         height: 135.0,
                         padding: const EdgeInsets.only(left: 9),
                         child: suggestionList()),
-                    sectionLabel("Your Circles", Colors.orange, Colors.white),
+                    sectionLabel('Your Circles', Colors.orange, Colors.white),
                     myPinnedGroupList(),
                     myGroupChatList(),
-                    sectionLabel("Spectating", Colors.orange, Colors.white),
+                    sectionLabel('Spectating', Colors.orange, Colors.white),
                     Container(
                       height: 135.0,
                       padding: const EdgeInsets.only(left: 9),
@@ -682,15 +682,15 @@ class _MyCirclesScreenState extends State<MyCirclesScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   myInvitesList(),
-                  sectionLabel("Suggestions", Colors.black, Colors.white),
+                  sectionLabel('Suggestions', Colors.black, Colors.white),
                   Container(
                       height: 135.0,
                       padding: const EdgeInsets.only(left: 9),
                       child: suggestionList()),
-                  sectionLabel("Your Circles", Colors.orange, Colors.white),
+                  sectionLabel('Your Circles', Colors.orange, Colors.white),
                   myPinnedGroupList(),
                   myGroupChatList(),
-                  sectionLabel("Spectating", Colors.orange, Colors.white),
+                  sectionLabel('Spectating', Colors.orange, Colors.white),
                   Container(
                       height: 135.0,
                       padding: const EdgeInsets.only(left: 9),
@@ -770,13 +770,13 @@ class MyGroupTile extends StatelessWidget {
                     items: [
                       PopupMenuItem(
                         value: 1,
-                        child: Text(!pinned ? "Pin to Top" : "Unpin from Top"),
+                        child: Text(!pinned ? 'Pin to Top' : 'Unpin from Top'),
                       ),
                       PopupMenuItem(
                         value: 2,
                         child: Text(!muted
-                            ? "Mute Notification"
-                            : "Unmute Notification"),
+                            ? 'Mute Notification'
+                            : 'Unmute Notification'),
                       ),
                     ]);
                 if (value == 1) {
@@ -954,12 +954,12 @@ class MyGroupTile extends StatelessWidget {
               leading: const CircleAvatar(
                 radius: 24,
               ),
-              title: Text("#HASHTAG",
+              title: Text('#HASHTAG',
                   style: GoogleFonts.varelaRound(
                       color: Colors.orange,
                       fontWeight: FontWeight.bold,
                       fontSize: 18)),
-              subtitle: const Text("...",
+              subtitle: const Text('...',
                   style: TextStyle(fontSize: 16, color: Colors.orange)),
               trailing: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -990,9 +990,9 @@ class SpecGroupTile extends StatelessWidget {
           if (snapshot.hasData && snapshot.data != null) {
             if (snapshot.data.data() != null) {
               var groupDS = snapshot.data;
-              String profileImg = groupDS.data()["profileImg"];
-              String hashTag = groupDS.data()["hashTag"];
-              String groupState = groupDS.data()["chatRoomState"];
+              String profileImg = groupDS.data()['profileImg'];
+              String hashTag = groupDS.data()['hashTag'];
+              String groupState = groupDS.data()['chatRoomState'];
               bool anon = groupDS.data()['anon'];
               // bool oneDay = groupDS.data()['oneDay'] != null && groupDS.data()['ondDay'];
               // int createdAt = groupDS.data()['createdAt'];
@@ -1053,7 +1053,7 @@ class SpecGroupTile extends StatelessWidget {
                                     color: Colors.redAccent,
                                     borderRadius: BorderRadius.circular(40)),
                                 child: Text(
-                                  "$numOfNewMsg",
+                                  '$numOfNewMsg',
                                   style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),

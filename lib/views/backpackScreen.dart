@@ -1,10 +1,10 @@
-import  'package:flutter/material.dart';
-import  'package:spidr_app/decorations/widgetDecorations.dart';
-import  'package:spidr_app/helper/constants.dart';
-import  'package:spidr_app/services/database.dart';
-import  'package:spidr_app/widgets/mediaGalleryWidgets.dart';
-import  'package:spidr_app/widgets/mediaInfoWidgets.dart';
-import  'package:spidr_app/widgets/widget.dart';
+import 'package:flutter/material.dart';
+import 'package:spidr_app/decorations/widgetDecorations.dart';
+import 'package:spidr_app/helper/constants.dart';
+import 'package:spidr_app/services/database.dart';
+import 'package:spidr_app/widgets/mediaGalleryWidgets.dart';
+import 'package:spidr_app/widgets/mediaInfoWidgets.dart';
+import 'package:spidr_app/widgets/widget.dart';
 
 class BackPackScreen extends StatefulWidget {
   // final ScrollController scrollController;
@@ -60,15 +60,15 @@ class _BackPackScreenState extends State<BackPackScreen> {
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     String groupId =
-                        snapshot.data.docs[index].data()["groupId"];
+                        snapshot.data.docs[index].data()['groupId'];
                     String messageId = snapshot.data.docs[index].id;
                     String senderId =
-                        snapshot.data.docs[index].data()["senderId"];
-                    Map fileObj = snapshot.data.docs[index].data()["fileObj"];
-                    Map imgObj = snapshot.data.docs[index].data()["imgObj"];
+                        snapshot.data.docs[index].data()['senderId'];
+                    Map fileObj = snapshot.data.docs[index].data()['fileObj'];
+                    Map imgObj = snapshot.data.docs[index].data()['imgObj'];
                     List mediaGallery =
-                        snapshot.data.docs[index].data()["mediaGallery"];
-                    bool anon = snapshot.data.docs[index].data()["anon"];
+                        snapshot.data.docs[index].data()['mediaGallery'];
+                    bool anon = snapshot.data.docs[index].data()['anon'];
 
                     return !Constants.myBlockList.contains(senderId)
                         ? BackPackGroupItem(
@@ -130,7 +130,7 @@ class _BackPackScreenState extends State<BackPackScreen> {
     return StreamBuilder(
         stream: mediaStream,
         builder: (context, snapshot) {
-          return groupItemList(snapshot, "No saved media");
+          return groupItemList(snapshot, 'No saved media');
         });
   }
 
@@ -138,7 +138,7 @@ class _BackPackScreenState extends State<BackPackScreen> {
     return StreamBuilder(
         stream: audioStream,
         builder: (context, snapshot) {
-          return groupItemList(snapshot, "No saved audios");
+          return groupItemList(snapshot, 'No saved audios');
         });
   }
 
@@ -146,7 +146,7 @@ class _BackPackScreenState extends State<BackPackScreen> {
     return StreamBuilder(
         stream: pdfStream,
         builder: (context, snapshot) {
-          return groupItemList(snapshot, "No saved PDFs");
+          return groupItemList(snapshot, 'No saved PDFs');
         });
   }
 
@@ -163,9 +163,9 @@ class _BackPackScreenState extends State<BackPackScreen> {
 
   Widget sectLabWithGroups(
       String label, List groups, Function filter, Function getAll) {
-    bool media = label == "Media";
-    bool audio = label == "Audio";
-    bool pdf = label == "PDF";
+    bool media = label == 'Media';
+    bool audio = label == 'Audio';
+    bool pdf = label == 'PDF';
     return SizedBox(
       height: 72,
       child: Row(
@@ -227,7 +227,7 @@ class _BackPackScreenState extends State<BackPackScreen> {
                           ),
                         ),
                         TextSpan(
-                            text: " All",
+                            text: ' All',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.w600))
@@ -259,13 +259,13 @@ class _BackPackScreenState extends State<BackPackScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               sectLabWithGroups(
-                  "Media", mdGroups, filterSavedMedia, getSavedMedia),
+                  'Media', mdGroups, filterSavedMedia, getSavedMedia),
               savedMediaList(),
               sectLabWithGroups(
-                  "Audio", adGroups, filterSavedAudios, getSavedAudios),
+                  'Audio', adGroups, filterSavedAudios, getSavedAudios),
               savedAudioList(),
               sectLabWithGroups(
-                  "PDF", pdfGroups, filterSavedPDFs, getSavedPDFs),
+                  'PDF', pdfGroups, filterSavedPDFs, getSavedPDFs),
               savedPDFList()
             ],
           ),

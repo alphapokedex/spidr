@@ -33,7 +33,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   String username;
   String profileImg;
 
-  String quote = "";
+  String quote = '';
   // String school = "School";
   // String program = "Program";
   List tags = [];
@@ -51,7 +51,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         .userCollection
         .doc(Constants.myUserId)
         .collection('replies')
-        .where("contactId", isEqualTo: widget.userId)
+        .where('contactId', isEqualTo: widget.userId)
         .get();
 
     setState(() {
@@ -97,7 +97,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         color: Theme.of(context).scaffoldBackgroundColor,
                         child: Center(
                           child: Text(
-                            "tell them to add some photos :)",
+                            'tell them to add some photos :)',
                             textAlign: TextAlign.center,
                             style: GoogleFonts.varelaRound(
                               color: Colors.orange,
@@ -168,12 +168,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 ),
                                 Text(
                                   befriended
-                                      ? "My Friend"
+                                      ? 'My Friend'
                                       : !sentReq && !receivedReq
-                                          ? "Befriend"
+                                          ? 'Befriend'
                                           : receivedReq
-                                              ? "Cancel"
-                                              : "Request",
+                                              ? 'Cancel'
+                                              : 'Request',
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     color: Colors.white,
@@ -242,7 +242,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                         DatabaseMethods(uid: Constants.myUserId)
                                             .createPersonalChat(
                                                 userId: widget.userId,
-                                                actionType: "START_CONVO",
+                                                actionType: 'START_CONVO',
                                                 anon: false)
                                             .then((personalChatId) {
                                           Navigator.pushReplacement(
@@ -275,10 +275,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 ),
                                 Text(
                                   !inChat && !blocked
-                                      ? "Chat"
+                                      ? 'Chat'
                                       : blocked
-                                          ? "Unblock"
-                                          : "In Chat",
+                                          ? 'Unblock'
+                                          : 'In Chat',
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     fontSize: 12,
@@ -301,7 +301,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 ),
               ],
             ),
-            Text(isMe ? "Me" : username,
+            Text(isMe ? 'Me' : username,
                 style: const TextStyle(
                     fontWeight: FontWeight.bold, color: Colors.black)),
             SizedBox(
@@ -371,10 +371,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             quote = val.data()['quote'];
             tags = val.data()['tags'];
             banner = val.data()['banner'];
-            friends = val.data()["friends"];
-            receivedFdReq = val.data()["receivedFdReq"];
-            sentFdReq = val.data()["sentFdReq"];
-            blockedBy = val.data()["blockedBy"];
+            friends = val.data()['friends'];
+            receivedFdReq = val.data()['receivedFdReq'];
+            sentFdReq = val.data()['sentFdReq'];
+            blockedBy = val.data()['blockedBy'];
             isMe = widget.userId == Constants.myUserId;
 
             bool befriended =

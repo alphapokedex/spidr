@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:spidr_app/decorations/widgetDecorations.dart';
 import 'package:spidr_app/helper/authenticate.dart';
 import 'package:spidr_app/helper/constants.dart';
-import "package:spidr_app/helper/functions.dart";
+import 'package:spidr_app/helper/functions.dart';
 import 'package:spidr_app/services/auth.dart';
 import 'package:spidr_app/services/database.dart';
 import 'package:spidr_app/views/docViewScreen.dart';
@@ -307,9 +307,9 @@ Widget mediaAndFilePreview({
   Alignment muteBttAlign = Alignment.bottomRight,
   bool play,
 }) {
-  bool video = imgObj != null && videoChecker(imgObj["imgName"]);
-  bool audio = fileObj != null && audioChecker(fileObj["fileName"]);
-  bool pdf = fileObj != null && pdfChecker(fileObj["fileName"]);
+  bool video = imgObj != null && videoChecker(imgObj['imgName']);
+  bool audio = fileObj != null && audioChecker(fileObj['fileName']);
+  bool pdf = fileObj != null && pdfChecker(fileObj['fileName']);
 
   String mediaUrl = imgObj != null
       ? imgObj['imgUrl']
@@ -326,7 +326,7 @@ Widget mediaAndFilePreview({
   String pdfName = pdf ? fileObj['fileName'] : null;
 
   bool sticker =
-      imgObj != null && imgObj["sticker"] != null && imgObj["sticker"];
+      imgObj != null && imgObj['sticker'] != null && imgObj['sticker'];
 
   String caption = imgObj != null
       ? imgObj['caption']
@@ -342,7 +342,7 @@ Widget mediaAndFilePreview({
   List gifs = imgObj != null
       ? imgObj['gifs']
       : fileObj != null
-          ? fileObj["gifs"]
+          ? fileObj['gifs']
           : null;
   bool mature = imgObj != null && imgObj['mature'] != null && imgObj['mature'];
   return Stack(
@@ -433,7 +433,7 @@ Widget mediaAndFilePreview({
               filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
               child: Container(
                   child: Image.asset(
-                "assets/icon/nsfwIcon.png",
+                'assets/icon/nsfwIcon.png',
                 scale: 3,
               )),
             )
@@ -478,12 +478,12 @@ Widget mediaAndFileDisplay({
           if (!toPageView &&
               !showInfo &&
               fileObj != null &&
-              pdfChecker(fileObj["fileName"])) {
+              pdfChecker(fileObj['fileName'])) {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => DocViewScreen(
-                        fileUrl: mediaUrl, fileName: fileObj["fileName"])));
+                        fileUrl: mediaUrl, fileName: fileObj['fileName'])));
           } else {
             Navigator.push(
                 context,
@@ -537,7 +537,7 @@ Widget mediaCommentList(
       builder: (context, snapshot) {
         List blockList;
         if (snapshot.hasData && snapshot.data.data() != null) {
-          blockList = snapshot.data.data()["blockList"];
+          blockList = snapshot.data.data()['blockList'];
         }
         return SizedBox(
           child: StreamBuilder(
@@ -572,10 +572,10 @@ Widget mediaCommentList(
                           itemCount: snapshot.data.docs.length,
                           itemBuilder: (context, index) {
                             String senderId =
-                                snapshot.data.docs[index].data()["senderId"];
+                                snapshot.data.docs[index].data()['senderId'];
                             String commentId = snapshot.data.docs[index].id;
                             String comment =
-                                snapshot.data.docs[index].data()["comment"];
+                                snapshot.data.docs[index].data()['comment'];
                             return blockList == null ||
                                     !blockList.contains(senderId)
                                 ? ListTile(
@@ -642,7 +642,7 @@ class _MediaCommentComposerState extends State<MediaCommentComposer> {
       String comment = commentEditingController.text;
       DatabaseMethods(uid: Constants.myUserId)
           .addMediaComment(widget.mediaId, comment);
-      commentEditingController.text = "";
+      commentEditingController.text = '';
     }
   }
 
@@ -672,15 +672,15 @@ class _MediaCommentComposerState extends State<MediaCommentComposer> {
                     },
                     validator: (val) {
                       return emptyStrChecker(val)
-                          ? "try typing in something"
+                          ? 'try typing in something'
                           : val.length > 100
-                              ? "sorry, comment > 100 characters"
+                              ? 'sorry, comment > 100 characters'
                               : null;
                     },
                     controller: commentEditingController,
                     style: const TextStyle(color: Colors.orange),
                     decoration: msgInputDec(
-                        hintText: "Comment",
+                        hintText: 'Comment',
                         hintColor: Colors.orange,
                         fillColor: widget.fillColor)),
               ),
@@ -719,7 +719,7 @@ Widget mediaCaption(
   );
 }
 
-Widget mediaSendBtt({icon, labelColor, bool off, String text = "Send"}) {
+Widget mediaSendBtt({icon, labelColor, bool off, String text = 'Send'}) {
   return Container(
     decoration: BoxDecoration(
       color: off ? Colors.grey : Colors.orange,
@@ -842,7 +842,7 @@ Widget urlPreview(
             ),
           )
         : const SizedBox.shrink(),
-    errorImage: "https://google.com/",
+    errorImage: 'https://google.com/',
     cache: const Duration(days: 7),
     backgroundColor: Colors.white,
     borderRadius: 15,
@@ -913,7 +913,7 @@ Widget noStory() {
         color: Colors.white,
       )),
       TextSpan(
-          text: " Broadcast is no longer available",
+          text: ' Broadcast is no longer available',
           style: TextStyle(color: Colors.white))
     ])),
   );
@@ -950,7 +950,7 @@ Widget tagTile({String all, String tag, borderColor, textColor}) {
     margin: EdgeInsets.symmetric(horizontal: all != null ? 0 : 6),
     child: Center(
         child: Text(
-      all ?? (!tag.startsWith("#") ? "#$tag" : tag),
+      all ?? (!tag.startsWith('#') ? '#$tag' : tag),
       style: TextStyle(
         color: textColor,
         fontWeight: all != null ? FontWeight.bold : FontWeight.w600,
@@ -977,7 +977,7 @@ Widget hashTags({List tags, boxColor, borderColor, textColor}) {
               padding: const EdgeInsets.symmetric(horizontal: 9),
               child: Center(
                   child: Text(
-                "#${tags[index]}",
+                '#${tags[index]}',
                 style: TextStyle(color: textColor),
               )),
             ),
@@ -1000,7 +1000,7 @@ Widget notifIcon(int numOfNewMsg, bool group) {
             color: !group ? Colors.orange : Colors.red,
             borderRadius: BorderRadius.circular(40)),
         child: Text(
-          numOfNewMsg < 100 ? "$numOfNewMsg" : "...",
+          numOfNewMsg < 100 ? '$numOfNewMsg' : '...',
           style: TextStyle(
               color: !group ? Colors.black : Colors.white,
               fontWeight: FontWeight.bold),
@@ -1016,7 +1016,7 @@ Widget privateGroupSign(platform) {
             ? Icons.lock_rounded
             : CupertinoIcons.lock),
         const Text(
-          "private",
+          'private',
           style: TextStyle(color: Colors.red),
         )
       ],
@@ -1030,15 +1030,15 @@ Widget groupStateIndicator(String groupState, bool anon, mAxAlign) {
     children: [
       Text(groupState,
           style: TextStyle(
-            color: groupState == "public"
+            color: groupState == 'public'
                 ? Colors.green
-                : groupState == "private"
+                : groupState == 'private'
                     ? Colors.red
                     : Colors.black,
           )),
       const SizedBox(width: 2.5),
       anon != null && anon
-          ? Image.asset("assets/icon/icons8-anonymous-mask-50.png", scale: 3.0)
+          ? Image.asset('assets/icon/icons8-anonymous-mask-50.png', scale: 3.0)
           : const SizedBox.shrink()
     ],
   );
@@ -1096,7 +1096,7 @@ Widget iconNum(icon, int number) {
           child: SizedBox(
         width: 5,
       )),
-      TextSpan(text: "$number", style: const TextStyle(color: Colors.white))
+      TextSpan(text: '$number', style: const TextStyle(color: Colors.white))
     ])),
   );
 }
@@ -1184,8 +1184,8 @@ Widget myAvatar() {
       stream: DatabaseMethods(uid: Constants.myUserId).getMyStream(),
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data.data() != null) {
-          bool uploading = snapshot.data.data()["numOfUploads"] != null &&
-              snapshot.data.data()["numOfUploads"] > 0;
+          bool uploading = snapshot.data.data()['numOfUploads'] != null &&
+              snapshot.data.data()['numOfUploads'] > 0;
 
           return GestureDetector(
             onTap: () async {
@@ -1249,7 +1249,7 @@ Widget userName(
               return Text(
                   anon == null || !anon
                       ? snapshot.data.data()['name']
-                      : "Anonymous",
+                      : 'Anonymous',
                   style: TextStyle(
                       color: color,
                       fontWeight: fontWeight,
@@ -1259,7 +1259,7 @@ Widget userName(
               return const SizedBox.shrink();
             }
           })
-      : Text("Me",
+      : Text('Me',
           style: TextStyle(
               color: color,
               fontWeight: fontWeight,
@@ -1277,9 +1277,9 @@ Widget userProfile(
       stream: DatabaseMethods().userCollection.doc(userId).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data.data() != null) {
-          String profileImg = snapshot.data.data()["profileImg"];
-          String username = snapshot.data.data()["name"];
-          int imgIndex = snapshot.data.data()["anonImg"];
+          String profileImg = snapshot.data.data()['profileImg'];
+          String username = snapshot.data.data()['name'];
+          int imgIndex = snapshot.data.data()['anonImg'];
           String anonImg = userMIYUs[imgIndex];
           return toProfile
               ? GestureDetector(

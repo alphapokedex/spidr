@@ -62,15 +62,15 @@ Widget groupList(String userId) {
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData && snapshot.data.data() != null) {
-                        String hashTag = snapshot.data.data()["hashTag"];
-                        String admin = snapshot.data.data()["admin"];
-                        String profileImg = snapshot.data.data()["profileImg"];
+                        String hashTag = snapshot.data.data()['hashTag'];
+                        String admin = snapshot.data.data()['admin'];
+                        String profileImg = snapshot.data.data()['profileImg'];
                         String groupState =
-                            snapshot.data.data()["chatRoomState"];
-                        bool anon = snapshot.data.data()["anon"];
-                        String school = snapshot.data.data()["school"];
-                        String program = snapshot.data.data()["program"];
-                        return groupState != "invisible"
+                            snapshot.data.data()['chatRoomState'];
+                        bool anon = snapshot.data.data()['anon'];
+                        String school = snapshot.data.data()['school'];
+                        String program = snapshot.data.data()['program'];
+                        return groupState != 'invisible'
                             ? groupTile(
                                 context,
                                 groupId,

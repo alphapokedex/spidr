@@ -36,7 +36,7 @@ class _DynamicStackItemState extends State<DynamicStackItem> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(5),
                             child: FadeInImage.assetNetwork(
-                              placeholder: "assets/icon/sm_giphy.png",
+                              placeholder: 'assets/icon/sm_giphy.png',
                               image: widget.gifUrl,
                               imageScale: 10,
                             ),

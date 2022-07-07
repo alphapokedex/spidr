@@ -141,8 +141,8 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
                       Map<String, dynamic> docData =
                           snapshot.data.hits[index].data;
                       String userId = snapshot.data.hits[index].objectID;
-                      String profileImg = docData["profileImg"];
-                      String name = docData["name"];
+                      String profileImg = docData['profileImg'];
+                      String name = docData['name'];
                       return userId != Constants.myUserId &&
                               (blockList == null || !blockList.contains(userId))
                           ? GestureDetector(
@@ -170,7 +170,7 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
                     })
                 : noItems(
                     icon: Icons.search_rounded,
-                    text: "no match found",
+                    text: 'no match found',
                     mAxAlign: MainAxisAlignment.center);
           } else {
             return sectionLoadingIndicator();
@@ -187,8 +187,8 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
             itemBuilder: (context, index) {
               Map<String, dynamic> docData = sugUsers[index].data;
               String userId = sugUsers[index].objectID;
-              String profileImg = docData["profileImg"];
-              String name = docData["name"];
+              String profileImg = docData['profileImg'];
+              String name = docData['name'];
               return blockList == null || !blockList.contains(userId)
                   ? userTile(profileImg, userId, name)
                   : const SizedBox.shrink();
@@ -256,9 +256,9 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
                       Map<String, dynamic> docData =
                           snapshot.data.hits[index].data;
                       String groupId = snapshot.data.hits[index].objectID;
-                      String hashTag = docData["hashTag"];
-                      String profileImg = docData["profileImg"];
-                      String admin = docData["admin"];
+                      String hashTag = docData['hashTag'];
+                      String profileImg = docData['profileImg'];
+                      String admin = docData['admin'];
 
                       return GestureDetector(
                         onTap: () {
@@ -288,7 +288,7 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
                   )
                 : noItems(
                     icon: Icons.search_rounded,
-                    text: "no match found",
+                    text: 'no match found',
                     mAxAlign: MainAxisAlignment.center);
           } else {
             return sectionLoadingIndicator();
@@ -305,9 +305,9 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
             itemBuilder: (context, index) {
               Map<String, dynamic> docData = sugGroups[index].data;
               String groupId = sugGroups[index].objectID;
-              String hashTag = docData["hashTag"];
-              String profileImg = docData["profileImg"];
-              String admin = docData["admin"];
+              String hashTag = docData['hashTag'];
+              String profileImg = docData['profileImg'];
+              String admin = docData['admin'];
 
               return groupTile(profileImg, groupId, hashTag, admin);
             },
@@ -335,7 +335,7 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
       String tagText = tagsEditingController.text;
 
       List<String> tags =
-          tagText.trim().replaceAll(RegExp(r'[^\w\s]+'), "").split(' ');
+          tagText.trim().replaceAll(RegExp(r'[^\w\s]+'), '').split(' ');
 
       DateTime now = DateTime.now();
 
@@ -349,7 +349,7 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
           gifs: widget.gifs,
           video: widget.video,
           sendTime: now.microsecondsSinceEpoch,
-          type: "snippet",
+          type: 'snippet',
           groupSnapshot: groupSnapshot,
           rmvGroups: rmvGroups,
           userSnapshot: userSnapshot,
@@ -385,7 +385,7 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
 
   void initTargets() {
     targets.add(TargetFocus(
-      identify: "Hashtag Explanation",
+      identify: 'Hashtag Explanation',
       keyTarget: key1,
       color: Colors.orange,
       contents: [
@@ -398,7 +398,7 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
                     child: Text(
-                      "Spidr Tags",
+                      'Spidr Tags',
                       style: GoogleFonts.varelaRound(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -406,7 +406,7 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
                     ),
                   ),
                   Text(
-                    "By adding a Spidr hash tag to your broadcast, users and groups with the same hashtag in their profile can view, comment and share your post",
+                    'By adding a Spidr hash tag to your broadcast, users and groups with the same hashtag in their profile can view, comment and share your post',
                     style: GoogleFonts.varelaRound(
                       color: Colors.white,
                     ),
@@ -419,7 +419,7 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
       radius: 27,
     ));
     targets.add(TargetFocus(
-      identify: "Anonymous Toggle",
+      identify: 'Anonymous Toggle',
       keyTarget: key2,
       color: Colors.orange,
       contents: [
@@ -432,7 +432,7 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
                     child: Text(
-                      "Anonymous Mode",
+                      'Anonymous Mode',
                       style: GoogleFonts.varelaRound(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -440,7 +440,7 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
                     ),
                   ),
                   Text(
-                    "You can broadcast anonymously so your identity is not revealed in your post",
+                    'You can broadcast anonymously so your identity is not revealed in your post',
                     style: GoogleFonts.varelaRound(
                       color: Colors.white,
                     ),
@@ -460,7 +460,7 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
         context,
         targets: targets,
         colorShadow: Colors.red,
-        textSkip: "SKIP",
+        textSkip: 'SKIP',
         paddingFocus: 10,
         opacityShadow: 0.8,
         onFinish: () {
@@ -510,7 +510,7 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
         stream: DatabaseMethods(uid: Constants.myUserId).getMyStream(),
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data.data() != null) {
-            blockList = snapshot.data.data()["blockList"];
+            blockList = snapshot.data.data()['blockList'];
           }
           return Dialog(
             insetPadding: const EdgeInsets.all(18),
@@ -534,7 +534,7 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
                             alignment: Alignment
                                 .center, // Align however you like (i.e .centerRight, centerLeft)
                             child: Text(
-                              "Broadcast To:",
+                              'Broadcast To:',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -567,14 +567,14 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
                                 },
                                 validator: (val) {
                                   return val.length > 150
-                                      ? "sorry, tags > 150 characters"
+                                      ? 'sorry, tags > 150 characters'
                                       : null;
                                 },
                                 controller: tagsEditingController,
                                 style: const TextStyle(
                                     color: Colors.orange, fontSize: 20),
                                 decoration: previewInputDec(
-                                    hintText: "UofG,Toronto,Sports ...",
+                                    hintText: 'UofG,Toronto,Sports ...',
                                     valid: validTags,
                                     textEtController: tagsEditingController,
                                     maxLength: 150,
@@ -587,7 +587,7 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
                               ),
                             ),
                           ),
-                          Text("Circles", style: sectTxtStyle),
+                          Text('Circles', style: sectTxtStyle),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.135,
                             key: key1,
@@ -595,7 +595,7 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
                                 ? groupList()
                                 : sugGroupList(),
                           ),
-                          Text("Users", style: sectTxtStyle),
+                          Text('Users', style: sectTxtStyle),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.135,
                             child: tagsEditingController.text.isNotEmpty
@@ -624,7 +624,7 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
                                 activeTrackColor: Colors.orangeAccent,
                                 activeColor: Colors.orange,
                               ),
-                              Text("Anonymous?",
+                              Text('Anonymous?',
                                   style: GoogleFonts.varelaRound(
                                       color: Colors.white,
                                       fontSize: 15.0,
@@ -668,7 +668,7 @@ class _SendSnippetDialogState extends State<SendSnippetDialog> {
                                               userSnapshot.data.hits.length -
                                                       rmvUsers.length ==
                                                   0),
-                                      text: "Broadcast",
+                                      text: 'Broadcast',
                                     ),
                                   ),
                                 )

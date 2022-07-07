@@ -41,7 +41,7 @@ class _AppCameraScreenState extends State<AppCameraScreen>
   List cameras;
   int selectedCameraIndex;
   double percentOfMaxVideoDurationRecorded = 0;
-  String _recordingProgressAnimation = "Idle";
+  String _recordingProgressAnimation = 'Idle';
   String filepath;
   double _minAvailableExposureOffset = 0.0;
   double _maxAvailableExposureOffset = 0.0;
@@ -200,10 +200,10 @@ class _AppCameraScreenState extends State<AppCameraScreen>
         if (numOfSMs < Constants.maxFileUpload && imgFile != null) {
           String uploadTo =
               widget.groupChatId == null && widget.personalChatId == null
-                  ? "SNIPPET"
+                  ? 'SNIPPET'
                   : widget.groupChatId != null
-                      ? "GROUP"
-                      : "PERSONAL";
+                      ? 'GROUP'
+                      : 'PERSONAL';
 
           setState(() {
             selMedia.add(
@@ -240,7 +240,7 @@ class _AppCameraScreenState extends State<AppCameraScreen>
 
     setState(() {
       _recordingProgressAnimation =
-          "Demo"; //setting to the name of the animation will trigger it to start
+          'Demo'; //setting to the name of the animation will trigger it to start
     });
 
     //print('camera recording: ${cameraController.value.isRecordingVideo}');
@@ -278,10 +278,10 @@ class _AppCameraScreenState extends State<AppCameraScreen>
         if (numOfSMs < Constants.maxFileUpload && videoFile != null) {
           String uploadTo =
               widget.groupChatId == null && widget.personalChatId == null
-                  ? "SNIPPET"
+                  ? 'SNIPPET'
                   : widget.groupChatId != null
-                      ? "GROUP"
-                      : "PERSONAL";
+                      ? 'GROUP'
+                      : 'PERSONAL';
 
           setState(() {
             selMedia.add(
@@ -307,7 +307,7 @@ class _AppCameraScreenState extends State<AppCameraScreen>
     }
     setState(() {
       _recordingProgressAnimation =
-          "Idle"; //setting to a name that does not refer to an actual animation will stop it
+          'Idle'; //setting to a name that does not refer to an actual animation will stop it
     });
   }
 
@@ -326,7 +326,7 @@ class _AppCameraScreenState extends State<AppCameraScreen>
                 width: AppCameraScreen.CAMERA_BUTTON_SIZE,
                 height: AppCameraScreen.CAMERA_BUTTON_SIZE,
                 child: FlareActor(
-                    "assets/animations/loading-fanimation-sun-flare.flr",
+                    'assets/animations/loading-fanimation-sun-flare.flr',
                     alignment: Alignment.center,
                     fit: BoxFit.contain,
                     animation: _recordingProgressAnimation))));
@@ -491,7 +491,7 @@ class _AppCameraScreenState extends State<AppCameraScreen>
             children: [
               const Center(
                 child: Text(
-                  "Exposure Mode",
+                  'Exposure Mode',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -524,7 +524,7 @@ class _AppCameraScreenState extends State<AppCameraScreen>
                 ],
               ),
               const Center(
-                child: Text("Exposure Offset",
+                child: Text('Exposure Offset',
                     style: TextStyle(color: Colors.white)),
               ),
               Row(
@@ -577,7 +577,7 @@ class _AppCameraScreenState extends State<AppCameraScreen>
             children: [
               const Center(
                 child: Text(
-                  "Focus Mode",
+                  'Focus Mode',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -926,7 +926,7 @@ class _AppCameraScreenState extends State<AppCameraScreen>
                                         indent: 45,
                                       )),
                                       Text(
-                                        "$numOfSMs/${Constants.maxFileUpload}",
+                                        '$numOfSMs/${Constants.maxFileUpload}',
                                         style: const TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold),
@@ -1003,10 +1003,10 @@ class _AppCameraScreenState extends State<AppCameraScreen>
                                       String uploadTo =
                                           widget.groupChatId == null &&
                                                   widget.personalChatId == null
-                                              ? "SNIPPET"
+                                              ? 'SNIPPET'
                                               : widget.groupChatId != null
-                                                  ? "GROUP"
-                                                  : "PERSONAL";
+                                                  ? 'GROUP'
+                                                  : 'PERSONAL';
 
                                       if (multiMedia) {
                                         if (numOfSMs <
@@ -1067,7 +1067,7 @@ class _AppCameraScreenState extends State<AppCameraScreen>
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Broadcast",
+                            Text('Broadcast',
                                 style: GoogleFonts.varelaRound(
                                     color: Colors.orange,
                                     fontWeight: FontWeight.bold,
@@ -1224,7 +1224,7 @@ class _AppCameraScreenState extends State<AppCameraScreen>
         });
         initCamera(cameras[selectedCameraIndex]);
       } else {
-        print("No camera available");
+        print('No camera available');
       }
     }).catchError((e) {
       print('Error: ${e.code}');
@@ -1245,7 +1245,6 @@ class _MediaSizeClipper extends CustomClipper<Rect> {
     return true;
   }
 }
-
 
 // class MultiMediaList extends StatefulWidget {
 //   final int max;
@@ -1372,7 +1371,7 @@ class _MediaSizeClipper extends CustomClipper<Rect> {
 //
 //   @override
 //   void dispose() {
-//     
+//
 //     Globals.numOfSMs = 0;
 //     widget.selMedia = [];
 //

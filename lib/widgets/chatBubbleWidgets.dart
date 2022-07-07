@@ -1,20 +1,19 @@
-import  'dart:async';
-import  'dart:ui';
+import 'dart:async';
 
-import  'package:carousel_slider/carousel_slider.dart';
-import  'package:cloud_firestore/cloud_firestore.dart';
-import  'package:dynamic_text_highlighting/dynamic_text_highlighting.dart';
-import  'package:flutter/cupertino.dart';
-import  'package:flutter/material.dart';
-import  'package:fluttertoast/fluttertoast.dart';
-import  'package:spidr_app/decorations/widgetDecorations.dart';
-import  'package:spidr_app/helper/constants.dart';
-import  "package:spidr_app/helper/functions.dart";
-import  'package:spidr_app/services/database.dart';
-import  'package:spidr_app/services/fileDownload.dart';
-import  'package:spidr_app/views/userProfilePage.dart';
-import  'package:spidr_app/widgets/mediaGalleryWidgets.dart';
-import  "package:spidr_app/widgets/widget.dart";
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dynamic_text_highlighting/dynamic_text_highlighting.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:spidr_app/decorations/widgetDecorations.dart';
+import 'package:spidr_app/helper/constants.dart';
+import 'package:spidr_app/helper/functions.dart';
+import 'package:spidr_app/services/database.dart';
+import 'package:spidr_app/services/fileDownload.dart';
+import 'package:spidr_app/views/userProfilePage.dart';
+import 'package:spidr_app/widgets/mediaGalleryWidgets.dart';
+import 'package:spidr_app/widgets/widget.dart';
 
 class SharedChatBubble extends StatefulWidget {
   final Map fileObj;
@@ -50,41 +49,40 @@ class _SharedChatBubbleState extends State<SharedChatBubble> {
         await DatabaseMethods(uid: ogSenderId).getUserById();
     if (mounted && userDS.exists) {
       setState(() {
-        ogSender = userDS.get("name");
+        ogSender = userDS.get('name');
         profileImg = anon == null || !anon
-            ? userDS.get("profileImg")
-            : userMIYUs[userDS.get("anonImg")];
+            ? userDS.get('profileImg')
+            : userMIYUs[userDS.get('anonImg')];
       });
     }
   }
 
   setUp() {
     if (widget.imgObj != null || widget.mediaGallery != null) {
-      Map imgObj =
-          widget.imgObj ?? widget.mediaGallery[0];
+      Map imgObj = widget.imgObj ?? widget.mediaGallery[0];
       setState(() {
         anon = imgObj['anon'];
-        ogSenderId = imgObj["ogSenderId"];
+        ogSenderId = imgObj['ogSenderId'];
       });
-      if (imgObj["ogStoryId"] != null) {
+      if (imgObj['ogStoryId'] != null) {
         setState(() {
-          mediaId = imgObj["ogStoryId"];
+          mediaId = imgObj['ogStoryId'];
           story = true;
         });
         DatabaseMethods(uid: Constants.myUserId)
             .markSeenStory(ogSenderId, mediaId);
       } else {
         setState(() {
-          mediaId = imgObj["ogChatId"];
-          groupId = imgObj["ogGroupId"];
+          mediaId = imgObj['ogChatId'];
+          groupId = imgObj['ogGroupId'];
         });
       }
     } else {
       setState(() {
-        ogSenderId = widget.fileObj["ogSenderId"];
-        anon = widget.fileObj["anon"];
-        mediaId = widget.fileObj["ogChatId"];
-        groupId = widget.fileObj["ogGroupId"];
+        ogSenderId = widget.fileObj['ogSenderId'];
+        anon = widget.fileObj['anon'];
+        mediaId = widget.fileObj['ogChatId'];
+        groupId = widget.fileObj['ogGroupId'];
       });
     }
     getOgSenderInfo();
@@ -169,10 +167,10 @@ class _SharedChatBubbleState extends State<SharedChatBubble> {
                         : const SizedBox.shrink(),
                     title: Text(
                         ogSenderId == Constants.myUserId
-                            ? "Me"
+                            ? 'Me'
                             : anon == null || !anon
                                 ? ogSender
-                                : "Anonymous",
+                                : 'Anonymous',
                         style: const TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold)),
                   ),
@@ -194,7 +192,7 @@ class UrlChatBubble extends StatefulWidget {
 }
 
 class _UrlChatBubbleState extends State<UrlChatBubble> {
-  String url = "";
+  String url = '';
 
   @override
   void didUpdateWidget(covariant UrlChatBubble oldWidget) {
@@ -203,7 +201,7 @@ class _UrlChatBubbleState extends State<UrlChatBubble> {
 
     if (url != newUrl) {
       setState(() {
-        url = "";
+        url = '';
       });
       Timer(
           const Duration(milliseconds: 1),
@@ -267,9 +265,10 @@ Widget fileChatDisplay(
 
 Widget unknownFileBubble(Map fileObj, bool isSendByMe, platform) {
   return ListTile(
-    leading: avatarImg("assets/images/unknownFile.png", 24, false),
-    title: Text(fileObj["fileName"],
-        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+    leading: avatarImg('assets/images/unknownFile.png', 24, false),
+    title: Text(fileObj['fileName'],
+        style:
+            const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
     subtitle: Text("${fileObj["fileSize"]}",
         style: TextStyle(
             fontWeight: FontWeight.w600,
@@ -298,7 +297,7 @@ Widget unknownFileBubble(Map fileObj, bool isSendByMe, platform) {
               fileObj['fileName'], fileObj['fileUrl'], savedDir);
           if (taskId != null) {
             Fluttertoast.showToast(
-              msg: "Start download",
+              msg: 'Start download',
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.SNACKBAR,
               timeInSecForIosWeb: 3,
@@ -453,7 +452,7 @@ Widget mediaChatBubble(
     bool toPageView = true}) {
   return Container(
     height: MediaQuery.of(context).size.height * 0.45,
-    decoration: imgObj["sticker"] == null ? shadowEffect(30) : null,
+    decoration: imgObj['sticker'] == null ? shadowEffect(30) : null,
     child: ClipRRect(
       borderRadius: BorderRadius.circular(30),
       child: Stack(

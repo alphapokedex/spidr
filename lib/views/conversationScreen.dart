@@ -1,7 +1,7 @@
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:spidr_app/decorations/widgetDecorations.dart';
 import 'package:spidr_app/helper/constants.dart';
@@ -53,8 +53,8 @@ class _ConversationScreenState extends State<ConversationScreen>
   String groupChatId;
   String groupPic;
   String groupState;
-  String hashTag = "";
-  String admin = "";
+  String hashTag = '';
+  String admin = '';
   double groupCapacity;
   bool oneDay;
   int createdAt;
@@ -100,14 +100,14 @@ class _ConversationScreenState extends State<ConversationScreen>
       String message = messageController.text;
       String ogSenderId;
       if (inChatReply != null) {
-        if (inChatReply["msgReplyTo"] is List &&
-            inChatReply["msgReplyTo"][0]["ogSenderId"] != null) {
-          ogSenderId = inChatReply["msgReplyTo"][0]["ogSenderId"];
-        } else if (inChatReply["msgReplyTo"] is Map &&
-            inChatReply["msgReplyTo"]["ogSenderId"] != null) {
-          ogSenderId = inChatReply["msgReplyTo"]["ogSenderId"];
+        if (inChatReply['msgReplyTo'] is List &&
+            inChatReply['msgReplyTo'][0]['ogSenderId'] != null) {
+          ogSenderId = inChatReply['msgReplyTo'][0]['ogSenderId'];
+        } else if (inChatReply['msgReplyTo'] is Map &&
+            inChatReply['msgReplyTo']['ogSenderId'] != null) {
+          ogSenderId = inChatReply['msgReplyTo']['ogSenderId'];
         } else {
-          ogSenderId = inChatReply["userReplyTo"];
+          ogSenderId = inChatReply['userReplyTo'];
         }
       }
 
@@ -118,7 +118,7 @@ class _ConversationScreenState extends State<ConversationScreen>
         userId: widget.uid,
         time: now.microsecondsSinceEpoch,
         inChatReply: inChatReply,
-        ogMediaId: inChatReply != null ? inChatReply["msgId"] : null,
+        ogMediaId: inChatReply != null ? inChatReply['msgId'] : null,
         ogSenderId: ogSenderId,
       );
       setState(() {
@@ -126,9 +126,9 @@ class _ConversationScreenState extends State<ConversationScreen>
       });
 
       if (inChatReply != null) {
-        if (inChatReply["msgReplyTo"] is Map ||
-            inChatReply["msgReplyTo"] is List) {
-          DatabaseMethods().addFileCopies(mediaId: inChatReply["msgId"]);
+        if (inChatReply['msgReplyTo'] is Map ||
+            inChatReply['msgReplyTo'] is List) {
+          DatabaseMethods().addFileCopies(mediaId: inChatReply['msgId']);
         }
         setState(() {
           msgReplyTo = null;
@@ -153,7 +153,7 @@ class _ConversationScreenState extends State<ConversationScreen>
       //     keyWordMap[word]= [0];
       //   }
       // }
-      messageController.text = "";
+      messageController.text = '';
     }
   }
 
@@ -199,7 +199,7 @@ class _ConversationScreenState extends State<ConversationScreen>
           textCapitalization: TextCapitalization.sentences,
           decoration: msgInputDec(
               context: context,
-              hintText: !expired ? "Message" : "Expired",
+              hintText: !expired ? 'Message' : 'Expired',
               groupChatId: widget.groupChatId,
               gif: true,
               disabled: expired,
@@ -257,7 +257,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                             ? RichText(
                                 text: TextSpan(children: [
                                   TextSpan(
-                                      text: "$sendBy ",
+                                      text: '$sendBy ',
                                       style: const TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold)),
@@ -295,10 +295,10 @@ class _ConversationScreenState extends State<ConversationScreen>
                     GestureDetector(
                       onLongPress: () async {
                         if (message.isNotEmpty ||
-                            (imgObj != null && imgObj["imgUrl"] != null) ||
-                            fileObj != null && fileObj["fileUrl"] != null ||
+                            (imgObj != null && imgObj['imgUrl'] != null) ||
+                            fileObj != null && fileObj['fileUrl'] != null ||
                             (mediaGallery != null &&
-                                mediaGallery[0]["imgUrl"] != null)) {
+                                mediaGallery[0]['imgUrl'] != null)) {
                           DocumentSnapshot mdDS = await DatabaseMethods()
                               .mediaCollection
                               .doc(messageId)
@@ -314,17 +314,17 @@ class _ConversationScreenState extends State<ConversationScreen>
                                       0.0),
                                   items: <PopupMenuEntry>[
                                       (imgObj != null &&
-                                                  imgObj["ogSenderId"] ==
+                                                  imgObj['ogSenderId'] ==
                                                       null) ||
                                               (mediaGallery != null &&
                                                   mediaGallery[0]
-                                                          ["ogSenderId"] ==
+                                                          ['ogSenderId'] ==
                                                       null) ||
                                               (fileObj != null &&
                                                   (pdfChecker(fileObj[
-                                                          "fileName"]) ||
+                                                          'fileName']) ||
                                                       audioChecker(
-                                                          fileObj["fileName"])))
+                                                          fileObj['fileName'])))
                                           ? PopupMenuItem(
                                               value: 2,
                                               child: iconText(
@@ -333,8 +333,8 @@ class _ConversationScreenState extends State<ConversationScreen>
                                                           .explore_off_rounded
                                                       : Icons.explore_rounded,
                                                   mdDS.exists
-                                                      ? " Hide"
-                                                      : " Post"))
+                                                      ? ' Hide'
+                                                      : ' Post'))
                                           : null,
                                       PopupMenuItem(
                                           value: 1,
@@ -343,8 +343,8 @@ class _ConversationScreenState extends State<ConversationScreen>
                                                   ? CupertinoIcons.delete
                                                   : Icons.open_in_new,
                                               numOfReplies == 0
-                                                  ? " Delete"
-                                                  : " Open Replies")),
+                                                  ? ' Delete'
+                                                  : ' Open Replies')),
                                     ]).then((value) {
                                   if (value == 1) {
                                     if (numOfReplies == 0) {
@@ -399,7 +399,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                                           ? PopupMenuItem(
                                               value: 1,
                                               child: iconText(
-                                                  Icons.maps_ugc, " Chat"))
+                                                  Icons.maps_ugc, ' Chat'))
                                           : null,
                                       isMyChat
                                           ? PopupMenuItem(
@@ -409,7 +409,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                                                           TargetPlatform.android
                                                       ? Icons.reply_rounded
                                                       : CupertinoIcons.reply,
-                                                  " Reply"))
+                                                  ' Reply'))
                                           : null,
                                       !reported
                                           ? PopupMenuItem(
@@ -420,7 +420,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                                                       ? Icons.flag_rounded
                                                       : CupertinoIcons
                                                           .flag_fill,
-                                                  " Report"))
+                                                  ' Report'))
                                           : null,
                                     ]).then((value) {
                                   if (value == 1) {
@@ -443,22 +443,22 @@ class _ConversationScreenState extends State<ConversationScreen>
                                     String msg = message.isNotEmpty
                                         ? message
                                         : imgObj != null
-                                            ? imgObj["imgName"]
+                                            ? imgObj['imgName']
                                             : fileObj != null
-                                                ? fileObj["fileName"]
+                                                ? fileObj['fileName']
                                                 : mediaGallery
-                                                    .map((e) => e["imgName"])
+                                                    .map((e) => e['imgName'])
                                                     .toList()
                                                     .join(' ');
 
                                     setState(() {
                                       msgReplyTo = msg;
                                       replyInfo = {
-                                        "userReplyTo": userId,
-                                        "msgReplyTo": message.isNotEmpty
+                                        'userReplyTo': userId,
+                                        'msgReplyTo': message.isNotEmpty
                                             ? message
                                             : imgObj ?? fileObj ?? mediaGallery,
-                                        "msgId": ogMediaId ?? messageId
+                                        'msgId': ogMediaId ?? messageId
                                       };
                                     });
                                   } else if (value == 3) {
@@ -489,8 +489,8 @@ class _ConversationScreenState extends State<ConversationScreen>
                                 isSendByMe,
                                 message.isNotEmpty ||
                                     (fileObj != null &&
-                                        !audioChecker(fileObj["fileName"]) &&
-                                        !pdfChecker(fileObj["fileName"]))),
+                                        !audioChecker(fileObj['fileName']) &&
+                                        !pdfChecker(fileObj['fileName']))),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
@@ -522,7 +522,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                                                     ),
                                                     userProfile(
                                                         userId: inChatReply[
-                                                            "userReplyTo"],
+                                                            'userReplyTo'],
                                                         anon: anon != null &&
                                                             anon,
                                                         size: 18),
@@ -532,7 +532,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                                                     anon == null || !anon
                                                         ? userName(
                                                             userId: inChatReply[
-                                                                "userReplyTo"],
+                                                                'userReplyTo'],
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             color: isSendByMe
@@ -543,71 +543,71 @@ class _ConversationScreenState extends State<ConversationScreen>
                                                   ],
                                                 ),
                                               ),
-                                              inChatReply["msgReplyTo"]
+                                              inChatReply['msgReplyTo']
                                                       is String
                                                   ? replyTextBubble(
                                                       context,
-                                                      inChatReply["msgReplyTo"],
+                                                      inChatReply['msgReplyTo'],
                                                       isSendByMe)
-                                                  : inChatReply["msgReplyTo"]
+                                                  : inChatReply['msgReplyTo']
                                                           is Map
-                                                      ? inChatReply["msgReplyTo"]
+                                                      ? inChatReply['msgReplyTo']
                                                                   [
-                                                                  "ogSenderId"] !=
+                                                                  'ogSenderId'] !=
                                                               null
                                                           ? SharedChatBubble(
                                                               imgObj: inChatReply[
-                                                                              "msgReplyTo"]
+                                                                              'msgReplyTo']
                                                                           [
                                                                           'imgName'] !=
                                                                       null
                                                                   ? inChatReply[
-                                                                      "msgReplyTo"]
+                                                                      'msgReplyTo']
                                                                   : null,
                                                               fileObj: inChatReply[
-                                                                              "msgReplyTo"]
+                                                                              'msgReplyTo']
                                                                           [
                                                                           'fileName'] !=
                                                                       null
                                                                   ? inChatReply[
-                                                                      "msgReplyTo"]
+                                                                      'msgReplyTo']
                                                                   : null,
                                                               isSendByMe:
                                                                   isSendByMe,
                                                               mediaId: inChatReply[
-                                                                              "msgReplyTo"]
+                                                                              'msgReplyTo']
                                                                           [
                                                                           'fileName'] !=
                                                                       null
                                                                   ? inChatReply[
-                                                                          "msgReplyTo"]
+                                                                          'msgReplyTo']
                                                                       [
-                                                                      "ogChatId"]
+                                                                      'ogChatId']
                                                                   : inChatReply[
-                                                                              "msgReplyTo"]
+                                                                              'msgReplyTo']
                                                                           [
-                                                                          "ogChatId"] ??
+                                                                          'ogChatId'] ??
                                                                       inChatReply[
-                                                                              "msgReplyTo"]
+                                                                              'msgReplyTo']
                                                                           [
-                                                                          "ogStoryId"],
+                                                                          'ogStoryId'],
                                                               reply: true,
                                                             )
                                                           : replyMediaBubble(
                                                               context: context,
-                                                              imgObj: inChatReply["msgReplyTo"]
+                                                              imgObj: inChatReply['msgReplyTo']
                                                                           [
                                                                           'imgName'] !=
                                                                       null
                                                                   ? inChatReply[
-                                                                      "msgReplyTo"]
+                                                                      'msgReplyTo']
                                                                   : null,
-                                                              fileObj: inChatReply["msgReplyTo"]
+                                                              fileObj: inChatReply['msgReplyTo']
                                                                           [
                                                                           'fileName'] !=
                                                                       null
                                                                   ? inChatReply[
-                                                                      "msgReplyTo"]
+                                                                      'msgReplyTo']
                                                                   : null,
                                                               messageId:
                                                                   messageId,
@@ -616,35 +616,35 @@ class _ConversationScreenState extends State<ConversationScreen>
                                                               platform:
                                                                   platform,
                                                               senderId: inChatReply[
-                                                                  "userReplyTo"])
-                                                      : inChatReply["msgReplyTo"]
+                                                                  'userReplyTo'])
+                                                      : inChatReply['msgReplyTo']
                                                                       [0]
-                                                                  ["ogSenderId"] !=
+                                                                  ['ogSenderId'] !=
                                                               null
                                                           ? SharedChatBubble(
                                                               mediaGallery:
                                                                   inChatReply[
-                                                                      "msgReplyTo"],
+                                                                      'msgReplyTo'],
                                                               isSendByMe:
                                                                   isSendByMe,
                                                               mediaId: inChatReply[
-                                                                          "msgReplyTo"][0]
+                                                                          'msgReplyTo'][0]
                                                                       [
-                                                                      "ogChatId"] ??
+                                                                      'ogChatId'] ??
                                                                   inChatReply[
-                                                                          "msgReplyTo"][0]
+                                                                          'msgReplyTo'][0]
                                                                       [
-                                                                      "ogStoryId"],
+                                                                      'ogStoryId'],
                                                               reply: true,
                                                             )
                                                           : MediaGalleryBubble(
                                                               mediaGallery:
                                                                   inChatReply[
-                                                                      "msgReplyTo"],
+                                                                      'msgReplyTo'],
                                                               messageId:
                                                                   messageId,
                                                               senderId: inChatReply[
-                                                                  "userReplyTo"],
+                                                                  'userReplyTo'],
                                                               isSendByMe:
                                                                   isSendByMe,
                                                               reply: true,
@@ -666,11 +666,11 @@ class _ConversationScreenState extends State<ConversationScreen>
                                     ? groupTextBubble(context, message,
                                         highlightWords, isSendByMe)
                                     : fileObj != null
-                                        ? fileObj["ogSenderId"] != null
+                                        ? fileObj['ogSenderId'] != null
                                             ? SharedChatBubble(
                                                 fileObj: fileObj,
                                                 isSendByMe: isSendByMe,
-                                                mediaId: fileObj["ogChatId"],
+                                                mediaId: fileObj['ogChatId'],
                                               )
                                             : Column(
                                                 crossAxisAlignment:
@@ -683,30 +683,30 @@ class _ConversationScreenState extends State<ConversationScreen>
                                                     isSendByMe: isSendByMe,
                                                     platform: platform,
                                                     audio: audioChecker(
-                                                        fileObj["fileName"]),
+                                                        fileObj['fileName']),
                                                     document: pdfChecker(
-                                                        fileObj["fileName"]),
+                                                        fileObj['fileName']),
                                                     senderId: userId,
                                                     groupId: widget.groupChatId,
                                                     hashTag: hashTag,
                                                     anon: anon,
                                                   ),
                                                   audioChecker(fileObj[
-                                                              "fileName"]) ||
+                                                              'fileName']) ||
                                                           pdfChecker(fileObj[
-                                                              "fileName"])
+                                                              'fileName'])
                                                       ? mediaCommentBtt
                                                       : const SizedBox.shrink()
                                                 ],
                                               )
                                         : imgObj != null
-                                            ? imgObj["ogSenderId"] != null
+                                            ? imgObj['ogSenderId'] != null
                                                 ? SharedChatBubble(
                                                     imgObj: imgObj,
                                                     isSendByMe: isSendByMe,
                                                     mediaId:
-                                                        imgObj["ogChatId"] ??
-                                                            imgObj["ogStoryId"])
+                                                        imgObj['ogChatId'] ??
+                                                            imgObj['ogStoryId'])
                                                 : Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
@@ -727,16 +727,16 @@ class _ConversationScreenState extends State<ConversationScreen>
                                                   )
                                             : mediaGallery != null
                                                 ? mediaGallery[0]
-                                                            ["ogSenderId"] !=
+                                                            ['ogSenderId'] !=
                                                         null
                                                     ? SharedChatBubble(
                                                         mediaGallery:
                                                             mediaGallery,
                                                         isSendByMe: isSendByMe,
                                                         mediaId: mediaGallery[0]
-                                                                ["ogChatId"] ??
+                                                                ['ogChatId'] ??
                                                             mediaGallery[0]
-                                                                ["ogStoryId"],
+                                                                ['ogStoryId'],
                                                       )
                                                     : Column(
                                                         crossAxisAlignment:
@@ -790,8 +790,8 @@ class _ConversationScreenState extends State<ConversationScreen>
                                               0.0, 10.0, 10.0, 0.0),
                                           child: Text(
                                             numOfReplies > 1
-                                                ? "$numOfReplies users replied"
-                                                : "$numOfReplies user replied",
+                                                ? '$numOfReplies users replied'
+                                                : '$numOfReplies user replied',
                                             style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.black),
@@ -825,7 +825,7 @@ class _ConversationScreenState extends State<ConversationScreen>
 
   Widget chatMessageList() {
     final TargetPlatform platform = Theme.of(context).platform;
-    return widget.preview && groupState == "private" && !isMyChat
+    return widget.preview && groupState == 'private' && !isMyChat
         ? privateGroupSign(platform)
         : StreamBuilder(
             stream: chatMessageStream,
@@ -843,16 +843,16 @@ class _ConversationScreenState extends State<ConversationScreen>
                             bool reported = reportedBy != null &&
                                 reportedBy.contains(Constants.myUserId);
                             String senderId =
-                                snapshot.data.docs[index].data()["userId"];
+                                snapshot.data.docs[index].data()['userId'];
 
                             int sendTime =
-                                snapshot.data.docs[index].data()["time"];
+                                snapshot.data.docs[index].data()['time'];
                             String sendDateTime = timeToString(sendTime);
                             bool newDay = false;
 
                             if (index > 0) {
                               int prevSendTime =
-                                  snapshot.data.docs[index - 1].data()["time"];
+                                  snapshot.data.docs[index - 1].data()['time'];
                               String preSendDateTime =
                                   timeToString(prevSendTime);
                               newDay = isNewDay(sendDateTime, preSendDateTime);
@@ -860,12 +860,12 @@ class _ConversationScreenState extends State<ConversationScreen>
 
                             return !blockList.contains(senderId)
                                 ? messageTile(
-                                    snapshot.data.docs[index].data()["message"],
-                                    snapshot.data.docs[index].data()["imgObj"],
-                                    snapshot.data.docs[index].data()["fileObj"],
+                                    snapshot.data.docs[index].data()['message'],
+                                    snapshot.data.docs[index].data()['imgObj'],
+                                    snapshot.data.docs[index].data()['fileObj'],
                                     snapshot.data.docs[index]
-                                        .data()["mediaGallery"],
-                                    snapshot.data.docs[index].data()["sendBy"],
+                                        .data()['mediaGallery'],
+                                    snapshot.data.docs[index].data()['sendBy'],
                                     sendDateTime,
                                     sendTime,
                                     senderId,
@@ -884,7 +884,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                                   )
                                 : const SizedBox.shrink();
                           })
-                      : Center(child: Image.asset("assets/icon/emptyChat.png"))
+                      : Center(child: Image.asset('assets/icon/emptyChat.png'))
                   : const SizedBox.shrink();
             },
           );
@@ -971,7 +971,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                               loading = false;
                             });
                           }
-                        } else if (groupState == "public") {
+                        } else if (groupState == 'public') {
                           if (!isOnWaitList && !isMyChat && !loading) {
                             setState(() {
                               loading = true;
@@ -1017,20 +1017,20 @@ class _ConversationScreenState extends State<ConversationScreen>
                             horizontal: 15, vertical: 10),
                         child: Text(
                             gotBanned
-                                ? "Banned"
+                                ? 'Banned'
                                 : !isOnWaitList
                                     ? !reqJoin
                                         ? numOfMem == groupCapacity
-                                            ? groupState == "private"
-                                                ? "Full | Waitlist"
-                                                : "Full | Spectate"
-                                            : groupState == "public"
-                                                ? "Join"
-                                                : "Request"
-                                        : "Requested"
+                                            ? groupState == 'private'
+                                                ? 'Full | Waitlist'
+                                                : 'Full | Spectate'
+                                            : groupState == 'public'
+                                                ? 'Join'
+                                                : 'Request'
+                                        : 'Requested'
                                     : groupState == 'private'
-                                        ? "Waitlisted"
-                                        : "Spectating",
+                                        ? 'Waitlisted'
+                                        : 'Spectating',
                             style: TextStyle(
                                 color: isOnWaitList
                                     ? Colors.redAccent
@@ -1046,7 +1046,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                           borderRadius: BorderRadius.circular(30)),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 15, vertical: 10),
-                      child: const Text("Expired",
+                      child: const Text('Expired',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w400)),
@@ -1101,13 +1101,13 @@ class _ConversationScreenState extends State<ConversationScreen>
 
   leaveGroupChat() {
     DatabaseMethods(uid: widget.uid)
-        .toggleGroupMembership(widget.groupChatId, "LEAVE_GROUP");
+        .toggleGroupMembership(widget.groupChatId, 'LEAVE_GROUP');
     // Navigator.of(context).pop();
   }
 
   quitSpectating() {
     DatabaseMethods(uid: widget.uid)
-        .toggleGroupMembership(widget.groupChatId, "QUIT_SPECTATING");
+        .toggleGroupMembership(widget.groupChatId, 'QUIT_SPECTATING');
     // Navigator.of(context, rootNavigator: true).pop();
   }
 
@@ -1118,12 +1118,12 @@ class _ConversationScreenState extends State<ConversationScreen>
     double groupCap = groupSnapshot.get('groupCapacity');
     if (numOfMem < groupCap) {
       await DatabaseMethods(uid: widget.uid)
-          .toggleGroupMembership(widget.groupChatId, "QUIT_SPECTATING");
+          .toggleGroupMembership(widget.groupChatId, 'QUIT_SPECTATING');
       DatabaseMethods(uid: widget.uid)
-          .toggleGroupMembership(widget.groupChatId, "JOIN_PUB_GROUP_CHAT");
+          .toggleGroupMembership(widget.groupChatId, 'JOIN_PUB_GROUP_CHAT');
       // Navigator.of(context, rootNavigator: true).pop();
     } else {
-      showAlertDialog("This group is still at its full capacity", context);
+      showAlertDialog('This group is still at its full capacity', context);
     }
   }
 
@@ -1183,7 +1183,7 @@ class _ConversationScreenState extends State<ConversationScreen>
 
   rmvWritingInd() {
     DatabaseMethods().groupChatCollection.doc(widget.groupChatId).update({
-      "writingMem": FieldValue.arrayRemove([Constants.myUserId])
+      'writingMem': FieldValue.arrayRemove([Constants.myUserId])
     });
   }
 
@@ -1207,7 +1207,7 @@ class _ConversationScreenState extends State<ConversationScreen>
   void didChangeMetrics() {
     final bottomInset = WidgetsBinding.instance.window.viewInsets.bottom;
     DatabaseMethods().groupChatCollection.doc(widget.groupChatId).update({
-      "writingMem": bottomInset > 0.0
+      'writingMem': bottomInset > 0.0
           ? FieldValue.arrayUnion([Constants.myUserId])
           : FieldValue.arrayRemove([Constants.myUserId])
     });
@@ -1259,8 +1259,8 @@ class _ConversationScreenState extends State<ConversationScreen>
             bool disabled;
             List memList = [];
             if (snapshot.data.data() != null &&
-                (snapshot.data.data()["deleted"] == null ||
-                    !snapshot.data.data()["deleted"])) {
+                (snapshot.data.data()['deleted'] == null ||
+                    !snapshot.data.data()['deleted'])) {
               var groupSnapshot = snapshot.data;
               isMyChat =
                   groupSnapshot.data()['members'].contains(Constants.myUserId);
@@ -1394,26 +1394,26 @@ class _ConversationScreenState extends State<ConversationScreen>
                                   itemBuilder: (BuildContext context) => [
                                         PopupMenuItem(
                                             value: !widget.spectate
-                                                ? "Invite Friends"
-                                                : "Become a member",
+                                                ? 'Invite Friends'
+                                                : 'Become a member',
                                             child: Text(
                                               !widget.spectate
-                                                  ? "Invite friends"
-                                                  : "Become a member",
+                                                  ? 'Invite friends'
+                                                  : 'Become a member',
                                             )),
                                         PopupMenuItem(
                                             value: !widget.spectate
-                                                ? "Leave $hashTag"
-                                                : "Quit spectating",
+                                                ? 'Leave $hashTag'
+                                                : 'Quit spectating',
                                             child: Text(
                                                 !widget.spectate
-                                                    ? "Leave $hashTag"
-                                                    : "Quit spectating",
+                                                    ? 'Leave $hashTag'
+                                                    : 'Quit spectating',
                                                 style: const TextStyle(
                                                     color: Colors.red))),
                                       ],
                                   onSelected: (value) {
-                                    if (value == "Invite Friends") {
+                                    if (value == 'Invite Friends') {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
@@ -1428,11 +1428,11 @@ class _ConversationScreenState extends State<ConversationScreen>
                                                       waitList,
                                                       invites,
                                                       bannedUsers)));
-                                    } else if (value == "Leave $hashTag") {
+                                    } else if (value == 'Leave $hashTag') {
                                       leaveGroupChat();
-                                    } else if (value == "Become a member") {
+                                    } else if (value == 'Become a member') {
                                       tryJoining();
-                                    } else if (value == "Quit spectating") {
+                                    } else if (value == 'Quit spectating') {
                                       quitSpectating();
                                     }
                                   })
@@ -1465,7 +1465,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                                     avatarSize: 14),
                               ),
                               TextSpan(
-                                text: "$hashTag ",
+                                text: '$hashTag ',
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -1475,7 +1475,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                               hashTag.isNotEmpty && anon != null && anon
                                   ? WidgetSpan(
                                       child: Image.asset(
-                                          "assets/icon/icons8-anonymous-mask-50.png",
+                                          'assets/icon/icons8-anonymous-mask-50.png',
                                           scale: 3.0),
                                     )
                                   : const TextSpan(),
@@ -1491,7 +1491,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                               ),
                             ),
                             TextSpan(
-                              text: "Expired",
+                              text: 'Expired',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.grey,

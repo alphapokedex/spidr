@@ -1,5 +1,4 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:spidr_app/decorations/widgetDecorations.dart';
 import 'package:spidr_app/helper/constants.dart';
@@ -8,7 +7,7 @@ import 'package:spidr_app/services/database.dart';
 import 'package:spidr_app/views/docViewScreen.dart';
 import 'package:spidr_app/views/mediaViewScreen.dart';
 import 'package:spidr_app/widgets/mediaInfoWidgets.dart';
-import "package:spidr_app/widgets/widget.dart";
+import 'package:spidr_app/widgets/widget.dart';
 
 Widget mediaFuncColumn(
     BuildContext context,
@@ -22,9 +21,9 @@ Widget mediaFuncColumn(
     bool isMember,
     String hashTag) {
   Map imgObj =
-      mediaObj != null && mediaObj["imgName"] != null ? mediaObj : null;
+      mediaObj != null && mediaObj['imgName'] != null ? mediaObj : null;
   Map fileObj =
-      mediaObj != null && mediaObj["fileName"] != null ? mediaObj : null;
+      mediaObj != null && mediaObj['fileName'] != null ? mediaObj : null;
 
   return Container(
     width: MediaQuery.of(context).size.width * 0.15,
@@ -80,7 +79,7 @@ Widget exploreMedia({
       builder: (context, snapshot) {
         bool removed = false;
         if (snapshot.hasData && snapshot.data.data() != null) {
-          List notVisibleTo = snapshot.data.data()["notVisibleTo"] ?? [];
+          List notVisibleTo = snapshot.data.data()['notVisibleTo'] ?? [];
           removed = notVisibleTo.contains(Constants.myUserId);
         }
         return !removed
@@ -91,8 +90,8 @@ Widget exploreMedia({
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                mediaObj["fileName"] == null ||
-                                        !pdfChecker(mediaObj["fileName"])
+                                mediaObj['fileName'] == null ||
+                                        !pdfChecker(mediaObj['fileName'])
                                     ? MediaViewScreen(
                                         mediaObj: mediaObj,
                                         senderId: userId,
@@ -101,7 +100,7 @@ Widget exploreMedia({
                                       )
                                     : DocViewScreen(
                                         fileUrl: mediaObj['fileUrl'],
-                                        fileName: mediaObj["fileName"])));
+                                        fileName: mediaObj['fileName'])));
                   }
                 },
                 child: Container(
@@ -114,10 +113,10 @@ Widget exploreMedia({
                                 child: mediaAndFilePreview(
                                 senderId: userId,
                                 context: context,
-                                imgObj: mediaObj["imgName"] != null
+                                imgObj: mediaObj['imgName'] != null
                                     ? mediaObj
                                     : null,
-                                fileObj: mediaObj["fileName"] != null
+                                fileObj: mediaObj['fileName'] != null
                                     ? mediaObj
                                     : null,
                                 muteBttAlign: Alignment.topRight,
@@ -212,7 +211,7 @@ Widget exploreMedia({
                               : Column(
                                   children: [
                                     const Icon(Icons.timer, color: Colors.grey),
-                                    borderedText("Expired", Colors.grey),
+                                    borderedText('Expired', Colors.grey),
                                   ],
                                 ),
                         )
@@ -224,7 +223,7 @@ Widget exploreMedia({
             : Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Media has been removed",
+                  const Text('Media has been removed',
                       style: TextStyle(color: Colors.grey)),
                   const SizedBox(
                     height: 10,
@@ -235,7 +234,7 @@ Widget exploreMedia({
                             .undoRemoveMedia(mediaId);
                       },
                       child: const Text(
-                        "UNDO",
+                        'UNDO',
                         style: TextStyle(color: Colors.blue),
                       ))
                 ],

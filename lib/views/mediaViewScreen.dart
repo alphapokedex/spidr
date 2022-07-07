@@ -134,7 +134,7 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
     bool success = await DownloadMethods.openDownloadedFile(taskId);
     if (!success) {
       Fluttertoast.showToast(
-          msg: "Sorry, please try again",
+          msg: 'Sorry, please try again',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.SNACKBAR,
           timeInSecForIosWeb: 3,
@@ -290,7 +290,7 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
   Widget storyInfoPanel() {
     List tags = widget.mediaGallery != null
         ? widget.mediaGallery[0]['tags']
-        : widget.mediaObj["tags"];
+        : widget.mediaObj['tags'];
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.45,
       width: MediaQuery.of(context).size.width,
@@ -370,7 +370,7 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
         context,
         targets: targets,
         colorShadow: Colors.red,
-        textSkip: "SKIP",
+        textSkip: 'SKIP',
         paddingFocus: 10,
         opacityShadow: 0.8,
         onFinish: () {
@@ -388,7 +388,7 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
   void initTargets() {
     targets.add(
       TargetFocus(
-        identify: "Share",
+        identify: 'Share',
         keyTarget: key1,
         color: Colors.deepOrangeAccent,
         contents: [
@@ -398,7 +398,7 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Text(
-                  "Snippet Share !",
+                  'Snippet Share !',
                   style: GoogleFonts.varelaRound(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -407,7 +407,7 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: Text(
-                    "Share this snippet with other users or circles ",
+                    'Share this snippet with other users or circles ',
                     style: GoogleFonts.varelaRound(
                       color: Colors.white,
                     ),
@@ -423,7 +423,7 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
     );
 
     targets.add(TargetFocus(
-      identify: "Comment",
+      identify: 'Comment',
       keyTarget: key2,
       color: Colors.orange,
       contents: [
@@ -435,7 +435,7 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20.0),
                   child: Text(
-                    "Comment",
+                    'Comment',
                     style: GoogleFonts.varelaRound(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -443,7 +443,7 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
                   ),
                 ),
                 Text(
-                  "Comment on the Snippet!",
+                  'Comment on the Snippet!',
                   style: GoogleFonts.varelaRound(
                     color: Colors.white,
                   ),
@@ -454,7 +454,7 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
       shape: ShapeLightFocus.Circle,
     ));
     targets.add(TargetFocus(
-      identify: "Options",
+      identify: 'Options',
       keyTarget: key3,
       color: Colors.orange,
       contents: [
@@ -466,7 +466,7 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10.0),
                   child: Text(
-                    "Options",
+                    'Options',
                     style: GoogleFonts.varelaRound(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -474,7 +474,7 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
                   ),
                 ),
                 Text(
-                  "Tap this to share this Snippet outside of Spidr, or block/report the user of the Snippet",
+                  'Tap this to share this Snippet outside of Spidr, or block/report the user of the Snippet',
                   style: GoogleFonts.varelaRound(
                     color: Colors.white,
                   ),
@@ -486,7 +486,7 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
     ));
     targets.add(
       TargetFocus(
-        identify: "Save Media",
+        identify: 'Save Media',
         keyTarget: key4,
         color: Colors.orange,
         contents: [
@@ -496,7 +496,7 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Text(
-                  "Save Media",
+                  'Save Media',
                   style: GoogleFonts.varelaRound(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -505,7 +505,7 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: Text(
-                    "Save this to your backpack. Your backpack can be found in your profile page ",
+                    'Save this to your backpack. Your backpack can be found in your profile page ',
                     style: GoogleFonts.varelaRound(
                       color: Colors.white,
                     ),
@@ -521,7 +521,7 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
     );
     targets.add(
       TargetFocus(
-        identify: "Circle Limit",
+        identify: 'Circle Limit',
         keyTarget: key5,
         color: Colors.orange,
         contents: [
@@ -531,7 +531,7 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Text(
-                  "Circle Limit",
+                  'Circle Limit',
                   style: GoogleFonts.varelaRound(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -540,7 +540,7 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: Text(
-                    "Choose how many users can join your Circle ",
+                    'Choose how many users can join your Circle ',
                     style: GoogleFonts.varelaRound(
                       color: Colors.white,
                     ),
@@ -611,16 +611,16 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
     }
 
     bool video = widget.mediaObj != null &&
-        widget.mediaObj["imgName"] != null &&
-        videoChecker(widget.mediaObj["imgName"]);
+        widget.mediaObj['imgName'] != null &&
+        videoChecker(widget.mediaObj['imgName']);
 
     bool mature = widget.mediaObj != null &&
         widget.mediaObj['mature'] != null &&
         widget.mediaObj['mature'];
 
     String fileName =
-        widget.mediaObj != null && widget.mediaObj["fileName"] != null
-            ? widget.mediaObj["fileName"]
+        widget.mediaObj != null && widget.mediaObj['fileName'] != null
+            ? widget.mediaObj['fileName']
             : null;
 
     String audioName =
@@ -718,13 +718,13 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
                       builder: (context, snapshot) {
                         if (snapshot.hasData && snapshot.data.data() != null) {
                           var val = snapshot.data;
-                          int imgIndex = val.data()["anonImg"];
-                          sendBy = val.data()["name"];
-                          profileImg = val.data()["profileImg"];
+                          int imgIndex = val.data()['anonImg'];
+                          sendBy = val.data()['name'];
+                          profileImg = val.data()['profileImg'];
                           anonImg = userMIYUs[imgIndex];
-                          blocked = val.data()["blockedBy"] != null &&
+                          blocked = val.data()['blockedBy'] != null &&
                               val
-                                  .data()["blockedBy"]
+                                  .data()['blockedBy']
                                   .contains(Constants.myUserId);
                           return widget.story != null && widget.story
                               ? storyInfoPanel()
@@ -795,11 +795,11 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
                           context,
                           widget.senderId,
                           widget.mediaObj != null &&
-                                  widget.mediaObj["imgName"] != null
+                                  widget.mediaObj['imgName'] != null
                               ? widget.mediaObj
                               : null,
                           widget.mediaObj != null &&
-                                  widget.mediaObj["fileName"] != null
+                                  widget.mediaObj['fileName'] != null
                               ? widget.mediaObj
                               : null,
                           widget.mediaId,
@@ -821,11 +821,11 @@ class _MediaViewScreenState extends State<MediaViewScreen> {
                       : moreOpsMediaBtt(
                           context: context,
                           imgObj: widget.mediaObj != null &&
-                                  widget.mediaObj["imgName"] != null
+                                  widget.mediaObj['imgName'] != null
                               ? widget.mediaObj
                               : null,
                           fileObj: widget.mediaObj != null &&
-                                  widget.mediaObj["fileName"] != null
+                                  widget.mediaObj['fileName'] != null
                               ? widget.mediaObj
                               : null,
                           mediaGallery: widget.mediaGallery,
@@ -885,7 +885,7 @@ class _MediaDisplayState extends State<MediaDisplay> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
-                "assets/icon/nsfwIcon.png",
+                'assets/icon/nsfwIcon.png',
                 scale: 2.5,
               ),
               TextButton(
@@ -910,7 +910,7 @@ class _MediaDisplayState extends State<MediaDisplay> {
                 endIndent: MediaQuery.of(context).size.width * 0.25,
               ),
               const Text(
-                "The media you are about to view contains sensitive content that might be offensive or disturbing",
+                'The media you are about to view contains sensitive content that might be offensive or disturbing',
                 style: TextStyle(
                   color: Colors.white,
                 ),

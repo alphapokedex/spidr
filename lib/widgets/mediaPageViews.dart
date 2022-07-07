@@ -1,7 +1,6 @@
 import 'dart:collection';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:spidr_app/helper/constants.dart';
 import 'package:spidr_app/services/database.dart';
@@ -16,7 +15,7 @@ class GroupChatMediaPageView extends StatefulWidget {
   final String messageId;
   final int mediaIndex;
 
-  GroupChatMediaPageView(
+  const GroupChatMediaPageView(
       {this.groupId, this.hashTag, this.anon, this.messageId, this.mediaIndex});
   @override
   _GroupChatMediaPageViewState createState() => _GroupChatMediaPageViewState();
@@ -32,15 +31,15 @@ class _GroupChatMediaPageViewState extends State<GroupChatMediaPageView> {
   pageViewSetUp() async {
     mediaQS = await DatabaseMethods().getGroupFeed(widget.groupId);
     int index = 0;
-    mediaQS.docs.forEach((DocumentSnapshot mediaDS) {
-      if (!Constants.myBlockList.contains(mediaDS.get("userId"))) {
-        mediaMap[mediaDS.id] = {"index": index, "data": mediaDS.data()};
+    for (var mediaDS in mediaQS.docs) {
+      if (!Constants.myBlockList.contains(mediaDS.get('userId'))) {
+        mediaMap[mediaDS.id] = {'index': index, 'data': mediaDS.data()};
         index++;
       }
-    });
+    }
 
     pageController =
-        new PageController(initialPage: mediaMap[widget.messageId]["index"]);
+        PageController(initialPage: mediaMap[widget.messageId]['index']);
     setState(() {});
 
     // DocumentReference groupDocRef = DatabaseMethods().groupChatCollection.doc(widget.groupId);
@@ -73,7 +72,7 @@ class _GroupChatMediaPageViewState extends State<GroupChatMediaPageView> {
           backgroundColor: Colors.white,
           elevation: 0.0,
         ),
-        body: mediaMap.length > 0
+        body: mediaMap.isNotEmpty
             ? PageView.builder(
                 reverse: true,
                 itemCount: mediaMap.length,
@@ -81,14 +80,14 @@ class _GroupChatMediaPageViewState extends State<GroupChatMediaPageView> {
                 controller: pageController,
                 itemBuilder: (context, index) {
                   var mediaData =
-                      mediaMap[mediaMap.keys.elementAt(index)]["data"];
+                      mediaMap[mediaMap.keys.elementAt(index)]['data'];
 
                   String messageId = mediaMap.keys.elementAt(index);
-                  Map imgObj = mediaData["imgObj"];
-                  Map fileObj = mediaData["fileObj"];
-                  List mediaGallery = mediaData["mediaGallery"];
-                  String senderId = mediaData["userId"];
-                  int sendTime = mediaData["time"];
+                  Map imgObj = mediaData['imgObj'];
+                  Map fileObj = mediaData['fileObj'];
+                  List mediaGallery = mediaData['mediaGallery'];
+                  String senderId = mediaData['userId'];
+                  int sendTime = mediaData['time'];
 
                   // String messageId = snapshot.data.docs[index].id;
                   // Map imgObj = snapshot.data.docs[index].data()["imgObj"];
@@ -206,22 +205,22 @@ class StoryPageView extends StatelessWidget {
   final int startIndex;
   final AsyncSnapshot snapshot;
   final int mediaIndex;
-  StoryPageView(this.startIndex, this.snapshot, this.mediaIndex);
+  const StoryPageView(this.startIndex, this.snapshot, this.mediaIndex);
 
   @override
   Widget build(BuildContext context) {
-    PageController pageController = new PageController(initialPage: startIndex);
+    PageController pageController = PageController(initialPage: startIndex);
     return PageView.builder(
         itemCount: snapshot.data.docs.length,
         scrollDirection: Axis.vertical,
         controller: pageController,
         itemBuilder: (context, index) {
           String storyId = snapshot.data.docs[index].id;
-          String senderId = snapshot.data.docs[index].data()["senderId"];
-          Map mediaObj = snapshot.data.docs[index].data()["mediaObj"];
-          List mediaGallery = snapshot.data.docs[index].data()["mediaGallery"];
-          bool anon = snapshot.data.docs[index].data()["anon"];
-          String groupId = snapshot.data.docs[index].data()["groupId"];
+          String senderId = snapshot.data.docs[index].data()['senderId'];
+          Map mediaObj = snapshot.data.docs[index].data()['mediaObj'];
+          List mediaGallery = snapshot.data.docs[index].data()['mediaGallery'];
+          bool anon = snapshot.data.docs[index].data()['anon'];
+          String groupId = snapshot.data.docs[index].data()['groupId'];
 
           return MediaViewScreen(
             senderId: senderId,

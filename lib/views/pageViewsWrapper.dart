@@ -37,26 +37,26 @@ class _PageViewsWrapperState extends State<PageViewsWrapper> {
         DatabaseMethods().userCollection.doc(Constants.myUserId);
     DocumentSnapshot userSnapshot = await userDocRef.get();
     bool getStarted = userSnapshot.data().toString().contains('getStarted')
-        ? userSnapshot.get("getStarted") != null &&
-            userSnapshot.get("getStarted")
+        ? userSnapshot.get('getStarted') != null &&
+            userSnapshot.get('getStarted')
         : true;
 
     try {
-      getStarted = userSnapshot.get("getStarted") != null &&
-          userSnapshot.get("getStarted");
+      getStarted = userSnapshot.get('getStarted') != null &&
+          userSnapshot.get('getStarted');
     } on StateError {
-      userDocRef.update({"getStarted": true});
+      userDocRef.update({'getStarted': true});
       getStarted = true;
     }
 
     if (getStarted) await showGetStartedDialog(context);
 
-    if (Constants.myName == null || Constants.myName == "null null") {
+    if (Constants.myName == null || Constants.myName == 'null null') {
       String name = userSnapshot.data().toString().contains('name')
-          ? userSnapshot.get("name")
+          ? userSnapshot.get('name')
           : null;
-      if (name == null || name == "null null") {
-        if (name == "null null") spidrIdTextEditingController.text = name;
+      if (name == null || name == 'null null') {
+        if (name == 'null null') spidrIdTextEditingController.text = name;
         await showSpidrIdBoxDialog(
             context, userDocRef, spidrIdKey, spidrIdTextEditingController);
       } else {
@@ -69,7 +69,7 @@ class _PageViewsWrapperState extends State<PageViewsWrapper> {
     Constants.myEmail = user.email;
     Constants.myQuote = userSnapshot.get('quote');
     Constants.myBlockList = userSnapshot.data().toString().contains('blockList')
-        ? userSnapshot.get("blockList")
+        ? userSnapshot.get('blockList')
         : [];
     // Constants.myRemovedMedia = userSnapshot.data()['removedMedia'] != null ? userSnapshot.data()['removedMedia'] : [];
 
@@ -102,67 +102,67 @@ class _PageViewsWrapperState extends State<PageViewsWrapper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        body: ready
-            ? PageView(
-                controller: pageController,
-                physics: const NeverScrollableScrollPhysics(),
-                onPageChanged: pageChanged,
-                children: [
-                  const ChatsScreen(),
-                  StreamScreen(),
-                  CircleMediaScreen(),
-                  const MyProfileScreen(),
-                ],
-              )
-            : sectionLoadingIndicator(),
-        bottomNavigationBar: BottomAppBar(
-            color: Colors.black,
-            elevation: 0.0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
+      backgroundColor: Colors.white,
+      body: ready
+          ? PageView(
+              controller: pageController,
+              physics: const NeverScrollableScrollPhysics(),
+              onPageChanged: pageChanged,
               children: [
-                bottomAppBarItem(
-                    _selectedIndex == 0
-                        ? navBarIconsFilled[0][1]
-                        : navBarIconsFilled[0][0],
-                    0,
-                    false,
-                    null),
-                bottomAppBarItem(
-                    _selectedIndex == 1
-                        ? navBarIconsFilled[1][1]
-                        : navBarIconsFilled[1][0],
-                    1,
-                    false,
-                    null),
-                bottomAppBarItem(
-                    _selectedIndex == 2
-                        ? navBarIconsFilled[2][1]
-                        : navBarIconsFilled[2][0],
-                    2,
-                    false,
-                    null),
-                bottomAppBarItem(
-                  null,
-                  3,
-                  true,
-                  Constants.myProfileImg != null
-                      ? Padding(
-                          padding: const EdgeInsets.only(top: 7.5),
-                          child: CircleAvatar(
-                            radius: 30,
-                            backgroundImage:
-                                Constants.myProfileImg.startsWith('assets', 0)
-                                    ? AssetImage(Constants.myProfileImg)
-                                    : NetworkImage(Constants.myProfileImg),
-                          ),
-                        )
-                      : const Icon(Icons.person),
-                )
+                const ChatsScreen(),
+                StreamScreen(),
+                CircleMediaScreen(),
+                const MyProfileScreen(),
               ],
-            )));
+            )
+          : sectionLoadingIndicator(),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.black,
+        elevation: 0.0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            bottomAppBarItem(
+              null,
+              0,
+              true,
+              Icon(
+                Icons.forum_rounded,
+                color: _selectedIndex == 0 ? Colors.white : Colors.grey,
+              ),
+            ),
+            bottomAppBarItem(
+              null,
+              1,
+              true,
+              Icon(
+                Icons.group,
+                color: _selectedIndex == 1 ? Colors.white : Colors.grey,
+              ),
+            ),
+            bottomAppBarItem(
+              null,
+              2,
+              true,
+              Icon(
+                Icons.search,
+                color: _selectedIndex == 2 ? Colors.white : Colors.grey,
+              ),
+            ),
+            bottomAppBarItem(
+              null,
+              3,
+              true,
+              Icon(
+                Icons.explore,
+                color: _selectedIndex == 3 ? Colors.white : Colors.grey,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 
   Widget bottomAppBarItem(

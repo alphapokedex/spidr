@@ -10,10 +10,10 @@ class AlgoliaMethods {
     apiKey: AlgoliaConst.API_SEARCH_KEY,
   );
   static final AlgoliaIndexReference groupChats =
-      algolia.instance.index("groupChats");
-  static final AlgoliaIndexReference users = algolia.instance.index("users");
+      algolia.instance.index('groupChats');
+  static final AlgoliaIndexReference users = algolia.instance.index('users');
   static final AlgoliaIndexReference mediaItems =
-      algolia.instance.index("mediaItems");
+      algolia.instance.index('mediaItems');
 
   static final random = Random();
 
@@ -24,28 +24,28 @@ class AlgoliaMethods {
   static searchGroupChats(String searchText) {
     return Stream.fromFuture(groupChats
         .query(searchText)
-        .filters("NOT chatRoomState:invisible AND NOT deleted:true")
+        .filters('NOT chatRoomState:invisible AND NOT deleted:true')
         .getObjects());
   }
 
   static getMedia(String searchText) {
     return Stream.fromFuture(mediaItems
         .query(searchText)
-        .filters("media:true AND NOT notVisibleTo:${Constants.myUserId}")
+        .filters('media:true AND NOT notVisibleTo:${Constants.myUserId}')
         .getObjects());
   }
 
   static getMediaAud(String searchText) {
     return Stream.fromFuture(mediaItems
         .query(searchText)
-        .filters("audio:true AND NOT notVisibleTo:${Constants.myUserId}")
+        .filters('audio:true AND NOT notVisibleTo:${Constants.myUserId}')
         .getObjects());
   }
 
   static getMediaPDF(String searchText) {
     return Stream.fromFuture(mediaItems
         .query(searchText)
-        .filters("pdf:true AND NOT notVisibleTo:${Constants.myUserId}")
+        .filters('pdf:true AND NOT notVisibleTo:${Constants.myUserId}')
         .getObjects());
   }
 
@@ -70,7 +70,7 @@ class AlgoliaMethods {
   static Future<List<String>> getSugTags(List hotTags, int max) async {
     Set<String> groupTags = {};
     AlgoliaQuerySnapshot result = await groupChats
-        .filters("NOT chatRoomState:invisible AND NOT deleted:true")
+        .filters('NOT chatRoomState:invisible AND NOT deleted:true')
         .getObjects();
     int resLength = result.hits.length;
     List resIndices = [for (int i = 0; i < resLength; i++) i];
@@ -81,7 +81,7 @@ class AlgoliaMethods {
         int randIndex = random.nextInt(resIndices.length);
 
         AlgoliaObjectSnapshot groupAS = result.hits[resIndices[randIndex]];
-        List tags = groupAS.data["tags"];
+        List tags = groupAS.data['tags'];
 
         if (tags != null && tags.isNotEmpty) {
           int randTag = random.nextInt(tags.length);
@@ -108,8 +108,8 @@ class AlgoliaMethods {
 
   static getStreamGroups(String searchText, bool oneDay) {
     String filter = !oneDay
-        ? "NOT chatRoomState:invisible AND NOT deleted:true"
-        : "oneDay:true AND NOT chatRoomState:invisible AND NOT deleted:true";
+        ? 'NOT chatRoomState:invisible AND NOT deleted:true'
+        : 'oneDay:true AND NOT chatRoomState:invisible AND NOT deleted:true';
 
     return Stream.fromFuture(
         groupChats.query(searchText).filters(filter).getObjects());
@@ -118,7 +118,7 @@ class AlgoliaMethods {
   static getSuggestedGroups(List tags) async {
     const int max = 9;
     final String filter =
-        "NOT chatRoomState:invisible AND NOT deleted:true AND NOT members:${Constants.myUserId}";
+        'NOT chatRoomState:invisible AND NOT deleted:true AND NOT members:${Constants.myUserId}';
     Set<AlgoliaObjectSnapshot> sugGroups = {};
     AlgoliaQuerySnapshot allGroups =
         await groupChats.filters(filter).getObjects();
@@ -130,7 +130,7 @@ class AlgoliaMethods {
 
     if (tags.isNotEmpty) {
       matchGroups =
-          await groupChats.query(tags.join(" ")).filters(filter).getObjects();
+          await groupChats.query(tags.join(' ')).filters(filter).getObjects();
       if (matchGroups.hits.isNotEmpty) {
         int matchRange = matchGroups.hits.length < (range / 2).ceil()
             ? matchGroups.hits.length
@@ -138,7 +138,7 @@ class AlgoliaMethods {
         for (int i = 0; i < matchRange; i++) {
           randIndex = random.nextInt(matchGroups.hits.length);
           sugGroups.add(matchGroups.hits[randIndex]);
-          matchTags.add(matchGroups.hits[randIndex].data["hashTag"]);
+          matchTags.add(matchGroups.hits[randIndex].data['hashTag']);
         }
       }
     }
@@ -147,7 +147,7 @@ class AlgoliaMethods {
       int numOfLeft = range - sugGroups.length;
       for (int i = 0; i < numOfLeft; i++) {
         randIndex = random.nextInt(allGroups.hits.length);
-        if (!matchTags.contains(allGroups.hits[randIndex].data["hashTag"])) {
+        if (!matchTags.contains(allGroups.hits[randIndex].data['hashTag'])) {
           sugGroups.add(allGroups.hits[randIndex]);
         }
       }
@@ -162,7 +162,7 @@ class AlgoliaMethods {
     Set<AlgoliaObjectSnapshot> sugUsers = {};
 
     AlgoliaQuerySnapshot matchUsers =
-        await users.query(tags.join(" ")).getObjects();
+        await users.query(tags.join(' ')).getObjects();
     List muIndices = [for (int i = 0; i < matchUsers.hits.length; i++) i];
     List matchUserIds = [];
     int range = matchUsers.hits.length < max ? matchUsers.hits.length : max;

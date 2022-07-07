@@ -147,7 +147,7 @@ class AuthMethods {
   Map<String, dynamic> genUserInfo(name, email) {
     Random random = Random();
     int randNum = random.nextInt(33);
-    String imgPath = "assets/images/userPic/SpidrProfImg.png";
+    String imgPath = 'assets/images/userPic/SpidrProfImg.png';
 
     Map<String, dynamic> userInfoMap = {
       'name': name,

@@ -90,9 +90,9 @@ class _SignUpState extends State<SignUp> {
                               TextFormField(
                                 validator: (val) {
                                   return val.length > 18
-                                      ? "Max length 18"
+                                      ? 'Max length 18'
                                       : emptyStrChecker(val)
-                                          ? "Sorry, Spidr ID can not be empty"
+                                          ? 'Sorry, Spidr ID can not be empty'
                                           : null;
                                 },
                                 controller: userNameTextEditingController,
@@ -102,9 +102,9 @@ class _SignUpState extends State<SignUp> {
                                   prefixIcon: Icon(
                                       Icons.alternate_email_rounded,
                                       color: Colors.white),
-                                  hintText: "Enter a Username",
+                                  hintText: 'Enter a Username',
                                   hintStyle: TextStyle(color: Colors.white),
-                                  labelText: "Spidr ID",
+                                  labelText: 'Spidr ID',
                                   labelStyle: TextStyle(color: Colors.orange),
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide:
@@ -126,7 +126,7 @@ class _SignUpState extends State<SignUp> {
                                               r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                           .hasMatch(val)
                                       ? null
-                                      : "Please provide a valid email";
+                                      : 'Please provide a valid email';
                                 },
                                 controller: emailTextEditingController,
                                 style: const TextStyle(color: Colors.white),
@@ -134,9 +134,9 @@ class _SignUpState extends State<SignUp> {
                                 decoration: const InputDecoration(
                                   prefixIcon:
                                       Icon(Icons.email, color: Colors.grey),
-                                  hintText: "Enter an email",
+                                  hintText: 'Enter an email',
                                   hintStyle: TextStyle(color: Colors.white),
-                                  labelText: "Email",
+                                  labelText: 'Email',
                                   labelStyle: TextStyle(color: Colors.orange),
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide:
@@ -157,7 +157,7 @@ class _SignUpState extends State<SignUp> {
                                 validator: (val) {
                                   return val.length > 6
                                       ? null
-                                      : "Password is not valid";
+                                      : 'Password is not valid';
                                 },
                                 controller: passwordTextEditingController,
                                 style: const TextStyle(color: Colors.white),
@@ -165,9 +165,9 @@ class _SignUpState extends State<SignUp> {
                                 decoration: const InputDecoration(
                                   prefixIcon:
                                       Icon(Icons.lock, color: Colors.grey),
-                                  hintText: "Enter a Password",
+                                  hintText: 'Enter a Password',
                                   hintStyle: TextStyle(color: Colors.white),
-                                  labelText: "Password",
+                                  labelText: 'Password',
                                   labelStyle: TextStyle(color: Colors.orange),
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide:
@@ -214,8 +214,8 @@ class _SignUpState extends State<SignUp> {
                                   },
                                   child: Text(
                                     _checkbox
-                                        ? "You have agreed to our EULA Agreement"
-                                        : "Review our EULA Agreement",
+                                        ? 'You have agreed to our EULA Agreement'
+                                        : 'Review our EULA Agreement',
                                     style: const TextStyle(
                                         color: Colors.orange,
                                         fontSize: 14,
@@ -247,7 +247,7 @@ class _SignUpState extends State<SignUp> {
                                     color: Colors.grey,
                                     borderRadius: BorderRadius.circular(30)),
                             child: const Text(
-                              "Join",
+                              'Join',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
@@ -259,7 +259,7 @@ class _SignUpState extends State<SignUp> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Text(
-                              "Already have an account?",
+                              'Already have an account?',
                               style: TextStyle(
                                   color: Colors.orange,
                                   fontWeight: FontWeight.bold,
@@ -273,7 +273,7 @@ class _SignUpState extends State<SignUp> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 25),
                                 child: const Text(
-                                  " Hop on now",
+                                  ' Hop on now',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 14,

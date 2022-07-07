@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -96,7 +95,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         context,
         targets: targets,
         colorShadow: Colors.red,
-        textSkip: "SKIP",
+        textSkip: 'SKIP',
         paddingFocus: 10,
         opacityShadow: 0.8,
         onFinish: () {
@@ -114,7 +113,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   void initTargets() {
     targets.add(
       TargetFocus(
-        identify: "Avatar Selector",
+        identify: 'Avatar Selector',
         keyTarget: key1,
         color: Colors.deepOrangeAccent,
         contents: [
@@ -125,7 +124,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    "Select an Avatar !",
+                    'Select an Avatar !',
                     style: GoogleFonts.varelaRound(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -134,7 +133,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: Text(
-                      "Represent yourself in Anonymous Circles with a MIYU avatar ",
+                      'Represent yourself in Anonymous Circles with a MIYU avatar ',
                       style: GoogleFonts.varelaRound(
                         color: Colors.white,
                       ),
@@ -150,7 +149,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     );
 
     targets.add(TargetFocus(
-      identify: "Avatar Picture",
+      identify: 'Avatar Picture',
       keyTarget: key2,
       color: Colors.orange,
       contents: [
@@ -163,7 +162,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
                     child: Text(
-                      "Profile Picture",
+                      'Profile Picture',
                       style: GoogleFonts.varelaRound(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -171,7 +170,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     ),
                   ),
                   Text(
-                    "Your profile picture. View and change it here!",
+                    'Your profile picture. View and change it here!',
                     style: GoogleFonts.varelaRound(
                       color: Colors.white,
                     ),
@@ -183,7 +182,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       shape: ShapeLightFocus.Circle,
     ));
     targets.add(TargetFocus(
-      identify: "About Me",
+      identify: 'About Me',
       keyTarget: key3,
       color: Colors.orange,
       contents: [
@@ -196,7 +195,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10.0),
                     child: Text(
-                      "About Me",
+                      'About Me',
                       style: GoogleFonts.varelaRound(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -204,7 +203,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     ),
                   ),
                   Text(
-                    "Describe yourself so users on Spidr can start to get to know you!",
+                    'Describe yourself so users on Spidr can start to get to know you!',
                     style: GoogleFonts.varelaRound(
                       color: Colors.white,
                     ),
@@ -216,7 +215,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       shape: ShapeLightFocus.RRect,
     ));
     targets.add(TargetFocus(
-      identify: "Hashtag",
+      identify: 'Hashtag',
       keyTarget: key4,
       color: Colors.orange,
       contents: [
@@ -229,7 +228,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10.0),
                     child: Text(
-                      "Hashtags",
+                      'Hashtags',
                       style: GoogleFonts.varelaRound(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -237,7 +236,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     ),
                   ),
                   Text(
-                    "Add hashtags to your profile to see Circles and Snippets relevant to you",
+                    'Add hashtags to your profile to see Circles and Snippets relevant to you',
                     style: GoogleFonts.varelaRound(
                       color: Colors.white,
                     ),
@@ -250,7 +249,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     ));
     targets.add(
       TargetFocus(
-        identify: "Groupchat List",
+        identify: 'Groupchat List',
         keyTarget: key5,
         color: Colors.orange,
         contents: [
@@ -261,7 +260,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    "Circle List",
+                    'Circle List',
                     style: GoogleFonts.varelaRound(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -270,7 +269,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: Text(
-                      "This is where the Circles you have joined will appear ",
+                      'This is where the Circles you have joined will appear ',
                       style: GoogleFonts.varelaRound(
                         color: Colors.white,
                       ),
@@ -471,12 +470,12 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasData && snapshot.data.data() != null) {
-              String quote = snapshot.data.data()["quote"];
-              String profileImg = snapshot.data.data()["profileImg"];
-              int imgIndex = snapshot.data.data()["anonImg"];
+              String quote = snapshot.data.data()['quote'];
+              String profileImg = snapshot.data.data()['profileImg'];
+              int imgIndex = snapshot.data.data()['anonImg'];
               String anonImg = imgIndex != null ? userMIYUs[imgIndex] : null;
-              List tags = snapshot.data.data()["tags"];
-              List banner = snapshot.data.data()["banner"];
+              List tags = snapshot.data.data()['tags'];
+              List banner = snapshot.data.data()['banner'];
 
               if (anonImg == null) {
                 DatabaseMethods(uid: Constants.myUserId).setUpAnonImg();
@@ -534,7 +533,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                             .scaffoldBackgroundColor,
                                         child: Center(
                                           child: Text(
-                                            "Add Photos :)",
+                                            'Add Photos :)',
                                             textAlign: TextAlign.center,
                                             style: GoogleFonts.varelaRound(
                                               color: Colors.orange,
@@ -580,7 +579,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                                           profileImg:
                                                               profileImg)
                                                       .pickAndUploadMedia(
-                                                          "USER_PROFILE_IMG",
+                                                          'USER_PROFILE_IMG',
                                                           false);
                                               setState(() {
                                                 uploading = false;
@@ -650,7 +649,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                           Positioned(
                                             top: 54,
                                             child: Image.asset(
-                                                "assets/icon/icons8-anonymous-mask-50.png",
+                                                'assets/icon/icons8-anonymous-mask-50.png',
                                                 scale: 2.5),
                                           )
                                         ],
@@ -684,15 +683,15 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                   onTap: () {
                                     showTextBoxDialog(
                                         context: context,
-                                        text: "About Me",
+                                        text: 'About Me',
                                         textEditingController: quoteController,
                                         errorText:
-                                            "Sorry, this can not be empty",
+                                            'Sorry, this can not be empty',
                                         editQuote: editAboutMe,
                                         formKey: formKey);
                                   },
                                   child: infoEditBtt(
-                                      context: context, text: "About Me"),
+                                      context: context, text: 'About Me'),
                                 )
                               : Container(
                                   padding: const EdgeInsets.symmetric(
@@ -711,11 +710,11 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                             onTap: () {
                                               showTextBoxDialog(
                                                   context: context,
-                                                  text: "About Me",
+                                                  text: 'About Me',
                                                   textEditingController:
                                                       quoteController,
                                                   errorText:
-                                                      "Sorry, about me can not be empty",
+                                                      'Sorry, about me can not be empty',
                                                   editQuote: editAboutMe,
                                                   formKey: formKey);
                                             },

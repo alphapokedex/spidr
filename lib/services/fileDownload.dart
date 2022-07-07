@@ -1,16 +1,16 @@
-import  'dart:io';
+import 'dart:io';
 
-import  'package:flutter/cupertino.dart';
-import  'package:flutter_downloader/flutter_downloader.dart';
-import  'package:path_provider/path_provider.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:path_provider/path_provider.dart';
 
-class DownloadMethods{
-  static prepareSaveDir(TargetPlatform platform) async{
+class DownloadMethods {
+  static prepareSaveDir(TargetPlatform platform) async {
     Directory extDir;
 
-    if(platform == TargetPlatform.android){
+    if (platform == TargetPlatform.android) {
       extDir = await getExternalStorageDirectory();
-    }else if(platform == TargetPlatform.iOS){
+    } else if (platform == TargetPlatform.iOS) {
       extDir = await getApplicationDocumentsDirectory();
     }
 
@@ -18,39 +18,37 @@ class DownloadMethods{
     final savedDir = Directory(localPath);
     bool hasExisted = await savedDir.exists();
 
-    if(!hasExisted){
+    if (!hasExisted) {
       savedDir.create();
     }
 
     return localPath;
   }
 
-  static startDownload(String fileName, String url, String savedDir)async{
+  static startDownload(String fileName, String url, String savedDir) async {
     String taskId = await FlutterDownloader.enqueue(
         url: url,
         savedDir: savedDir,
         showNotification: true,
         openFileFromNotification: true,
-        fileName: fileName
-    );
+        fileName: fileName);
     return taskId;
   }
 
   static cancelDownload(String taskId) async {
-    await FlutterDownloader.cancel(taskId:taskId);
+    await FlutterDownloader.cancel(taskId: taskId);
   }
 
-  static retryDownload(String taskId)async{
+  static retryDownload(String taskId) async {
     String newTaskId = await FlutterDownloader.retry(taskId: taskId);
     return newTaskId;
   }
 
-  static openDownloadedFile(String taskId){
-    if(taskId != null){
+  static openDownloadedFile(String taskId) {
+    if (taskId != null) {
       return FlutterDownloader.open(taskId: taskId);
-    }else{
+    } else {
       return Future.value(false);
     }
   }
-
 }

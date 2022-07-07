@@ -16,7 +16,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           backgroundColor: Colors.white,
           centerTitle: true,
           title: const Text(
-            "Forgot Password?",
+            'Forgot Password?',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
           elevation: 0),
@@ -52,8 +52,8 @@ class ForgotPasswordScreen extends StatelessWidget {
                     TextField(
                       controller: editController,
                       decoration: const InputDecoration(
-                        hintText: "Enter your Email",
-                        labelText: "Email",
+                        hintText: 'Enter your Email',
+                        labelText: 'Email',
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.orange),
                         ),
@@ -108,19 +108,19 @@ class ForgotPasswordScreen extends StatelessWidget {
         .then((value) {
       Fluttertoast.showToast(
           msg:
-              "Reset password link has been sent. Please check your email to change the password.");
+              'Reset password link has been sent. Please check your email to change the password.');
       Navigator.pop(context);
     }).catchError((onError) {
       if (onError.toString().contains(
-          "The email template corresponding to this action contains an invalid sender email or name.")) {
-        Fluttertoast.showToast(msg: "Email not found");
+          'The email template corresponding to this action contains an invalid sender email or name.')) {
+        Fluttertoast.showToast(msg: 'Email not found');
       } else if (onError
           .toString()
-          .contains("The email address is badly formatted.")) {
+          .contains('The email address is badly formatted.')) {
         //print(onError.toString());
-        Fluttertoast.showToast(msg: "Email badly formatted");
+        Fluttertoast.showToast(msg: 'Email badly formatted');
       } else {
-        Fluttertoast.showToast(msg: "Unknown error");
+        Fluttertoast.showToast(msg: 'Unknown error');
       }
     });
   }

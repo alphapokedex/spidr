@@ -104,7 +104,7 @@ class FileDisplay extends StatelessWidget {
               : fileName == null
                   ? Image.file(file, fit: BoxFit.cover)
                   : filePreview(
-                      context, "assets/images/docImage.png", fileName, false),
+                      context, 'assets/images/docImage.png', fileName, false),
         ),
         if (vidOrAud) audioName == null ? videoIcon() : const SizedBox.shrink(),
       ],
@@ -119,7 +119,7 @@ class UnknownFileDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return filePreview(
-        context, "assets/images/unknownFile.png", fileName, false);
+        context, 'assets/images/unknownFile.png', fileName, false);
   }
 }
 
@@ -203,7 +203,7 @@ class _MediaAndFileGalleryState extends State<MediaAndFileGallery> {
     //   Globals.nonSentPDF.length;
     // });
 
-    if (widget.type == "MEDIA") {
+    if (widget.type == 'MEDIA') {
       fetchMedia();
       widget.controller.addListener(() {
         if (widget.controller.position.pixels /
@@ -276,10 +276,10 @@ class _MediaAndFileGalleryState extends State<MediaAndFileGallery> {
 
   sendToChat(rdyFile) {
     DateTime now = DateTime.now();
-    if (widget.type == "MEDIA") {
+    if (widget.type == 'MEDIA') {
       List<Map> mediaList = conMediaList(rdyFile);
       fileUploadToChats(
-        file: mediaList.length == 1 ? File(mediaList[0]["imgPath"]) : null,
+        file: mediaList.length == 1 ? File(mediaList[0]['imgPath']) : null,
         personalChatId: widget.personalChatId,
         contactId: widget.contactId,
         friend: widget.friend,
@@ -320,12 +320,12 @@ class _MediaAndFileGalleryState extends State<MediaAndFileGallery> {
         List gifs = [];
         if (rf.gifs != null) gifs = conGifMap(rf.gifs);
         Map fileObj = {
-          "filePath": rf.filePath,
-          "fileName": rf.fileName,
-          "fileSize": rf.fileSize,
-          "caption": rf.caption,
-          "link": rf.link,
-          "gifs": gifs
+          'filePath': rf.filePath,
+          'fileName': rf.fileName,
+          'fileSize': rf.fileSize,
+          'caption': rf.caption,
+          'link': rf.link,
+          'gifs': gifs
         };
 
         DateTime now = DateTime.now();
@@ -462,8 +462,8 @@ class _MediaAndFileGalleryState extends State<MediaAndFileGallery> {
                         ),
                         Text(
                             widget.numOfAvlUpl == null
-                                ? "$numOfSFs/${Constants.maxFileUpload}"
-                                : "$numOfSFs/${widget.numOfAvlUpl}",
+                                ? '$numOfSFs/${Constants.maxFileUpload}'
+                                : '$numOfSFs/${widget.numOfAvlUpl}',
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black))
@@ -479,7 +479,7 @@ class _MediaAndFileGalleryState extends State<MediaAndFileGallery> {
             indent: 90,
             endIndent: 90,
           ),
-          widget.type == "MEDIA"
+          widget.type == 'MEDIA'
               ? Expanded(
                   child: GridView.builder(
                       controller: widget.controller,
@@ -498,9 +498,9 @@ class _MediaAndFileGalleryState extends State<MediaAndFileGallery> {
                     children: [
                       numOfSFs == 0
                           ? Image.asset(
-                              widget.type == "AUDIO"
-                                  ? "assets/images/audiofile.png"
-                                  : "assets/images/docImage.png",
+                              widget.type == 'AUDIO'
+                                  ? 'assets/images/audiofile.png'
+                                  : 'assets/images/docImage.png',
                               fit: BoxFit.cover,
                               scale: 2.5,
                             )
@@ -509,7 +509,7 @@ class _MediaAndFileGalleryState extends State<MediaAndFileGallery> {
                           ? TextButton.icon(
                               onPressed: () async {
                                 FilePickerResult result;
-                                if (widget.type == "AUDIO") {
+                                if (widget.type == 'AUDIO') {
                                   result = await FilePicker.platform.pickFiles(
                                     type: FileType.custom,
                                     allowMultiple: true,
@@ -522,7 +522,7 @@ class _MediaAndFileGalleryState extends State<MediaAndFileGallery> {
                                       'm4a'
                                     ],
                                   );
-                                } else if (widget.type == "PDF") {
+                                } else if (widget.type == 'PDF') {
                                   result = await FilePicker.platform.pickFiles(
                                     type: FileType.custom,
                                     allowMultiple: true,
@@ -555,9 +555,9 @@ class _MediaAndFileGalleryState extends State<MediaAndFileGallery> {
                               },
                               icon: const Icon(Icons.open_in_new_rounded),
                               label: Text(
-                                widget.type == "AUDIO"
-                                    ? "select audio files"
-                                    : "select PDF files",
+                                widget.type == 'AUDIO'
+                                    ? 'select audio files'
+                                    : 'select PDF files',
                                 style: const TextStyle(
                                     decoration: TextDecoration.underline,
                                     color: Colors.black),
@@ -618,7 +618,7 @@ class SelectedFile extends StatefulWidget {
   String fileName;
   String filePath;
   String fileSize;
-  String caption = "";
+  String caption = '';
   List<DynamicStackItem> gifs = [];
   String link;
   bool mature = false;
@@ -638,9 +638,9 @@ class SelectedFile extends StatefulWidget {
 
 class _SelectedFileState extends State<SelectedFile> {
   // String fileUrl;
-  String caption = "";
+  String caption = '';
   List<DynamicStackItem> gifs = [];
-  String link = "";
+  String link = '';
   bool mature = false;
 
   bool isVidOrAud;

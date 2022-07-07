@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +24,7 @@ Widget mediaAndFileTile({
 }) {
   Widget tile = Container(
       decoration:
-          imgObj != null && imgObj["sticker"] != null && imgObj["sticker"]
+          imgObj != null && imgObj['sticker'] != null && imgObj['sticker']
               ? null
               : shadowEffect(30),
       margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 10.0),
@@ -152,7 +151,7 @@ Widget infoListTile(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 5, vertical: 5),
                         child: Text(
-                          "$numOfReplies users replied",
+                          '$numOfReplies users replied',
                           style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,

@@ -240,9 +240,9 @@ class _PreviewScreenState extends State<PreviewScreen>
                                 },
                                 validator: (val) {
                                   return emptyStrChecker(val)
-                                      ? "try typing in something"
+                                      ? 'try typing in something'
                                       : val.length > 300
-                                          ? "sorry, caption > 300 characters"
+                                          ? 'sorry, caption > 300 characters'
                                           : null;
                                 },
                                 controller: captionEditingController,
@@ -251,7 +251,7 @@ class _PreviewScreenState extends State<PreviewScreen>
                                   fontSize: 18,
                                 ),
                                 decoration: previewInputDec(
-                                    hintText: "ADD A CAPTION",
+                                    hintText: 'ADD A CAPTION',
                                     valid: validCaption,
                                     textEtController: captionEditingController,
                                     maxLength: 300,
@@ -274,7 +274,7 @@ class _PreviewScreenState extends State<PreviewScreen>
                                 },
                                 validator: (val) {
                                   return !urlRegExp.hasMatch(val)
-                                      ? "invalid url"
+                                      ? 'invalid url'
                                       : null;
                                 },
                                 controller: linkEditingController,
@@ -283,7 +283,7 @@ class _PreviewScreenState extends State<PreviewScreen>
                                   fontSize: 18,
                                 ),
                                 decoration: previewInputDec(
-                                    hintText: "ATTACH A LINK",
+                                    hintText: 'ATTACH A LINK',
                                     valid: validLink,
                                     textEtController: linkEditingController,
                                     icon: platform == TargetPlatform.android
@@ -346,7 +346,7 @@ class _PreviewScreenState extends State<PreviewScreen>
                                   activeColor: Colors.orange,
                                 ),
                                 Text(
-                                  "sensitive content?",
+                                  'sensitive content?',
                                   style: GoogleFonts.varelaRound(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
@@ -408,7 +408,7 @@ class _PreviewScreenState extends State<PreviewScreen>
                             });
                           } else {
                             Fluttertoast.showToast(
-                                msg: "Sorry, this gif is corrupted",
+                                msg: 'Sorry, this gif is corrupted',
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.SNACKBAR,
                                 timeInSecForIosWeb: 3,
@@ -472,7 +472,7 @@ class _PreviewScreenState extends State<PreviewScreen>
                         icon: widget.tagPublic ? Icons.tag : Icons.send_rounded,
                         labelColor: Colors.white,
                         off: false,
-                        text: widget.tagPublic ? "Send to:" : "Send to:"),
+                        text: widget.tagPublic ? 'Send to:' : 'Send to:'),
                   )
                 : const SizedBox.shrink(),
           ],
@@ -553,7 +553,7 @@ class _PreviewScreenState extends State<PreviewScreen>
         context,
         targets: targets,
         colorShadow: Colors.red,
-        textSkip: "SKIP",
+        textSkip: 'SKIP',
         paddingFocus: 10,
         opacityShadow: 0.8,
         onFinish: () {},
@@ -567,7 +567,7 @@ class _PreviewScreenState extends State<PreviewScreen>
   void initTargets() {
     targets.add(
       TargetFocus(
-        identify: "Caption Button",
+        identify: 'Caption Button',
         keyTarget: key1,
         color: Colors.deepOrangeAccent,
         contents: [
@@ -578,7 +578,7 @@ class _PreviewScreenState extends State<PreviewScreen>
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    "Add A Caption !",
+                    'Add A Caption !',
                     style: GoogleFonts.varelaRound(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -587,7 +587,7 @@ class _PreviewScreenState extends State<PreviewScreen>
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: Text(
-                      "Add some more life to your broadcast by sending it with a caption ",
+                      'Add some more life to your broadcast by sending it with a caption ',
                       style: GoogleFonts.varelaRound(
                         color: Colors.white,
                       ),
@@ -604,7 +604,7 @@ class _PreviewScreenState extends State<PreviewScreen>
     );
 
     targets.add(TargetFocus(
-      identify: "GIF Button",
+      identify: 'GIF Button',
       keyTarget: key2,
       color: Colors.orange,
       contents: [
@@ -617,7 +617,7 @@ class _PreviewScreenState extends State<PreviewScreen>
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
                     child: Text(
-                      "GIF Button",
+                      'GIF Button',
                       style: GoogleFonts.varelaRound(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -637,7 +637,7 @@ class _PreviewScreenState extends State<PreviewScreen>
       shape: ShapeLightFocus.Circle,
     ));
     targets.add(TargetFocus(
-      identify: "URL Button",
+      identify: 'URL Button',
       keyTarget: key3,
       color: Colors.orange,
       contents: [
@@ -650,7 +650,7 @@ class _PreviewScreenState extends State<PreviewScreen>
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
                     child: Text(
-                      "URL Button",
+                      'URL Button',
                       style: GoogleFonts.varelaRound(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -658,7 +658,7 @@ class _PreviewScreenState extends State<PreviewScreen>
                     ),
                   ),
                   Text(
-                    "Tap this to attach a link to your broadcasts!",
+                    'Tap this to attach a link to your broadcasts!',
                     style: GoogleFonts.varelaRound(
                       color: Colors.white,
                     ),
@@ -671,7 +671,7 @@ class _PreviewScreenState extends State<PreviewScreen>
     ));
     targets.add(
       TargetFocus(
-        identify: "Hashtag Button",
+        identify: 'Hashtag Button',
         keyTarget: key4,
         color: Colors.orange,
         contents: [
@@ -682,7 +682,7 @@ class _PreviewScreenState extends State<PreviewScreen>
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    "Tag your Broadcast",
+                    'Tag your Broadcast',
                     style: GoogleFonts.varelaRound(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -691,7 +691,7 @@ class _PreviewScreenState extends State<PreviewScreen>
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: Text(
-                      "Tap this to choose who gets to see your masterpiece !",
+                      'Tap this to choose who gets to see your masterpiece !',
                       style: GoogleFonts.varelaRound(
                         color: Colors.white,
                       ),
@@ -713,12 +713,12 @@ class _PreviewScreenState extends State<PreviewScreen>
     int time = now.microsecondsSinceEpoch;
 
     Map imgObj = {
-      "imgPath": widget.filePath ?? widget.file.path,
-      "imgName": widget.vidOrAud ? "$time.mp4" : "$time.jpeg",
-      "caption": captionEditingController.text,
-      "gifs": conGifMap(gifyStickers),
-      "mature": mature,
-      "link": linkEditingController.text
+      'imgPath': widget.filePath ?? widget.file.path,
+      'imgName': widget.vidOrAud ? '$time.mp4' : '$time.jpeg',
+      'caption': captionEditingController.text,
+      'gifs': conGifMap(gifyStickers),
+      'mature': mature,
+      'link': linkEditingController.text
     };
 
     fileUploadToChats(
@@ -735,7 +735,7 @@ class _PreviewScreenState extends State<PreviewScreen>
   mediaListSendToChats() {
     DateTime now = DateTime.now();
     fileUploadToChats(
-      file: mediaList.length == 1 ? File(mediaList[0]["imgPath"]) : null,
+      file: mediaList.length == 1 ? File(mediaList[0]['imgPath']) : null,
       personalChatId: widget.personalChatId,
       contactId: widget.contactId,
       friend: widget.friend,

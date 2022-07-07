@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:spidr_app/views/groupsList.dart';
 import 'package:spidr_app/views/usersList.dart';
@@ -61,7 +60,7 @@ class _SearchScreenState extends State<SearchScreen>
                 decoration: const InputDecoration(
                     icon: Icon(Icons.search),
                     border: InputBorder.none,
-                    hintText: "Search",
+                    hintText: 'Search',
                     hintStyle: TextStyle(color: Colors.grey)),
               ),
             ),
@@ -71,10 +70,10 @@ class _SearchScreenState extends State<SearchScreen>
               unselectedLabelColor: Colors.grey,
               tabs: const [
                 Tab(
-                  text: "Circles",
+                  text: 'Circles',
                 ),
                 Tab(
-                  text: "Users",
+                  text: 'Users',
                 ),
               ],
             ),

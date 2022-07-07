@@ -6,7 +6,7 @@ import 'package:spidr_app/helper/functions.dart';
 import 'package:spidr_app/helper/storyFunctions.dart';
 import 'package:spidr_app/services/database.dart';
 import 'package:spidr_app/widgets/storyFuncWidgets.dart';
-import "package:spidr_app/widgets/widget.dart";
+import 'package:spidr_app/widgets/widget.dart';
 
 Widget buildReplyComposer(
   ScrollController controller,
@@ -35,8 +35,8 @@ Widget buildReplyComposer(
                               return !emptyStrChecker(val)
                                   ? val.length <= 300
                                       ? null
-                                      : "Sorry, reply > 300 characters"
-                                  : "Sorry, reply can not be empty";
+                                      : 'Sorry, reply > 300 characters'
+                                  : 'Sorry, reply can not be empty';
                             },
                             textAlign: TextAlign.left,
                             autocorrect: true,
@@ -45,7 +45,7 @@ Widget buildReplyComposer(
                             controller: replyEditingController,
                             textCapitalization: TextCapitalization.sentences,
                             decoration: msgInputDec(
-                                context: context, hintText: "Reply")),
+                                context: context, hintText: 'Reply')),
                       ),
                     ),
                     IconButton(
@@ -74,7 +74,7 @@ Widget replyList(ScrollController controller, Stream replyStream,
       builder: (context, snapshot) {
         List blockList;
         if (snapshot.hasData && snapshot.data.data() != null) {
-          blockList = snapshot.data.data()["blockList"];
+          blockList = snapshot.data.data()['blockList'];
         }
         return StreamBuilder(
           stream: replyStream,
@@ -86,11 +86,11 @@ Widget replyList(ScrollController controller, Stream replyStream,
                     controller: controller,
                     itemBuilder: (BuildContext context, index) {
                       String replierId =
-                          snapshot.data.docs[index].data()["replierId"];
-                      String reply = snapshot.data.docs[index].data()["reply"];
+                          snapshot.data.docs[index].data()['replierId'];
+                      String reply = snapshot.data.docs[index].data()['reply'];
                       String replyId = snapshot.data.docs[index].id;
                       List reportedBy =
-                          snapshot.data.docs[index].data()["reportedBy"];
+                          snapshot.data.docs[index].data()['reportedBy'];
                       return blockList == null || !blockList.contains(replyId)
                           ? listTile(
                               context: context,
@@ -105,7 +105,7 @@ Widget replyList(ScrollController controller, Stream replyStream,
                   )
                 : noItems(
                     icon: Icons.reply,
-                    text: "no replies yet",
+                    text: 'no replies yet',
                     mAxAlign: MainAxisAlignment.center);
           },
         );

@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spidr_app/decorations/widgetDecorations.dart';
@@ -53,12 +53,12 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
     });
 
     String hashTag = hashTagController.text;
-    hashTag = !hashTag.startsWith("#") ? "#${hashTagController.text}" : hashTag;
+    hashTag = !hashTag.startsWith('#') ? '#${hashTagController.text}' : hashTag;
     String chatRoomState = state == 1
-        ? "public"
+        ? 'public'
         : state == 2
-            ? "private"
-            : "invisible";
+            ? 'private'
+            : 'invisible';
 
     DateTime now = DateTime.now();
     DatabaseMethods(uid: widget.uid)
@@ -88,7 +88,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
       print(error);
     });
 
-    hashTagController.text = "";
+    hashTagController.text = '';
     setState(() {
       creating = false;
     });
@@ -116,7 +116,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
         context,
         targets: targets,
         colorShadow: Colors.red,
-        textSkip: "SKIP",
+        textSkip: 'SKIP',
         paddingFocus: 10,
         opacityShadow: 0.8,
         onFinish: () {
@@ -134,7 +134,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
   void initTargets() {
     targets.add(
       TargetFocus(
-        identify: "Avatar Selector",
+        identify: 'Avatar Selector',
         keyTarget: key1,
         color: Colors.deepOrangeAccent,
         contents: [
@@ -145,7 +145,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    "Select an Avatar !",
+                    'Select an Avatar !',
                     style: GoogleFonts.varelaRound(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -154,7 +154,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: Text(
-                      "Represent your group chat with a MIYU ",
+                      'Represent your group chat with a MIYU ',
                       style: GoogleFonts.varelaRound(
                         color: Colors.white,
                       ),
@@ -171,7 +171,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
     );
 
     targets.add(TargetFocus(
-      identify: "Circle Name",
+      identify: 'Circle Name',
       keyTarget: key2,
       color: Colors.orange,
       contents: [
@@ -184,7 +184,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
                     child: Text(
-                      "Circle Name",
+                      'Circle Name',
                       style: GoogleFonts.varelaRound(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -192,7 +192,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                     ),
                   ),
                   Text(
-                    "Name your own circle here!",
+                    'Name your own circle here!',
                     style: GoogleFonts.varelaRound(
                       color: Colors.white,
                     ),
@@ -204,7 +204,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
       shape: ShapeLightFocus.RRect,
     ));
     targets.add(TargetFocus(
-      identify: "Toggles",
+      identify: 'Toggles',
       keyTarget: key3,
       color: Colors.orange,
       contents: [
@@ -217,7 +217,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10.0),
                     child: Text(
-                      "24 Hours / Anon Mode",
+                      '24 Hours / Anon Mode',
                       style: GoogleFonts.varelaRound(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -225,7 +225,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                     ),
                   ),
                   Text(
-                    "Turn these on to make your circle only exist for 24 hours, You can also choose to make your circle Anonymous",
+                    'Turn these on to make your circle only exist for 24 hours, You can also choose to make your circle Anonymous',
                     style: GoogleFonts.varelaRound(
                       color: Colors.white,
                     ),
@@ -238,7 +238,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
     ));
     targets.add(
       TargetFocus(
-        identify: "Circle Privacy",
+        identify: 'Circle Privacy',
         keyTarget: key4,
         color: Colors.orange,
         contents: [
@@ -249,7 +249,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    "Choose your Circle privacy",
+                    'Choose your Circle privacy',
                     style: GoogleFonts.varelaRound(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -258,7 +258,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: Text(
-                      "Choose how intimate you want your Circle to be ",
+                      'Choose how intimate you want your Circle to be ',
                       style: GoogleFonts.varelaRound(
                         color: Colors.white,
                       ),
@@ -275,7 +275,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
     );
     targets.add(
       TargetFocus(
-        identify: "Circle Limit",
+        identify: 'Circle Limit',
         keyTarget: key5,
         color: Colors.orange,
         contents: [
@@ -286,7 +286,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    "Circle Limit",
+                    'Circle Limit',
                     style: GoogleFonts.varelaRound(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -295,7 +295,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: Text(
-                      "Choose how many users can join your Circle ",
+                      'Choose how many users can join your Circle ',
                       style: GoogleFonts.varelaRound(
                         color: Colors.white,
                       ),
@@ -352,7 +352,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
         ),
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Text("Pick a group avatar",
+        title: Text('Pick a group avatar',
             style: GoogleFonts.varelaRound(
                 color: Colors.black,
                 fontSize: 15.0,
@@ -419,9 +419,9 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                             },
                             validator: (val) {
                               return val.length > 18
-                                  ? "Maximum length 18"
+                                  ? 'Maximum length 18'
                                   : emptyStrChecker(val)
-                                      ? "Please enter a hashTag"
+                                      ? 'Please enter a hashTag'
                                       : null;
                             },
                             decoration: hashTagFromDec(
@@ -441,7 +441,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                               const SizedBox(
                                 width: 10,
                               ),
-                              Text("24 hrs",
+                              Text('24 hrs',
                                   style: GoogleFonts.varelaRound(
                                       color: Colors.orange,
                                       fontSize: 13.5,
@@ -465,12 +465,12 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Image.asset(
-                                  "assets/icon/icons8-anonymous-mask-50.png",
+                                  'assets/icon/icons8-anonymous-mask-50.png',
                                   scale: 2.5),
                               const SizedBox(
                                 width: 10,
                               ),
-                              Text("Anonymity",
+                              Text('Anonymity',
                                   style: GoogleFonts.varelaRound(
                                       color: Colors.black,
                                       fontSize: 15.0,
@@ -501,7 +501,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                             value: 1,
                             groupValue: state,
                             title: const Text(
-                              "Public",
+                              'Public',
                               style: TextStyle(
                                 color: Colors.green,
                                 fontWeight: FontWeight.bold,
@@ -519,7 +519,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                             value: 2,
                             groupValue: state,
                             title: const Text(
-                              "Private",
+                              'Private',
                               style: TextStyle(
                                 color: Colors.red,
                                 fontWeight: FontWeight.bold,
@@ -537,7 +537,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                             value: 3,
                             groupValue: state,
                             title: Text(
-                              "Invisible".toUpperCase(),
+                              'Invisible'.toUpperCase(),
                               style: const TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.bold,
@@ -566,9 +566,9 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                                 groupCapacity = newCapacity;
                               });
                             },
-                            label: "$groupCapacity",
+                            label: '$groupCapacity',
                           ),
-                          Text("Circle Limit (50)",
+                          Text('Circle Limit (50)',
                               style: GoogleFonts.varelaRound(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold)),
@@ -608,7 +608,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                             }
                           }
                         },
-                        child: Text("Create Circle",
+                        child: Text('Create Circle',
                             style: GoogleFonts.varelaRound(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold)),

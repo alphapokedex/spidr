@@ -49,13 +49,13 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
   bool isAdmin = false;
   bool isMember;
   bool anon;
-  String hashTag = "";
+  String hashTag = '';
 
-  String info = "";
-  String school = "School";
-  String program = "Program";
+  String info = '';
+  String school = 'School';
+  String program = 'Program';
   List tags = [];
-  String groupState = "";
+  String groupState = '';
   String profileImg;
 
   List blockList;
@@ -104,7 +104,7 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
 
     return Container(
       decoration:
-          imgObj != null && imgObj["sticker"] != null && imgObj["sticker"]
+          imgObj != null && imgObj['sticker'] != null && imgObj['sticker']
               ? null
               : shadowEffect(15),
       child: ClipRRect(
@@ -115,7 +115,7 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
   }
 
   Widget groupMediaList() {
-    return groupState.isNotEmpty && groupState == "public" ||
+    return groupState.isNotEmpty && groupState == 'public' ||
             (isMember != null && isMember)
         ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: 9.0),
@@ -126,12 +126,12 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
                     crossAxisSpacing: 9.0,
                     children: mediaQS.map(
                       (item) {
-                        Map imgObj = item.data()["imgObj"];
-                        List mediaGallery = item.data()["mediaGallery"];
+                        Map imgObj = item.data()['imgObj'];
+                        List mediaGallery = item.data()['mediaGallery'];
                         String messageId = item.id;
-                        String sendBy = item.data()["sendBy"];
-                        String senderId = item.data()["userId"];
-                        int sendTime = item.data()["time"];
+                        String sendBy = item.data()['sendBy'];
+                        String senderId = item.data()['userId'];
+                        int sendTime = item.data()['time'];
                         return mediaAndFileTile(
                           imgObj: imgObj,
                           messageId: messageId,
@@ -150,13 +150,13 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
                   )
                 : noItems(
                     icon: Icons.image_rounded,
-                    text: "no media yet",
+                    text: 'no media yet',
                     mAxAlign: MainAxisAlignment.center))
         : privateGroupSign(Theme.of(context).platform);
   }
 
   Widget groupAudioList() {
-    return groupState.isNotEmpty && groupState == "public" ||
+    return groupState.isNotEmpty && groupState == 'public' ||
             (isMember != null && isMember)
         ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: 9.0),
@@ -168,12 +168,12 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
                     // itemCount: audioQS.length,
                     // itemBuilder: (context, index) {
                     children: audioQS.map((item) {
-                      Map fileObj = item.data()["fileObj"];
+                      Map fileObj = item.data()['fileObj'];
                       String messageId = item.id;
-                      String sendBy = item.data()["sendBy"];
-                      String senderId = item.data()["userId"];
-                      String profileImg = item.data()["profileImg"];
-                      int sendTime = item.data()["time"];
+                      String sendBy = item.data()['sendBy'];
+                      String senderId = item.data()['userId'];
+                      String profileImg = item.data()['profileImg'];
+                      int sendTime = item.data()['time'];
                       return mediaAndFileTile(
                         fileObj: fileObj,
                         messageId: messageId,
@@ -190,7 +190,7 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
                   )
                 : noItems(
                     icon: Icons.music_note_rounded,
-                    text: "no audios yet",
+                    text: 'no audios yet',
                     mAxAlign: MainAxisAlignment.center,
                   ),
           )
@@ -198,7 +198,7 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
   }
 
   Widget groupPDFList() {
-    return groupState.isNotEmpty && groupState == "public" ||
+    return groupState.isNotEmpty && groupState == 'public' ||
             (isMember != null && isMember)
         ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: 9.0),
@@ -212,12 +212,12 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
                     // itemBuilder: (context, index) {
                     children: pdfQS.map(
                       (item) {
-                        Map fileObj = item.data()["fileObj"];
+                        Map fileObj = item.data()['fileObj'];
                         String messageId = item.id;
-                        String sendBy = item.data()["sendBy"];
-                        String senderId = item.data()["userId"];
-                        String profileImg = item.data()["profileImg"];
-                        int sendTime = item.data()["time"];
+                        String sendBy = item.data()['sendBy'];
+                        String senderId = item.data()['userId'];
+                        String profileImg = item.data()['profileImg'];
+                        int sendTime = item.data()['time'];
                         return mediaAndFileTile(
                           fileObj: fileObj,
                           messageId: messageId,
@@ -235,7 +235,7 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
                   )
                 : noItems(
                     icon: Icons.insert_drive_file,
-                    text: "no PDFs yet",
+                    text: 'no PDFs yet',
                     mAxAlign: MainAxisAlignment.center))
         : privateGroupSign(Theme.of(context).platform);
   }
@@ -266,7 +266,7 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
   }
 
   Widget groupURLList() {
-    return groupState.isNotEmpty && groupState == "public" ||
+    return groupState.isNotEmpty && groupState == 'public' ||
             (isMember != null && isMember)
         ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: 9.0),
@@ -280,8 +280,8 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
                     // itemBuilder: (context, index) {
                     children: messageQS.map(
                       (item) {
-                        String message = item.data()["message"];
-                        String senderId = item.data()["userId"];
+                        String message = item.data()['message'];
+                        String senderId = item.data()['userId'];
                         return urlTile(senderId: senderId, message: message);
                       },
                       // staggeredTileBuilder: (index) {
@@ -293,7 +293,7 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
                     icon: Theme.of(context).platform == TargetPlatform.android
                         ? Icons.link_rounded
                         : CupertinoIcons.link,
-                    text: "no URLs yet",
+                    text: 'no URLs yet',
                     mAxAlign: MainAxisAlignment.center))
         : privateGroupSign(Theme.of(context).platform);
   }
@@ -303,7 +303,7 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
       setState(() {
         mediaQS = mdQS.docs
             .where((mdDS) =>
-                !Constants.myBlockList.contains(mdDS.data()["userId"]))
+                !Constants.myBlockList.contains(mdDS.data()['userId']))
             .toList();
       });
     });
@@ -314,7 +314,7 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
       setState(() {
         audioQS = adQS.docs
             .where((adDS) =>
-                !Constants.myBlockList.contains(adDS.data()["userId"]))
+                !Constants.myBlockList.contains(adDS.data()['userId']))
             .toList();
       });
     });
@@ -325,7 +325,7 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
       setState(() {
         pdfQS = docQS.docs
             .where((docDS) =>
-                !Constants.myBlockList.contains(docDS.data()["userId"]))
+                !Constants.myBlockList.contains(docDS.data()['userId']))
             .toList();
       });
     });
@@ -336,7 +336,7 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
       setState(() {
         messageQS = msgQS.docs
             .where((msgDS) =>
-                !Constants.myBlockList.contains(msgDS.data()["userId"]))
+                !Constants.myBlockList.contains(msgDS.data()['userId']))
             .toList();
       });
     });
@@ -394,25 +394,25 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 if (snapshot.data.data() != null &&
-                    (snapshot.data.data()["deleted"] == null ||
-                        !snapshot.data.data()["deleted"])) {
+                    (snapshot.data.data()['deleted'] == null ||
+                        !snapshot.data.data()['deleted'])) {
                   var val = snapshot.data;
                   isAdmin = widget.admin == Constants.myUserId;
-                  info = val.data()["about"];
-                  tags = val.data()["tags"];
-                  hashTag = val.data()["hashTag"];
-                  groupState = val.data()["chatRoomState"];
-                  school = val.data()["school"] != null &&
-                          val.data()["school"].isNotEmpty
-                      ? val.data()["school"]
-                      : "School";
-                  program = val.data()["program"] != null &&
-                          val.data()["program"].isNotEmpty
-                      ? val.data()["program"]
-                      : "Program";
-                  profileImg = val.data()["profileImg"];
-                  anon = val.data()["anon"];
-                  isMember = val.data()["members"].contains(Constants.myUserId);
+                  info = val.data()['about'];
+                  tags = val.data()['tags'];
+                  hashTag = val.data()['hashTag'];
+                  groupState = val.data()['chatRoomState'];
+                  school = val.data()['school'] != null &&
+                          val.data()['school'].isNotEmpty
+                      ? val.data()['school']
+                      : 'School';
+                  program = val.data()['program'] != null &&
+                          val.data()['program'].isNotEmpty
+                      ? val.data()['program']
+                      : 'Program';
+                  profileImg = val.data()['profileImg'];
+                  anon = val.data()['anon'];
+                  isMember = val.data()['members'].contains(Constants.myUserId);
 
                   double groupCapacity = val.data()['groupCapacity'];
                   List members = val.data()['members'];
@@ -470,7 +470,7 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
                             background: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                school != "School" && program != "Program"
+                                school != 'School' && program != 'Program'
                                     ? schAndProgWrapper(school, program)
                                     : const SizedBox.shrink(),
                                 SizedBox(
@@ -567,9 +567,9 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
                                               context,
                                               Colors.blueAccent,
                                               Icons.remove_red_eye_rounded,
-                                              "View Chat"))
+                                              'View Chat'))
                                       : functionBtt(context, Colors.grey,
-                                          Icons.access_time_rounded, "In Chat"),
+                                          Icons.access_time_rounded, 'In Chat'),
                                 )
                               ],
                             ),
@@ -590,7 +590,7 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
                         builder: (context, snapshot) {
                           if (snapshot.hasData &&
                               snapshot.data.data() != null) {
-                            blockList = snapshot.data.data()["blockList"];
+                            blockList = snapshot.data.data()['blockList'];
                             return TabBarView(
                               controller: tabController,
                               children: [
@@ -621,7 +621,7 @@ class _GroupProfileScreenState extends State<GroupProfileScreen>
                       children: const [
                         Icon(Icons.timer, color: Colors.grey),
                         Text(
-                          "Expired",
+                          'Expired',
                           style: TextStyle(color: Colors.grey),
                         )
                       ],

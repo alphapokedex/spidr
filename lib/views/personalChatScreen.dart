@@ -50,7 +50,7 @@ class _PersonalChatScreenState extends State<PersonalChatScreen>
   checkBlocked() async {
     DocumentSnapshot userDS =
         await DatabaseMethods(uid: widget.contactId).getUserById();
-    List blockList = userDS.get("blockList");
+    List blockList = userDS.get('blockList');
     setState(() {
       blocked = blockList != null && blockList.contains(Constants.myUserId);
     });
@@ -95,7 +95,7 @@ class _PersonalChatScreenState extends State<PersonalChatScreen>
       setState(() {
         writing = false;
       });
-      textController.text = "";
+      textController.text = '';
     }
   }
 
@@ -128,8 +128,8 @@ class _PersonalChatScreenState extends State<PersonalChatScreen>
           decoration: msgInputDec(
               context: context,
               hintText: blocked || !widget.openByOther || !chatExist
-                  ? "Disabled"
-                  : "Message",
+                  ? 'Disabled'
+                  : 'Message',
               personalChatId: widget.personalChatId,
               friend: widget.friend,
               contactId: widget.contactId,
@@ -152,14 +152,14 @@ class _PersonalChatScreenState extends State<PersonalChatScreen>
     String hourMin = dateTime.substring(dateTime.indexOf(' ') + 1);
     String date = dateTime.substring(0, dateTime.indexOf(' '));
     bool blocked = imgMap != null &&
-            imgMap["ogSenderId"] != null &&
-            Constants.myBlockList.contains(imgMap["ogSenderId"]) ||
+            imgMap['ogSenderId'] != null &&
+            Constants.myBlockList.contains(imgMap['ogSenderId']) ||
         fileMap != null &&
-            fileMap["ogSenderId"] != null &&
-            Constants.myBlockList.contains(fileMap["ogSenderId"]) ||
+            fileMap['ogSenderId'] != null &&
+            Constants.myBlockList.contains(fileMap['ogSenderId']) ||
         mediaGallery != null &&
-            mediaGallery[0]["ogSenderId"] != null &&
-            Constants.myBlockList.contains(mediaGallery[0]["ogSenderId"]);
+            mediaGallery[0]['ogSenderId'] != null &&
+            Constants.myBlockList.contains(mediaGallery[0]['ogSenderId']);
 
     final TargetPlatform platform = Theme.of(context).platform;
     double width = MediaQuery.of(context).size.width;
@@ -183,10 +183,10 @@ class _PersonalChatScreenState extends State<PersonalChatScreen>
                     GestureDetector(
                       onLongPress: () {
                         if (text.isNotEmpty ||
-                            (imgMap != null && imgMap["imgUrl"] != null) ||
-                            fileMap != null && fileMap["fileUrl"] != null ||
+                            (imgMap != null && imgMap['imgUrl'] != null) ||
+                            fileMap != null && fileMap['fileUrl'] != null ||
                             (mediaGallery != null &&
-                                mediaGallery[0]["imgUrl"] != null)) {
+                                mediaGallery[0]['imgUrl'] != null)) {
                           if (isSendByMe) {
                             showMenu(
                                 context: context,
@@ -202,7 +202,7 @@ class _PersonalChatScreenState extends State<PersonalChatScreen>
                                           platform == TargetPlatform.android
                                               ? Icons.delete
                                               : CupertinoIcons.delete,
-                                          " Delete")),
+                                          ' Delete')),
                                 ]).then((value) {
                               if (value == 1) {
                                 deleteMessage(textId);
@@ -224,7 +224,7 @@ class _PersonalChatScreenState extends State<PersonalChatScreen>
                                             platform == TargetPlatform.android
                                                 ? Icons.flag_rounded
                                                 : CupertinoIcons.flag_fill,
-                                            " Report")),
+                                            ' Report')),
                                   ]).then((value) {
                                 if (value == 1) {
                                   reportContent(
@@ -258,8 +258,8 @@ class _PersonalChatScreenState extends State<PersonalChatScreen>
                                 isSendByMe,
                                 text.isNotEmpty ||
                                     (fileMap != null &&
-                                        !audioChecker(fileMap["fileName"]) &&
-                                        !pdfChecker(fileMap["fileName"]))),
+                                        !audioChecker(fileMap['fileName']) &&
+                                        !pdfChecker(fileMap['fileName']))),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -267,11 +267,11 @@ class _PersonalChatScreenState extends State<PersonalChatScreen>
                                     ? personalTextBubble(
                                         context, text, isSendByMe)
                                     : fileMap != null
-                                        ? fileMap["ogSenderId"] != null
+                                        ? fileMap['ogSenderId'] != null
                                             ? SharedChatBubble(
                                                 fileObj: fileMap,
                                                 isSendByMe: isSendByMe,
-                                                mediaId: fileMap["ogChatId"],
+                                                mediaId: fileMap['ogChatId'],
                                               )
                                             : fileChatBubble(
                                                 context: context,
@@ -285,16 +285,18 @@ class _PersonalChatScreenState extends State<PersonalChatScreen>
                                                 toPageView: false,
                                                 // personalChatId: widget.personalChatId,
                                                 audio: audioChecker(
-                                                    fileMap["fileName"]),
+                                                    fileMap['fileName']),
                                                 document: pdfChecker(
-                                                    fileMap["fileName"]),
+                                                    fileMap['fileName']),
                                               )
                                         : imgMap != null
-                                            ? imgMap["ogSenderId"] != null
+                                            ? imgMap['ogSenderId'] != null
                                                 ? SharedChatBubble(
                                                     imgObj: imgMap,
                                                     isSendByMe: isSendByMe,
-                                                    mediaId: imgMap["ogChatId"] ?? imgMap["ogStoryId"],
+                                                    mediaId:
+                                                        imgMap['ogChatId'] ??
+                                                            imgMap['ogStoryId'],
                                                   )
                                                 : mediaChatBubble(
                                                     imgObj: imgMap,
@@ -308,11 +310,13 @@ class _PersonalChatScreenState extends State<PersonalChatScreen>
                                                     )
                                             : const SizedBox.shrink(),
                                 mediaGallery != null
-                                    ? mediaGallery[0]["ogSenderId"] != null
+                                    ? mediaGallery[0]['ogSenderId'] != null
                                         ? SharedChatBubble(
                                             mediaGallery: mediaGallery,
                                             isSendByMe: isSendByMe,
-                                            mediaId: mediaGallery[0]["ogChatId"] ?? mediaGallery[0]["ogStoryId"])
+                                            mediaId: mediaGallery[0]
+                                                    ['ogChatId'] ??
+                                                mediaGallery[0]['ogStoryId'])
                                         : MediaGalleryBubble(
                                             mediaGallery: mediaGallery,
                                             messageId: textId,
@@ -358,29 +362,29 @@ class _PersonalChatScreenState extends State<PersonalChatScreen>
                 reverse: true,
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, index) {
-                  int sendTime = snapshot.data.docs[index].data()["sendTime"];
+                  int sendTime = snapshot.data.docs[index].data()['sendTime'];
                   String sendDatetime = timeToString(sendTime);
                   bool newDay = false;
 
                   if (index > 0) {
                     int prevSendTime =
-                        snapshot.data.docs[index - 1].data()["sendTime"];
+                        snapshot.data.docs[index - 1].data()['sendTime'];
                     String prevDatetime = timeToString(prevSendTime);
                     newDay = isNewDay(sendDatetime, prevDatetime);
                   }
 
                   return textTile(
-                      snapshot.data.docs[index].data()["text"],
+                      snapshot.data.docs[index].data()['text'],
                       sendDatetime,
-                      snapshot.data.docs[index].data()["imgMap"],
-                      snapshot.data.docs[index].data()["fileMap"],
-                      snapshot.data.docs[index].data()["mediaGallery"],
-                      snapshot.data.docs[index].data()["senderId"] ==
+                      snapshot.data.docs[index].data()['imgMap'],
+                      snapshot.data.docs[index].data()['fileMap'],
+                      snapshot.data.docs[index].data()['mediaGallery'],
+                      snapshot.data.docs[index].data()['senderId'] ==
                           Constants.myUserId,
                       snapshot.data.docs[index].id,
                       newDay,
-                      snapshot.data.docs[index].data()["reported"] != null &&
-                          snapshot.data.docs[index].data()["reported"]);
+                      snapshot.data.docs[index].data()['reported'] != null &&
+                          snapshot.data.docs[index].data()['reported']);
                 })
             : Container();
       },
@@ -507,7 +511,7 @@ class _PersonalChatScreenState extends State<PersonalChatScreen>
                                       value: 1,
                                       child: iconText(
                                           Icons.do_disturb_on_outlined,
-                                          " Remove")),
+                                          ' Remove')),
                                 ],
                             onSelected: (value) {
                               if (value == 1) {
@@ -555,11 +559,12 @@ class _PersonalChatScreenState extends State<PersonalChatScreen>
                                   )),
                                   TextSpan(
                                       text: !widget.openByOther
-                                          ? "This chat has not been opened yet"
+                                          ? 'This chat has not been opened yet'
                                           : !chatExist
-                                              ? "This chat has been removed"
-                                              : "You have been blocked by this user",
-                                      style: const TextStyle(color: Colors.white))
+                                              ? 'This chat has been removed'
+                                              : 'You have been blocked by this user',
+                                      style:
+                                          const TextStyle(color: Colors.white))
                                 ])),
                           )
                         : const SizedBox.shrink(),
@@ -600,8 +605,7 @@ class _PersonalChatScreenState extends State<PersonalChatScreen>
                                   platform: platform,
                                   personalChatId: widget.personalChatId,
                                   anon: widget.anon,
-                                  inCallUsers:
-                                      inCallUsers ?? {},
+                                  inCallUsers: inCallUsers ?? {},
                                   role: ClientRole.Broadcaster,
                                   disabled: blocked || !widget.openByOther)
                               : const SizedBox.shrink(),

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -102,17 +101,18 @@ class _StreamScreenState extends State<StreamScreen>
                     });
                     await DatabaseMethods(uid: Constants.myUserId)
                         .createGroupChat(
-                            hashTag: !hashTag.startsWith("#")
-                                ? "#${hashTag.toUpperCase()}"
-                                : hashTag.toUpperCase(),
-                            username: Constants.myName,
-                            chatRoomState: "public",
-                            time: now.microsecondsSinceEpoch,
-                            groupCapacity: 50,
-                            groupPic: profileImg,
-                            anon: true,
-                            oneDay: true,
-                            tags: [selTag]);
+                      hashTag: !hashTag.startsWith('#')
+                          ? '#${hashTag.toUpperCase()}'
+                          : hashTag.toUpperCase(),
+                      username: Constants.myName,
+                      chatRoomState: 'public',
+                      time: now.microsecondsSinceEpoch,
+                      groupCapacity: 50,
+                      groupPic: profileImg,
+                      anon: true,
+                      oneDay: true,
+                      tags: [selTag],
+                    );
                     Timer(const Duration(milliseconds: 4500), () {
                       getGroups();
                       setState(() {
@@ -143,7 +143,7 @@ class _StreamScreenState extends State<StreamScreen>
           height: 10,
         ),
         const Text(
-          "Start Conversation",
+          'Start Conversation',
           style: TextStyle(
             fontSize: 18,
             color: Colors.white,
@@ -233,10 +233,10 @@ class _StreamScreenState extends State<StreamScreen>
                       return genCircleBtt();
                     } else if (_seen == null || false) {
                       return Center(
-                          child: Image.asset("assets/images/convoExample.png"));
+                          child: Image.asset('assets/images/convoExample.png'));
                     } else {
                       return Center(
-                          child: Image.asset("assets/icon/Spidr_News.png"));
+                          child: Image.asset('assets/icon/Spidr_News.png'));
                     }
                   }
                 });
@@ -268,7 +268,7 @@ class _StreamScreenState extends State<StreamScreen>
         context,
         targets: targets,
         colorShadow: Colors.red,
-        textSkip: "SKIP",
+        textSkip: 'SKIP',
         paddingFocus: 10,
         opacityShadow: 0.8,
         onFinish: () {
@@ -286,7 +286,7 @@ class _StreamScreenState extends State<StreamScreen>
   void initTargets() {
     targets.add(
       TargetFocus(
-        identify: "Search Bar",
+        identify: 'Search Bar',
         keyTarget: key1,
         color: Colors.deepOrangeAccent,
         contents: [
@@ -297,7 +297,7 @@ class _StreamScreenState extends State<StreamScreen>
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    "Search Bar !",
+                    'Search Bar !',
                     style: GoogleFonts.varelaRound(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -306,7 +306,7 @@ class _StreamScreenState extends State<StreamScreen>
                   Padding(
                     padding: const EdgeInsets.only(bottom: 40.0),
                     child: Text(
-                      "Search for Circles or Users on Spidr ",
+                      'Search for Circles or Users on Spidr ',
                       style: GoogleFonts.varelaRound(
                         color: Colors.white,
                       ),
@@ -322,7 +322,7 @@ class _StreamScreenState extends State<StreamScreen>
     );
 
     targets.add(TargetFocus(
-      identify: "Trending",
+      identify: 'Trending',
       keyTarget: key2,
       color: Colors.orange,
       contents: [
@@ -335,7 +335,7 @@ class _StreamScreenState extends State<StreamScreen>
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
                     child: Text(
-                      "Trending Tab!",
+                      'Trending Tab!',
                       style: GoogleFonts.varelaRound(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -343,7 +343,7 @@ class _StreamScreenState extends State<StreamScreen>
                     ),
                   ),
                   Text(
-                    "Select one of the trending hashtags to scroll through all Circles related to that hashtag",
+                    'Select one of the trending hashtags to scroll through all Circles related to that hashtag',
                     style: GoogleFonts.varelaRound(
                       color: Colors.white,
                     ),
@@ -355,7 +355,7 @@ class _StreamScreenState extends State<StreamScreen>
       shape: ShapeLightFocus.RRect,
     ));
     targets.add(TargetFocus(
-      identify: "Chats",
+      identify: 'Chats',
       keyTarget: key3,
       color: Colors.orange,
       contents: [
@@ -368,14 +368,14 @@ class _StreamScreenState extends State<StreamScreen>
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    "Circles",
+                    'Circles',
                     style: GoogleFonts.varelaRound(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 16.0),
                   ),
                   Text(
-                    "You can swipe up or down to check out all the chats under a hashtag. Check some hashtags out and discover a Circle for you!",
+                    'You can swipe up or down to check out all the chats under a hashtag. Check some hashtags out and discover a Circle for you!',
                     style: GoogleFonts.varelaRound(
                       color: Colors.white,
                     ),
@@ -388,7 +388,7 @@ class _StreamScreenState extends State<StreamScreen>
     ));
     targets.add(
       TargetFocus(
-        identify: "Circle Privacy",
+        identify: 'Circle Privacy',
         keyTarget: key4,
         color: Colors.orange,
         contents: [
@@ -399,7 +399,7 @@ class _StreamScreenState extends State<StreamScreen>
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    "Choose your Circle privacy",
+                    'Choose your Circle privacy',
                     style: GoogleFonts.varelaRound(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -408,7 +408,7 @@ class _StreamScreenState extends State<StreamScreen>
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: Text(
-                      "Choose how intimate you want your Circle to be ",
+                      'Choose how intimate you want your Circle to be ',
                       style: GoogleFonts.varelaRound(
                         color: Colors.white,
                       ),
@@ -425,7 +425,7 @@ class _StreamScreenState extends State<StreamScreen>
     );
     targets.add(
       TargetFocus(
-        identify: "Circle Limit",
+        identify: 'Circle Limit',
         keyTarget: key5,
         color: Colors.orange,
         contents: [
@@ -436,7 +436,7 @@ class _StreamScreenState extends State<StreamScreen>
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    "Circle Limit",
+                    'Circle Limit',
                     style: GoogleFonts.varelaRound(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -445,7 +445,7 @@ class _StreamScreenState extends State<StreamScreen>
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: Text(
-                      "Choose how many users can join your Circle ",
+                      'Choose how many users can join your Circle ',
                       style: GoogleFonts.varelaRound(
                         color: Colors.white,
                       ),
@@ -516,7 +516,7 @@ class _StreamScreenState extends State<StreamScreen>
             decoration: const InputDecoration(
                 icon: Icon(Icons.search),
                 border: InputBorder.none,
-                hintText: "Search",
+                hintText: 'Search',
                 hintStyle: TextStyle(color: Colors.grey)),
           ),
         ),
@@ -540,7 +540,7 @@ class _StreamScreenState extends State<StreamScreen>
                     pageController.jumpToPage(0);
                   },
                   child: tagTile(
-                    all: "Trending",
+                    all: 'Trending',
                     borderColor:
                         selTag.isNotEmpty ? Colors.white : Colors.orange,
                     textColor: selTag.isNotEmpty ? Colors.orange : Colors.white,

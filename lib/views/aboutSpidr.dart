@@ -42,15 +42,15 @@ class AboutSpidrScreen extends StatelessWidget {
             Column(
               children: [
                 Image.asset(
-                  "assets/icon/appIcon.png",
+                  'assets/icon/appIcon.png',
                   height: 91,
                   width: 91,
                   fit: BoxFit.contain,
                 ),
-                const Text("Spidr",
+                const Text('Spidr',
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold)),
-                const Text("Version 1.1.0",
+                const Text('Version 1.1.0',
                     style: TextStyle(color: Colors.black)),
               ],
             ),
@@ -69,7 +69,7 @@ class AboutSpidrScreen extends StatelessWidget {
                             color: Colors.white,
                             boxShadow: [circleShadow]),
                         child: ListTile(
-                            title: const Text("Terms and Conditions",
+                            title: const Text('Terms and Conditions',
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     color: Colors.black)),
@@ -81,7 +81,7 @@ class AboutSpidrScreen extends StatelessWidget {
                             ),
                             onTap: () {
                               launchSite(
-                                  "https://www.iubenda.com/terms-and-conditions/80156886");
+                                  'https://www.iubenda.com/terms-and-conditions/80156886');
                             }),
                       ),
                       Container(
@@ -103,16 +103,16 @@ class AboutSpidrScreen extends StatelessWidget {
                               verPad: 5,
                             ),
                             onTap: () {
-                              launchSite("https://www.spidrapp.com/");
+                              launchSite('https://www.spidrapp.com/');
                             }),
                       ),
                     ],
                   ),
                   Column(
                     children: const [
-                      Text("Copyright \u00a9 2021-2031 Brane",
+                      Text('Copyright \u00a9 2021-2031 Brane',
                           style: TextStyle(color: Colors.grey, fontSize: 12)),
-                      Text("All Rights Reserved",
+                      Text('All Rights Reserved',
                           style: TextStyle(color: Colors.grey, fontSize: 12)),
                     ],
                   )

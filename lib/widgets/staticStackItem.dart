@@ -22,7 +22,7 @@ class StaticStackItem extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
                   child: FadeInImage.assetNetwork(
-                    placeholder: "assets/icon/sm_giphy.png",
+                    placeholder: 'assets/icon/sm_giphy.png',
                     image: gifUrl,
                     imageScale: 10,
                   ),

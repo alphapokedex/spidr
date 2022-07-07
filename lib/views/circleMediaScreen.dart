@@ -43,13 +43,13 @@ class _CircleMediaScreenState extends State<CircleMediaScreen> {
                         Map<String, dynamic> docData =
                             snapshot.data.hits[index].data;
                         String mediaId = snapshot.data.hits[index].objectID;
-                        String senderId = docData["senderId"];
-                        String sendBy = docData["sendBy"];
-                        Map mediaObj = docData["mediaObj"];
-                        List mediaGallery = docData["mediaGallery"];
-                        String groupId = docData["groupId"];
-                        String hashTag = docData["hashTag"];
-                        List tags = docData["tags"];
+                        String senderId = docData['senderId'];
+                        String sendBy = docData['sendBy'];
+                        Map mediaObj = docData['mediaObj'];
+                        List mediaGallery = docData['mediaGallery'];
+                        String groupId = docData['groupId'];
+                        String hashTag = docData['hashTag'];
+                        List tags = docData['tags'];
                         return groupMedia(
                           mediaObj,
                           mediaGallery,
@@ -64,7 +64,7 @@ class _CircleMediaScreenState extends State<CircleMediaScreen> {
                     )
                   : Center(
                       child: Text(
-                      "no ${type.toLowerCase()} available",
+                      'no ${type.toLowerCase()} available',
                       style: const TextStyle(color: Colors.orange),
                     ))
               : sectionLoadingIndicator();
@@ -137,7 +137,7 @@ class _CircleMediaScreenState extends State<CircleMediaScreen> {
         context,
         targets: targets,
         colorShadow: Colors.red,
-        textSkip: "SKIP",
+        textSkip: 'SKIP',
         paddingFocus: 10,
         opacityShadow: 0.8,
         onFinish: () {
@@ -155,34 +155,32 @@ class _CircleMediaScreenState extends State<CircleMediaScreen> {
   void initTargets() {
     targets.add(
       TargetFocus(
-        identify: "Media Selector",
+        identify: 'Media Selector',
         keyTarget: key1,
         color: Colors.deepOrangeAccent,
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
-            child: Container(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text(
-                    "Circle Media Selector",
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text(
+                  'Circle Media Selector',
+                  style: GoogleFonts.varelaRound(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25.0),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: Text(
+                    'Select between Media, Audio, PDF to see Circles with those files!',
                     style: GoogleFonts.varelaRound(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25.0),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: Text(
-                      "Select between Media, Audio, PDF to see Circles with those files!",
-                      style: GoogleFonts.varelaRound(
-                        color: Colors.white,
-                      ),
+                      color: Colors.white,
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
           )
         ],
@@ -191,40 +189,38 @@ class _CircleMediaScreenState extends State<CircleMediaScreen> {
     );
 
     targets.add(TargetFocus(
-      identify: "Circle Search",
+      identify: 'Circle Search',
       keyTarget: key2,
       color: Colors.orange,
       contents: [
         TargetContent(
             align: ContentAlign.bottom,
-            child: Container(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 20.0),
-                    child: Text(
-                      "Circle Search Bar",
-                      style: GoogleFonts.varelaRound(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25.0),
-                    ),
-                  ),
-                  Text(
-                    "Search for circles here to view them on the discover page",
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 20.0),
+                  child: Text(
+                    'Circle Search Bar',
                     style: GoogleFonts.varelaRound(
-                      color: Colors.white,
-                    ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25.0),
                   ),
-                ],
-              ),
+                ),
+                Text(
+                  'Search for circles here to view them on the discover page',
+                  style: GoogleFonts.varelaRound(
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             )),
       ],
       shape: ShapeLightFocus.RRect,
     ));
     targets.add(TargetFocus(
-      identify: "Toggles",
+      identify: 'Toggles',
       keyTarget: key3,
       color: Colors.orange,
       contents: [
@@ -237,7 +233,7 @@ class _CircleMediaScreenState extends State<CircleMediaScreen> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10.0),
                     child: Text(
-                      "24 Hours / Anon Mode",
+                      '24 Hours / Anon Mode',
                       style: GoogleFonts.varelaRound(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -245,7 +241,7 @@ class _CircleMediaScreenState extends State<CircleMediaScreen> {
                     ),
                   ),
                   Text(
-                    "Turn these on to make your circle only exist for 24 hours, You can also choose to make your circle Anonymous",
+                    'Turn these on to make your circle only exist for 24 hours, You can also choose to make your circle Anonymous',
                     style: GoogleFonts.varelaRound(
                       color: Colors.white,
                     ),
@@ -258,7 +254,7 @@ class _CircleMediaScreenState extends State<CircleMediaScreen> {
     ));
     targets.add(
       TargetFocus(
-        identify: "Circle Privacy",
+        identify: 'Circle Privacy',
         keyTarget: key4,
         color: Colors.orange,
         contents: [
@@ -269,7 +265,7 @@ class _CircleMediaScreenState extends State<CircleMediaScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    "Choose your Circle privacy",
+                    'Choose your Circle privacy',
                     style: GoogleFonts.varelaRound(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -278,7 +274,7 @@ class _CircleMediaScreenState extends State<CircleMediaScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: Text(
-                      "Choose how intimate you want your Circle to be ",
+                      'Choose how intimate you want your Circle to be ',
                       style: GoogleFonts.varelaRound(
                         color: Colors.white,
                       ),
@@ -295,7 +291,7 @@ class _CircleMediaScreenState extends State<CircleMediaScreen> {
     );
     targets.add(
       TargetFocus(
-        identify: "Circle Limit",
+        identify: 'Circle Limit',
         keyTarget: key5,
         color: Colors.orange,
         contents: [
@@ -306,7 +302,7 @@ class _CircleMediaScreenState extends State<CircleMediaScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    "Circle Limit",
+                    'Circle Limit',
                     style: GoogleFonts.varelaRound(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -315,7 +311,7 @@ class _CircleMediaScreenState extends State<CircleMediaScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: Text(
-                      "Choose how many users can join your Circle ",
+                      'Choose how many users can join your Circle ',
                       style: GoogleFonts.varelaRound(
                         color: Colors.white,
                       ),
@@ -373,7 +369,7 @@ class _CircleMediaScreenState extends State<CircleMediaScreen> {
 
             // Transform.scale(scale:0.7,child: Image.asset("assets/icon/dicoverTitle.png")),
 
-            Text("Discover",
+            Text('Discover',
                 style: platform == TargetPlatform.android
                     ? GoogleFonts.electrolize(
                         color: Colors.orange,
@@ -409,7 +405,7 @@ class _CircleMediaScreenState extends State<CircleMediaScreen> {
                     });
                     getGCMedia();
                   },
-                  items: ["Media", "Audio", "PDF"]
+                  items: ['Media', 'Audio', 'PDF']
                       .map((e) => DropdownMenuItem(
                           value: e,
                           child: Text(e,
@@ -436,7 +432,7 @@ class _CircleMediaScreenState extends State<CircleMediaScreen> {
                         color: Colors.orange,
                         size: 20,
                       ),
-                      hintText: "Search",
+                      hintText: 'Search',
                       hintStyle: TextStyle(color: Colors.orange, fontSize: 14),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.orangeAccent),
@@ -489,7 +485,7 @@ Widget groupMedia(
         if (snapshot.hasData) {
           var groupDS = snapshot.data;
           String groupProfile;
-          String groupState = "";
+          String groupState = '';
           String admin;
           bool anon;
           bool oneDay;
@@ -497,16 +493,16 @@ Widget groupMedia(
           bool isMember;
           bool expiredGroup = false;
           if (groupDS.data() != null &&
-              (groupDS.data()["deleted"] == null ||
-                  !groupDS.data()["deleted"])) {
-            groupProfile = groupDS.data()["profileImg"];
-            groupState = groupDS.data()["chatRoomState"];
-            admin = groupDS.data()["admin"];
-            anon = groupDS.data()["anon"];
+              (groupDS.data()['deleted'] == null ||
+                  !groupDS.data()['deleted'])) {
+            groupProfile = groupDS.data()['profileImg'];
+            groupState = groupDS.data()['chatRoomState'];
+            admin = groupDS.data()['admin'];
+            anon = groupDS.data()['anon'];
             oneDay =
-                groupDS.data()["oneDay"] != null && groupDS.data()["oneDay"];
-            createdAt = groupDS.data()["createdAt"];
-            isMember = groupDS.data()["members"].contains(Constants.myUserId);
+                groupDS.data()['oneDay'] != null && groupDS.data()['oneDay'];
+            createdAt = groupDS.data()['createdAt'];
+            isMember = groupDS.data()['members'].contains(Constants.myUserId);
           } else {
             expiredGroup = true;
           }
@@ -514,12 +510,12 @@ Widget groupMedia(
               stream: DatabaseMethods().userCollection.doc(userId).snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.data.data() != null) {
-                  String userProfile = snapshot.data.data()["profileImg"];
-                  int imgIndex = snapshot.data.data()["anonImg"];
+                  String userProfile = snapshot.data.data()['profileImg'];
+                  int imgIndex = snapshot.data.data()['anonImg'];
                   String anonImg = userMIYUs[imgIndex];
-                  bool blocked = snapshot.data.data()["blockedBy"] != null &&
+                  bool blocked = snapshot.data.data()['blockedBy'] != null &&
                       snapshot.data
-                          .data()["blockedBy"]
+                          .data()['blockedBy']
                           .contains(Constants.myUserId);
                   return exploreMedia(
                     context: context,

@@ -50,49 +50,49 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       key: introKey,
       pages: [
         PageViewModel(
-          title: "Welcome to the Spidr Community",
+          title: 'Welcome to the Spidr Community',
           body:
-              "The easiest way to be a part of the happ(ening)iness around you.",
+              'The easiest way to be a part of the happ(ening)iness around you.',
           image: Center(
               child: Image.asset(
-            "assets/icon/1.PNG",
+            'assets/icon/1.PNG',
             width: MediaQuery.of(context).size.width / 1.4,
             height: MediaQuery.of(context).size.width / 1.4,
           )),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Join a Circle",
+          title: 'Join a Circle',
           body:
-              "Scroll through and join anonymous conversations at your school, work and city. Exchange and receive the latest happenings around you",
+              'Scroll through and join anonymous conversations at your school, work and city. Exchange and receive the latest happenings around you',
           image: Center(
               child: Image.asset(
-            "assets/icon/Joinacircle2.png",
+            'assets/icon/Joinacircle2.png',
             width: MediaQuery.of(context).size.width / 1.4,
             height: MediaQuery.of(context).size.width / 1.4,
           )),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Broadcast your message",
+          title: 'Broadcast your message',
           body:
-              "Take a Broadcast, add a hashtag, send and every group and user with that hashtag in their profile gets to see ¥our creation.",
+              'Take a Broadcast, add a hashtag, send and every group and user with that hashtag in their profile gets to see ¥our creation.',
           image: Center(
               child: Image.asset(
-            "assets/images/CarPurp.png",
+            'assets/images/CarPurp.png',
             width: MediaQuery.of(context).size.width / 1.4,
             height: MediaQuery.of(context).size.width / 1.4,
           )),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Receive A Broadcast",
+          title: 'Receive A Broadcast',
           bodyWidget: RichText(
             textAlign: TextAlign.center,
             text: const TextSpan(children: [
               TextSpan(
                   text:
-                      "Add Spidr Tags to your bio to receive special broadcasts on the latest happenings around you.",
+                      'Add Spidr Tags to your bio to receive special broadcasts on the latest happenings around you.',
                   style: bodyStyle),
               WidgetSpan(
                 child: Icon(Icons.donut_large_rounded),
@@ -101,19 +101,19 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           ),
           image: Center(
               child: Image.asset(
-            "assets/icon/Untitled_design-3.png",
+            'assets/icon/Untitled_design-3.png',
             width: MediaQuery.of(context).size.width / 1.4,
             height: MediaQuery.of(context).size.width / 1.4,
           )),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Add Your Spidr Tags",
+          title: 'Add Your Spidr Tags',
           body:
-              "Add Spidr Tags relating to topics that interest you to receive broadcasts and suggestions for group-chats",
+              'Add Spidr Tags relating to topics that interest you to receive broadcasts and suggestions for group-chats',
           image: Center(
               child: Image.asset(
-            "assets/images/TagGirl.png",
+            'assets/images/TagGirl.png',
             width: MediaQuery.of(context).size.width / 1.2,
             height: MediaQuery.of(context).size.width / 1.2,
           )),

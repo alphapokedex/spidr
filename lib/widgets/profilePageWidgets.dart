@@ -1,5 +1,4 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:spidr_app/views/mediaPreview.dart';
 import 'package:spidr_app/views/viewBanner.dart';
@@ -46,23 +45,23 @@ class _ProfileTagListState extends State<ProfileTagList> {
                 onTap: () async {
                   if (widget.editable) {
                     widget.tagController.text = widget.tags.length - 1 < index
-                        ? ""
+                        ? ''
                         : widget.tags[index];
                     if (widget.editTag != null) {
                       showTextBoxDialog(
                           context: context,
-                          text: "Tag",
+                          text: 'Tag',
                           textEditingController: widget.tagController,
-                          errorText: "Sorry, your tag can not be empty",
+                          errorText: 'Sorry, your tag can not be empty',
                           editTag: widget.editTag,
                           formKey: widget.formKey,
                           index: index);
                     } else {
                       String tag = await showTextBoxDialog(
                           context: context,
-                          text: "Tag",
+                          text: 'Tag',
                           textEditingController: widget.tagController,
-                          errorText: "Sorry, your tag can not be empty",
+                          errorText: 'Sorry, your tag can not be empty',
                           formKey: widget.formKey,
                           index: index);
                       if (tag != null) {
@@ -84,12 +83,13 @@ class _ProfileTagListState extends State<ProfileTagList> {
                     border: Border.all(color: widget.outlineColor, width: 2.0),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 9),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 18, vertical: 9),
                     child: Center(
                       child: widget.editable
                           ? Text(
                               widget.tags.length - 1 < index
-                                  ? "# Add a tag"
+                                  ? '# Add a tag'
                                   : '# ' + widget.tags[index],
                               style: TextStyle(color: widget.outlineColor),
                             )
@@ -151,7 +151,8 @@ Widget infoText(
 Widget infoEditIcon() {
   return Container(
       padding: const EdgeInsets.all(2.5),
-      decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+      decoration:
+          const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
       child: const Icon(
         Icons.edit_rounded,
         size: 16,
@@ -220,7 +221,7 @@ Widget schAndProgWrapper(String school, String program) {
       children: [
         schAndProgDisp(
             text: Center(
-                child: school != "School"
+                child: school != 'School'
                     ? Text('# $school',
                         style: const TextStyle(color: Colors.orange))
                     : const Icon(
@@ -229,7 +230,7 @@ Widget schAndProgWrapper(String school, String program) {
                       ))),
         schAndProgDisp(
             text: Center(
-                child: program != "Program"
+                child: program != 'Program'
                     ? Text('# $program',
                         style: const TextStyle(color: Colors.orange))
                     : const Icon(

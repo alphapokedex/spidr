@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +78,7 @@ class _SignInState extends State<SignIn> {
         // print(onError);
         // print(onError.toString());
         Fluttertoast.showToast(
-            msg: "Google account error. Please try signing in without google.");
+            msg: 'Google account error. Please try signing in without google.');
       });
 
       GoogleSignInAuthentication googleAuth =
@@ -84,7 +86,7 @@ class _SignInState extends State<SignIn> {
         // print("2");
         // print(onError.toString());
         Fluttertoast.showToast(
-            msg: "Google account error. Please try signing in without google.");
+            msg: 'Google account error. Please try signing in without google.');
       });
 
       final AuthCredential credential = GoogleAuthProvider.credential(
@@ -96,7 +98,7 @@ class _SignInState extends State<SignIn> {
         // print("3");
         // print(onError.toString());
         Fluttertoast.showToast(
-            msg: "Google account error. Please try signing in without google.");
+            msg: 'Google account error. Please try signing in without google.');
       });
       User firebaseUser = result.user;
 
@@ -135,10 +137,10 @@ class _SignInState extends State<SignIn> {
 
             HelperFunctions.saveUserLoggedInSharedPreference(true);
             HelperFunctions.saveUserNameSharedPreference(
-                userInfoSnapshot.docs[0].get("name"));
+                userInfoSnapshot.docs[0].get('name'));
 
             HelperFunctions.saveUserEmailSharedPreference(
-                userInfoSnapshot.docs[0].get("email"));
+                userInfoSnapshot.docs[0].get('email'));
 
             Navigator.pushReplacement(
                 context,
@@ -152,12 +154,12 @@ class _SignInState extends State<SignIn> {
         });
       } catch (e) {
         if (e ==
-            "[firebase_auth/wrong-password] The password is invalid or the user does not have a password.") {
+            '[firebase_auth/wrong-password] The password is invalid or the user does not have a password.') {
           setState(() {
             invalidPassword = true;
           });
         } else if (e ==
-            "[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.") {
+            '[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.') {
           setState(() {
             invalidEmail = true;
           });
@@ -209,7 +211,7 @@ class _SignInState extends State<SignIn> {
                                         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                     .hasMatch(val)
                                 ? null
-                                : "Invalid Email";
+                                : 'Invalid Email';
                           },
                           controller: emailTextEditingController,
                           style: const TextStyle(color: Colors.white),
@@ -219,12 +221,12 @@ class _SignInState extends State<SignIn> {
                                 20.0, 15.0, 20.0, 15.0),
                             prefixIcon:
                                 const Icon(Icons.email, color: Colors.white),
-                            hintText: "Enter your email",
+                            hintText: 'Enter your email',
                             hintStyle: const TextStyle(color: Colors.black),
-                            labelText: "Email",
+                            labelText: 'Email',
                             labelStyle: const TextStyle(color: Colors.white),
                             errorText: invalidEmail
-                                ? "Email is not registered :("
+                                ? 'Email is not registered :('
                                 : null,
                             errorStyle: const TextStyle(color: Colors.white),
                             enabledBorder: OutlineInputBorder(
@@ -247,7 +249,7 @@ class _SignInState extends State<SignIn> {
                         TextFormField(
                           obscureText: hidePass,
                           validator: (val) {
-                            return val.length > 6 ? null : "Invalid password";
+                            return val.length > 6 ? null : 'Invalid password';
                           },
                           controller: passwordTextEditingController,
                           style: const TextStyle(
@@ -268,12 +270,12 @@ class _SignInState extends State<SignIn> {
                               child: const Icon(Icons.visibility,
                                   color: Colors.white),
                             ),
-                            hintText: "Enter your Password",
+                            hintText: 'Enter your Password',
                             hintStyle: const TextStyle(color: Colors.black),
-                            labelText: "Password",
+                            labelText: 'Password',
                             labelStyle: const TextStyle(color: Colors.white),
                             errorText: invalidPassword
-                                ? "Password incorrect :("
+                                ? 'Password incorrect :('
                                 : null,
                             errorStyle: const TextStyle(color: Colors.white),
                             enabledBorder: OutlineInputBorder(
@@ -301,7 +303,7 @@ class _SignInState extends State<SignIn> {
                       alignment: Alignment.centerRight,
                       child: TextButton(
                           style: flatButtonStyle,
-                          child: const Text("Forgot password?",
+                          child: const Text('Forgot password?',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -328,7 +330,7 @@ class _SignInState extends State<SignIn> {
                               colors: [Color(0xDD000000), Color(0xDD000000)]),
                           borderRadius: BorderRadius.circular(15)),
                       child: const Text(
-                        "Hop On",
+                        'Hop On',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -346,7 +348,7 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                     Text(
-                      "OR",
+                      'OR',
                       style: TextStyle(
                           color: Colors.white70,
                           fontSize: 11,

@@ -1,15 +1,15 @@
-import  'dart:math';
+import 'dart:math';
 
-import  'package:algolia/algolia.dart';
-import  'package:flutter/material.dart';
-import  'package:shimmer/shimmer.dart';
-import  'package:spidr_app/helper/constants.dart';
-import  'package:spidr_app/helper/functions.dart';
-import  'package:spidr_app/services/database.dart';
-import  'package:spidr_app/views/personalChatScreen.dart';
-import  'package:spidr_app/views/userProfilePage.dart';
-import  'package:spidr_app/widgets/bottomSheetWidgets.dart';
-import  'package:spidr_app/widgets/widget.dart';
+import 'package:algolia/algolia.dart';
+import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:spidr_app/helper/constants.dart';
+import 'package:spidr_app/helper/functions.dart';
+import 'package:spidr_app/services/database.dart';
+import 'package:spidr_app/views/personalChatScreen.dart';
+import 'package:spidr_app/views/userProfilePage.dart';
+import 'package:spidr_app/widgets/bottomSheetWidgets.dart';
+import 'package:spidr_app/widgets/widget.dart';
 
 class MyFriendsScreen extends StatefulWidget {
   final List mutedChats;
@@ -63,7 +63,7 @@ class _MyFriendsScreenState extends State<MyFriendsScreen> {
   acceptFriendReq(String userId) {
     DatabaseMethods(uid: Constants.myUserId).acceptFriendRequest(userId);
     DatabaseMethods(uid: Constants.myUserId)
-        .createPersonalChat(userId: userId, actionType: "FRIEND_CHAT");
+        .createPersonalChat(userId: userId, actionType: 'FRIEND_CHAT');
   }
 
   ignoreFriendReq(String userId) {
@@ -95,7 +95,7 @@ class _MyFriendsScreenState extends State<MyFriendsScreen> {
             userId: userId,
             fontWeight: FontWeight.bold,
           ),
-          subtitle: const Text("befriend"),
+          subtitle: const Text('befriend'),
           trailing: Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
@@ -109,7 +109,7 @@ class _MyFriendsScreenState extends State<MyFriendsScreen> {
                         borderRadius: BorderRadius.circular(30)),
                     padding: const EdgeInsets.symmetric(
                         horizontal: 16, vertical: 16),
-                    child: const Text("Accept",
+                    child: const Text('Accept',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white))),
               ),
@@ -119,7 +119,7 @@ class _MyFriendsScreenState extends State<MyFriendsScreen> {
                 },
                 child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 5),
-                    child: const Text("Ignore",
+                    child: const Text('Ignore',
                         style: TextStyle(
                             fontWeight: FontWeight.normal,
                             color: Colors.black))),
@@ -161,12 +161,12 @@ class _MyFriendsScreenState extends State<MyFriendsScreen> {
             items: [
               PopupMenuItem(
                 value: 1,
-                child: Text(!pinned ? "Pin to Top" : "Unpin from Top"),
+                child: Text(!pinned ? 'Pin to Top' : 'Unpin from Top'),
               ),
               PopupMenuItem(
                 value: 2,
                 child:
-                    Text(!muted ? "Mute Notification" : "Unmute Notification"),
+                    Text(!muted ? 'Mute Notification' : 'Unmute Notification'),
               ),
             ]);
         if (value == 1) {
@@ -485,7 +485,7 @@ class _MyFriendsScreenState extends State<MyFriendsScreen> {
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data.data() != null) {
-            bool anon = snapshot.data.data()["anon"];
+            bool anon = snapshot.data.data()['anon'];
             return GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -570,7 +570,7 @@ class _MyFriendsScreenState extends State<MyFriendsScreen> {
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     String contactId =
-                        snapshot.data.docs[index].data()["contactId"];
+                        snapshot.data.docs[index].data()['contactId'];
                     String personalChatId = snapshot.data.docs[index].id;
                     int numOfNewMsg =
                         snapshot.data.docs[index].data()['numOfNewMsg'];
@@ -600,7 +600,7 @@ class _MyFriendsScreenState extends State<MyFriendsScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: noItems(
                       icon: Icons.maps_ugc,
-                      text: "no private chats yet",
+                      text: 'no private chats yet',
                       mAxAlign: MainAxisAlignment.start));
             }
           } else {
@@ -625,10 +625,10 @@ class _MyFriendsScreenState extends State<MyFriendsScreen> {
         stream: DatabaseMethods(uid: Constants.myUserId).getMyStream(),
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data != null) {
-            friends = snapshot.data.data()["friends"];
-            receivedFdReq = snapshot.data.data()["receivedFdReq"];
-            sentFdReq = snapshot.data.data()["sentFdReq"];
-            blockList = snapshot.data.data()["blockList"];
+            friends = snapshot.data.data()['friends'];
+            receivedFdReq = snapshot.data.data()['receivedFdReq'];
+            sentFdReq = snapshot.data.data()['sentFdReq'];
+            blockList = snapshot.data.data()['blockList'];
           }
           return Container(
             color: Colors.white,
@@ -641,13 +641,13 @@ class _MyFriendsScreenState extends State<MyFriendsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           sectionLabel(
-                              "Private Chats", Colors.black, Colors.white),
+                              'Private Chats', Colors.black, Colors.white),
                           Container(
                             height: 125.0,
                             padding: const EdgeInsets.only(left: 9),
                           ),
                           sectionLabel(
-                              "Your Friends", Colors.orange, Colors.white),
+                              'Your Friends', Colors.orange, Colors.white),
                         ],
                       ),
                     ),
@@ -658,14 +658,14 @@ class _MyFriendsScreenState extends State<MyFriendsScreen> {
                       children: [
                         friendReqList(),
                         sectionLabel(
-                            "Private Chats", Colors.black, Colors.white),
+                            'Private Chats', Colors.black, Colors.white),
                         Container(
                           height: 125.0,
                           padding: const EdgeInsets.only(left: 9),
                           child: personalChatsList(context),
                         ),
                         sectionLabel(
-                            "Your Friends", Colors.orange, Colors.white),
+                            'Your Friends', Colors.orange, Colors.white),
                         friendPinnedList(),
                         friendList()
                       ],

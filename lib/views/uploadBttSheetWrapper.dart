@@ -64,7 +64,7 @@ class _UploadBttSheetWrapperState extends State<UploadBttSheetWrapper> {
                     friend: widget.friend,
                     contactId: widget.contactId,
                     uploadTo: widget.uploadTo,
-                    type: "MEDIA",
+                    type: 'MEDIA',
                   ),
                   MediaAndFileGallery(
                     controller: widget.controller,
@@ -73,7 +73,7 @@ class _UploadBttSheetWrapperState extends State<UploadBttSheetWrapper> {
                     friend: widget.friend,
                     contactId: widget.contactId,
                     uploadTo: widget.uploadTo,
-                    type: "AUDIO",
+                    type: 'AUDIO',
                   ),
                   MediaAndFileGallery(
                     controller: widget.controller,
@@ -82,7 +82,7 @@ class _UploadBttSheetWrapperState extends State<UploadBttSheetWrapper> {
                     friend: widget.friend,
                     contactId: widget.contactId,
                     uploadTo: widget.uploadTo,
-                    type: "PDF",
+                    type: 'PDF',
                   ),
                   AppCameraScreen(
                     camScrollController: widget.controller,
@@ -118,7 +118,7 @@ class _UploadBttSheetWrapperState extends State<UploadBttSheetWrapper> {
             controller: widget.controller,
             uploadTo: widget.uploadTo,
             numOfAvlUpl: widget.numOfAvlUpl,
-            type: "MEDIA",
+            type: 'MEDIA',
             singleFile: widget.singleFile,
             personalChatId: widget.personalChatId,
             friend: widget.friend,

@@ -105,7 +105,7 @@ class UploadMethods {
     String imgUrl;
 
     if (!video) {
-      if (type == "USER_PROFILE_IMG" || type == "GROUP_PROFILE_IMG") {
+      if (type == 'USER_PROFILE_IMG' || type == 'GROUP_PROFILE_IMG') {
         imgFile = await getProfImage();
       } else {
         imgFile = await getImage();
@@ -139,7 +139,7 @@ class UploadMethods {
       }
 
       switch (type) {
-        case "USER_PROFILE_IMG":
+        case 'USER_PROFILE_IMG':
           if (!profileImg.startsWith('assets', 0)) {
             Reference imgRef = FirebaseStorage.instance.refFromURL(profileImg);
             await imgRef.delete();
@@ -156,7 +156,7 @@ class UploadMethods {
           });
           return imgUrl;
           break;
-        case "GROUP_PROFILE_IMG":
+        case 'GROUP_PROFILE_IMG':
           if (!profileImg.startsWith('assets', 0)) {
             Reference imgRef = FirebaseStorage.instance.refFromURL(profileImg);
             await imgRef.delete();
@@ -172,7 +172,7 @@ class UploadMethods {
           });
           return imgUrl;
           break;
-        case "USER_BANNER":
+        case 'USER_BANNER':
           Reference ref = FirebaseStorage.instance
               .ref()
               .child('usersBanner/${Constants.myUserId}/$imgName');

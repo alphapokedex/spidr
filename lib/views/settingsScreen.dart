@@ -21,8 +21,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     DocumentSnapshot myDS =
         await DatabaseMethods(uid: Constants.myUserId).getUserById();
     setState(() {
-      notifOff = myDS.data().toString().contains("notifOff")
-          ? myDS.get("notifOff")
+      notifOff = myDS.data().toString().contains('notifOff')
+          ? myDS.get('notifOff')
           : false;
     });
   }
@@ -42,7 +42,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           boxShadow: [circleShadow]),
       child: ListTile(
         title: const Text(
-          "Notifications",
+          'Notifications',
           style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black),
         ),
         trailing: notifOff != null
@@ -76,7 +76,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           boxShadow: [circleShadow]),
       child: ListTile(
         title: const Text(
-          "Clear Search History",
+          'Clear Search History',
           style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black),
         ),
         trailing: iconContainer(
@@ -106,7 +106,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           boxShadow: [circleShadow]),
       child: ListTile(
         title: const Text(
-          "Blocked List",
+          'Blocked List',
           style: TextStyle(fontWeight: FontWeight.w600, color: Colors.red),
         ),
         trailing: iconContainer(

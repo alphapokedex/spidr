@@ -1,7 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 import 'package:spidr_app/decorations/widgetDecorations.dart';
 import 'package:spidr_app/helper/constants.dart';
 import 'package:spidr_app/helper/functions.dart';
@@ -48,7 +47,7 @@ class EditGroupScreen extends StatefulWidget {
 class _EditGroupScreenState extends State<EditGroupScreen> {
   String hashTag;
   String profileImg;
-  String groupInfo = "";
+  String groupInfo = '';
   List tags = [];
   double groupCapacity;
   double numOfMem;
@@ -130,7 +129,7 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Row(
                 children: const [
-                  Text("Delete Circle", style: TextStyle(color: Colors.red)),
+                  Text('Delete Circle', style: TextStyle(color: Colors.red)),
                   SizedBox(
                     width: 5,
                   ),
@@ -179,7 +178,7 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
                                         profileImg: profileImg,
                                         groupId: widget.groupId)
                                     .pickAndUploadMedia(
-                                        "GROUP_PROFILE_IMG", false);
+                                        'GROUP_PROFILE_IMG', false);
 
                                 setState(() {
                                   uploading = false;
@@ -219,14 +218,14 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
                             onTap: () {
                               showTextBoxDialog(
                                   context: context,
-                                  text: "About Circle",
+                                  text: 'About Circle',
                                   textEditingController: infoController,
-                                  errorText: "Sorry, this can not be empty",
+                                  errorText: 'Sorry, this can not be empty',
                                   editQuote: editGroupInfo,
                                   formKey: formKey);
                             },
                             child: infoEditBtt(
-                                context: context, text: "About Circle"),
+                                context: context, text: 'About Circle'),
                           )
                         : Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -243,10 +242,10 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
                                     onTap: () {
                                       showTextBoxDialog(
                                           context: context,
-                                          text: "Circle Info",
+                                          text: 'Circle Info',
                                           textEditingController: infoController,
                                           errorText:
-                                              "Sorry, your circle info can not be empty",
+                                              'Sorry, your circle info can not be empty',
                                           editQuote: editGroupInfo,
                                           formKey: formKey);
                                     },
@@ -292,9 +291,9 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
                             setState(() {
                               validHashTag = true;
                             });
-                            hashTag = val.startsWith("#")
+                            hashTag = val.startsWith('#')
                                 ? val.toUpperCase()
-                                : "#${val.toUpperCase()}";
+                                : '#${val.toUpperCase()}';
                           }
                         },
                         decoration: hashTagFromDec(
@@ -317,10 +316,10 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
                                       : numOfMem;
                                 });
                               },
-                              label: "$groupCapacity",
+                              label: '$groupCapacity',
                             ),
                             Text(
-                              "$groupCapacity",
+                              '$groupCapacity',
                               style: const TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w400),
@@ -328,7 +327,7 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
                           ],
                         ),
                         const Text(
-                          "Circle Limit (50)",
+                          'Circle Limit (50)',
                           style: TextStyle(
                               color: Colors.orange,
                               fontWeight: FontWeight.bold),
