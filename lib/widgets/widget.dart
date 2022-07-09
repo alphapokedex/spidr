@@ -766,6 +766,23 @@ Widget sectionLabel(String label, decColor, textColor) {
       ));
 }
 
+Widget newSectionLabel(String label) {
+  return Container(
+    padding: const EdgeInsets.all(8),
+    child: FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Text(
+        label,
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.orange,
+          fontSize: 20,
+        ),
+      ),
+    ),
+  );
+}
+
 Widget dateDivider(bool newDay, String date) {
   return newDay
       ? Row(children: <Widget>[
@@ -890,6 +907,19 @@ Widget borderedText(String text, color) {
   return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
+        border: Border.all(color: color, width: 3.0),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      child: Text(text,
+          style: TextStyle(fontWeight: FontWeight.bold, color: color),
+          textAlign: TextAlign.center));
+}
+
+Widget newBorderedText(String text, color) {
+  return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: color, width: 3.0),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -1028,14 +1058,14 @@ Widget groupStateIndicator(String groupState, bool anon, mAxAlign) {
   return Row(
     mainAxisAlignment: mAxAlign,
     children: [
-      Text(groupState,
-          style: TextStyle(
-            color: groupState == 'public'
-                ? Colors.green
-                : groupState == 'private'
-                    ? Colors.red
-                    : Colors.black,
-          )),
+      // Text(groupState,
+      //     style: TextStyle(
+      //       color: groupState == 'public'
+      //           ? Colors.green
+      //           : groupState == 'private'
+      //               ? Colors.red
+      //               : Colors.black,
+      //     )),
       const SizedBox(width: 2.5),
       anon != null && anon
           ? Image.asset('assets/icon/icons8-anonymous-mask-50.png', scale: 3.0)
@@ -1074,7 +1104,7 @@ Widget filePreview(
 Widget iconNum(icon, int number) {
   return Container(
     decoration: BoxDecoration(
-      color: Colors.black,
+      color: Colors.orange,
       borderRadius: BorderRadius.circular(30),
       boxShadow: const [
         BoxShadow(

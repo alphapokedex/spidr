@@ -347,7 +347,7 @@ List<Map> conMediaList(List<SelectedFile> rdyMedia) {
 conGifWidgets(List gifs) {
   List gifsWidgetList = [];
   if (gifsWidgetList != null) {
-    for (Map g in gifs) {
+    for (Map g in (gifs ?? [])) {
       double scale = g['scale'] ??= g['scale'].toDouble();
       gifsWidgetList.add(
         StaticStackItem(
@@ -359,7 +359,7 @@ conGifWidgets(List gifs) {
       );
     }
   }
-  return gifs;
+  return (gifs ?? []);
 }
 
 checkRepliedMsg(List replies) {

@@ -33,100 +33,105 @@ class ProfileTagList extends StatefulWidget {
 class _ProfileTagListState extends State<ProfileTagList> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
-        itemCount: widget.tagNum,
-        physics: const BouncingScrollPhysics(),
-        itemBuilder: (context, index) {
-          return Stack(
-            children: [
-              GestureDetector(
-                onTap: () async {
-                  if (widget.editable) {
-                    widget.tagController.text = widget.tags.length - 1 < index
-                        ? ''
-                        : widget.tags[index];
-                    if (widget.editTag != null) {
-                      showTextBoxDialog(
-                          context: context,
-                          text: 'Tag',
-                          textEditingController: widget.tagController,
-                          errorText: 'Sorry, your tag can not be empty',
-                          editTag: widget.editTag,
-                          formKey: widget.formKey,
-                          index: index);
+    return Wrap(
+        children: widget.tags.map((e) {
+      final index = widget.tags.indexOf(e);
+      return Column(
+        children: [
+          GestureDetector(
+            onTap: () async {
+              if (widget.editable) {
+                widget.tagController.text =
+                    widget.tags.length - 1 < index ? '' : e;
+                if (widget.editTag != null) {
+                  showTextBoxDialog(
+                      context: context,
+                      text: 'Tag',
+                      textEditingController: widget.tagController,
+                      errorText: 'Sorry, your tag can not be empty',
+                      editTag: widget.editTag,
+                      formKey: widget.formKey,
+                      index: index);
+                } else {
+                  String tag = await showTextBoxDialog(
+                      context: context,
+                      text: 'Tag',
+                      textEditingController: widget.tagController,
+                      errorText: 'Sorry, your tag can not be empty',
+                      formKey: widget.formKey,
+                      index: index);
+                  if (tag != null) {
+                    if (widget.tags.length - 1 < index) {
+                      widget.tags.add(tag);
                     } else {
-                      String tag = await showTextBoxDialog(
-                          context: context,
-                          text: 'Tag',
-                          textEditingController: widget.tagController,
-                          errorText: 'Sorry, your tag can not be empty',
-                          formKey: widget.formKey,
-                          index: index);
-                      if (tag != null) {
-                        if (widget.tags.length - 1 < index) {
-                          widget.tags.add(tag);
-                        } else {
-                          widget.tags[index] = tag;
-                        }
-                        setState(() {});
-                      }
+                      e = tag;
                     }
+                    setState(() {});
                   }
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(right: 9),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: widget.boxColor,
-                    border: Border.all(color: widget.outlineColor, width: 2.0),
-                  ),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 18, vertical: 9),
-                    child: Center(
-                      child: widget.editable
-                          ? Text(
-                              widget.tags.length - 1 < index
-                                  ? '# Add a tag'
-                                  : '# ' + widget.tags[index],
-                              style: TextStyle(color: widget.outlineColor),
+                }
+              }
+            },
+            child: Container(
+              margin: const EdgeInsets.only(right: 9),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  widget.tags.length - 1 < index ? 30 : 10,
+                ),
+                color: widget.boxColor,
+                border: Border.all(
+                    color: widget.tags.length - 1 < index
+                        ? Colors.orange
+                        : widget.outlineColor,
+                    width: 2.0),
+              ),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 18, vertical: 9),
+                child: Center(
+                  child: widget.editable
+                      ? Text(
+                          widget.tags.length - 1 < index
+                              ? '# Add a tag'
+                              : '# ' + widget.tags[index],
+                          style: TextStyle(
+                              color: widget.tags.length - 1 < index
+                                  ? Colors.orange
+                                  : widget.outlineColor),
+                        )
+                      : widget.tags.length - 1 < index
+                          ? const Icon(
+                              Icons.tag,
+                              color: Colors.orange,
                             )
-                          : widget.tags.length - 1 < index
-                              ? const Icon(
-                                  Icons.tag,
-                                  color: Colors.orange,
-                                )
-                              : Text(
-                                  '# ' + widget.tags[index],
-                                  style: TextStyle(color: widget.outlineColor),
-                                ),
-                    ),
-                  ),
+                          : Text(
+                              '# ' + widget.tags[index],
+                              style: TextStyle(color: widget.outlineColor),
+                            ),
                 ),
               ),
-              widget.editable && widget.tags.length - 1 >= index
-                  ? Positioned(
-                      bottom: 9,
-                      right: -3,
-                      child: IconButton(
-                          icon: Icon(Icons.cancel_rounded,
-                              size: 18, color: widget.outlineColor),
-                          onPressed: () {
-                            if (widget.delTag != null) {
-                              widget.delTag(widget.tags[index]);
-                            } else {
-                              setState(() {
-                                widget.tags.removeAt(index);
-                              });
-                            }
-                          }),
-                    )
-                  : const SizedBox.shrink()
-            ],
-          );
-        });
+            ),
+          ),
+          // widget.editable && widget.tags.length - 1 >= index
+          //     ? Positioned(
+          //         bottom: 9,
+          //         right: -3,
+          //         child: IconButton(
+          //             icon: Icon(Icons.cancel_rounded,
+          //                 size: 18, color: widget.outlineColor),
+          //             onPressed: () {
+          //               if (widget.delTag != null) {
+          //                 widget.delTag(widget.tags[index]);
+          //               } else {
+          //                 setState(() {
+          //                   widget.tags.removeAt(index);
+          //                 });
+          //               }
+          //             }),
+          //       )
+          //     : const SizedBox.shrink()
+        ],
+      );
+    }).toList());
   }
 }
 

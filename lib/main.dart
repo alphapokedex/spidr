@@ -12,7 +12,6 @@ import 'package:spidr_app/services/auth.dart';
 import 'package:spidr_app/views/introScreen.dart';
 import 'package:spidr_app/views/pageViewsWrapper.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -67,7 +66,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
       });
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Provider<AuthMethods>(
@@ -76,11 +75,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
         title: 'Spidr',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          scaffoldBackgroundColor: const Color(0xff1F1F1F),
           primaryColor: const Color(0xfffb934d),
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          canvasColor: Colors.transparent,
         ),
         home: userIsLoggedIn != null && userIsLoggedIn
             ? const PageViewsWrapper()

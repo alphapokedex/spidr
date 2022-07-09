@@ -7,8 +7,10 @@ import 'package:spidr_app/helper/helperFunctions.dart';
 import 'package:spidr_app/services/database.dart';
 import 'package:spidr_app/views/chatsScreen.dart';
 import 'package:spidr_app/views/circleMediaScreen.dart';
+import 'package:spidr_app/views/createGroup.dart';
 import 'package:spidr_app/views/myProfilePage.dart';
 import 'package:spidr_app/views/streamScreen.dart';
+import 'package:spidr_app/widgets/bottomSheetWidgets.dart';
 import 'package:spidr_app/widgets/dialogWidgets.dart';
 import 'package:spidr_app/widgets/widget.dart';
 
@@ -58,7 +60,11 @@ class _PageViewsWrapperState extends State<PageViewsWrapper> {
       if (name == null || name == 'null null') {
         if (name == 'null null') spidrIdTextEditingController.text = name;
         await showSpidrIdBoxDialog(
-            context, userDocRef, spidrIdKey, spidrIdTextEditingController);
+          context,
+          userDocRef,
+          spidrIdKey,
+          spidrIdTextEditingController,
+        );
       } else {
         Constants.myName = name;
       }
@@ -102,7 +108,8 @@ class _PageViewsWrapperState extends State<PageViewsWrapper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: _selectedIndex == 2 ? Colors.black : Colors.white,
+      resizeToAvoidBottomInset: false,
       body: ready
           ? PageView(
               controller: pageController,
@@ -116,50 +123,127 @@ class _PageViewsWrapperState extends State<PageViewsWrapper> {
               ],
             )
           : sectionLoadingIndicator(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        elevation: 5.0,
+        backgroundColor: Colors.orange,
+        child: const Icon(
+          Icons.settings_input_antenna_sharp,
+          color: Colors.white,
+        ),
+        onPressed: () {
+          openCameraBttSheet(context: context);
+        },
+      ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.black,
         elevation: 0.0,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            bottomAppBarItem(
-              null,
-              0,
-              true,
-              Icon(
-                Icons.forum_rounded,
-                color: _selectedIndex == 0 ? Colors.white : Colors.grey,
+        notchMargin: 5,
+        shape: const CircularNotchedRectangle(),
+        child: SizedBox(
+          height: kBottomNavigationBarHeight,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              bottomAppBarItem(
+                null,
+                0,
+                true,
+                Column(
+                  children: [
+                    if (_selectedIndex == 0)
+                      Container(
+                        height: 2,
+                        width: 8,
+                        color: Colors.orange,
+                      ),
+                    Expanded(
+                      child: Icon(
+                        Icons.forum_rounded,
+                        color:
+                            _selectedIndex == 0 ? Colors.orange : Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            bottomAppBarItem(
-              null,
-              1,
-              true,
-              Icon(
-                Icons.group,
-                color: _selectedIndex == 1 ? Colors.white : Colors.grey,
+              bottomAppBarItem(
+                null,
+                1,
+                true,
+                Column(
+                  children: [
+                    if (_selectedIndex == 1)
+                      Container(
+                        height: 2,
+                        width: 8,
+                        color: Colors.orange,
+                      ),
+                    Expanded(
+                      child: Icon(
+                        Icons.group,
+                        color:
+                            _selectedIndex == 1 ? Colors.orange : Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            bottomAppBarItem(
-              null,
-              2,
-              true,
-              Icon(
-                Icons.search,
-                color: _selectedIndex == 2 ? Colors.white : Colors.grey,
+              bottomAppBarItem(
+                null,
+                2,
+                true,
+                Column(
+                  children: [
+                    if (_selectedIndex == 2)
+                      Container(
+                        height: 2,
+                        width: 8,
+                        color: Colors.orange,
+                      ),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color:
+                              _selectedIndex == 2 ? Colors.orange : Colors.grey,
+                        ),
+                        child: const Icon(
+                          Icons.search,
+                          size: 18,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            bottomAppBarItem(
-              null,
-              3,
-              true,
-              Icon(
-                Icons.explore,
-                color: _selectedIndex == 3 ? Colors.white : Colors.grey,
+              bottomAppBarItem(
+                null,
+                3,
+                true,
+                Column(
+                  children: [
+                    if (_selectedIndex == 3)
+                      Container(
+                        height: 2,
+                        width: 8,
+                        color: Colors.orange,
+                      ),
+                    Expanded(
+                      child: Icon(
+                        Icons.explore,
+                        color:
+                            _selectedIndex == 3 ? Colors.orange : Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -197,13 +197,13 @@ class _ConversationScreenState extends State<ConversationScreen>
           maxLines: null,
           controller: messageController,
           textCapitalization: TextCapitalization.sentences,
-          decoration: msgInputDec(
+          decoration: darkMsgInputDec(
               context: context,
               hintText: !expired ? 'Message' : 'Expired',
               groupChatId: widget.groupChatId,
               gif: true,
               disabled: expired,
-              fillColor: Colors.white)),
+              fillColor: Colors.black)),
     );
   }
 
@@ -899,7 +899,7 @@ class _ConversationScreenState extends State<ConversationScreen>
             ? Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 height: 54.0,
-                color: Colors.white,
+                color: Colors.black,
                 child: Row(
                   children: [
                     writing
@@ -917,10 +917,12 @@ class _ConversationScreenState extends State<ConversationScreen>
                             context: context,
                             platform: platform,
                             groupChatId: widget.groupChatId,
-                            disabled: expired)
+                            disabled: expired,
+                            color: Colors.orange)
                         : const SizedBox.shrink(),
                     !writing
                         ? callBtt(
+                            color: Colors.orange,
                             context: context,
                             platform: platform,
                             groupId: widget.groupChatId,
@@ -933,7 +935,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                         : const SizedBox.shrink(),
                     textField(expired),
                     const SizedBox(width: 5),
-                    sendChatBtt(
+                    newsendChatBtt(
                         context: context,
                         platform: platform,
                         sendMessage: sendMessage,
@@ -1302,15 +1304,17 @@ class _ConversationScreenState extends State<ConversationScreen>
               disabled = true;
             }
             return Scaffold(
-              backgroundColor: Colors.white,
+              backgroundColor: const Color.fromARGB(255, 32, 32, 41),
               appBar: AppBar(
                   iconTheme: const IconThemeData(
                     color: Colors.black,
                   ),
-                  backgroundColor: Colors.white,
+                  backgroundColor: const Color.fromARGB(255, 32, 32, 41),
                   centerTitle: true,
                   leading: BackButton(
-                    color: !widget.hideBackButton ? Colors.black : Colors.white,
+                    color: !widget.hideBackButton
+                        ? Colors.orange
+                        : Colors.transparent,
                   ),
                   actions: !disabled
                       ? [
@@ -1331,7 +1335,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                           !widget.spectate && admin == widget.uid
                               ? IconButton(
                                   icon: const Icon(Icons.group_add_rounded),
-                                  color: Colors.black,
+                                  color: Colors.orange,
                                   onPressed: () {
                                     Navigator.push(
                                         context,
@@ -1356,7 +1360,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                                   icon: Icon(platform == TargetPlatform.android
                                       ? Icons.settings
                                       : CupertinoIcons.settings),
-                                  color: Colors.black,
+                                  color: Colors.orange,
                                   onPressed: () async {
                                     bool deleted = await Navigator.push(
                                         context,
@@ -1389,7 +1393,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                                     platform == TargetPlatform.android
                                         ? Icons.more_vert
                                         : CupertinoIcons.ellipsis_vertical,
-                                    color: Colors.black,
+                                    color: Colors.orange,
                                   ),
                                   itemBuilder: (BuildContext context) => [
                                         PopupMenuItem(
@@ -1468,7 +1472,7 @@ class _ConversationScreenState extends State<ConversationScreen>
                                 text: '$hashTag ',
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black,
+                                  color: Colors.orange,
                                   fontSize: 12.5,
                                 ),
                               ),
@@ -1487,14 +1491,14 @@ class _ConversationScreenState extends State<ConversationScreen>
                             WidgetSpan(
                               child: Icon(
                                 Icons.timer,
-                                color: Colors.grey,
+                                color: Colors.orange,
                               ),
                             ),
                             TextSpan(
                               text: 'Expired',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.grey,
+                                color: Colors.orange,
                                 fontSize: 12.5,
                               ),
                             ),

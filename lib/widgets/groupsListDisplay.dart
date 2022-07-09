@@ -44,55 +44,46 @@ Widget groupList(String userId) {
       if (snapshot.hasData) {
         if (snapshot.data.docs.length > 0) {
           return StaggeredGrid.count(
-            // padding: EdgeInsets.zero,
-            // physics: const NeverScrollableScrollPhysics(),
-            // shrinkWrap: true,
-            // itemCount: snapshot.data.docs.length,
             crossAxisCount: 2,
             mainAxisSpacing: 9.0,
             crossAxisSpacing: 9.0,
-            // itemBuilder: (context, index) {
-            children: snapshot.data.docs.map(
+            children: snapshot.data.docs.map<Widget>(
               (doc) {
                 String groupId = doc.id;
                 return StreamBuilder(
-                    stream: DatabaseMethods()
-                        .groupChatCollection
-                        .doc(groupId)
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData && snapshot.data.data() != null) {
-                        String hashTag = snapshot.data.data()['hashTag'];
-                        String admin = snapshot.data.data()['admin'];
-                        String profileImg = snapshot.data.data()['profileImg'];
-                        String groupState =
-                            snapshot.data.data()['chatRoomState'];
-                        bool anon = snapshot.data.data()['anon'];
-                        String school = snapshot.data.data()['school'];
-                        String program = snapshot.data.data()['program'];
-                        return groupState != 'invisible'
-                            ? groupTile(
-                                context,
-                                groupId,
-                                hashTag,
-                                admin,
-                                profileImg,
-                                groupState,
-                                anon != null && anon,
-                                school,
-                                program,
-                              )
-                            : const SizedBox.shrink();
-                      } else {
-                        return const SizedBox.shrink();
-                      }
-                    });
+                  stream: DatabaseMethods()
+                      .groupChatCollection
+                      .doc(groupId)
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData && snapshot.data.data() != null) {
+                      String hashTag = snapshot.data.data()['hashTag'];
+                      String admin = snapshot.data.data()['admin'];
+                      String profileImg = snapshot.data.data()['profileImg'];
+                      String groupState = snapshot.data.data()['chatRoomState'];
+                      bool anon = snapshot.data.data()['anon'];
+                      String school = snapshot.data.data()['school'];
+                      String program = snapshot.data.data()['program'];
+                      return groupState != 'invisible'
+                          ? groupTile(
+                              context,
+                              groupId,
+                              hashTag,
+                              admin,
+                              profileImg,
+                              groupState,
+                              anon != null && anon,
+                              school,
+                              program,
+                            )
+                          : const SizedBox.shrink();
+                    } else {
+                      return const SizedBox.shrink();
+                    }
+                  },
+                );
               },
-            ),
-            // staggeredTileBuilder: (index) => StaggeredGridTile.fit(
-            //   crossAxisCellCount: 1,
-            //   child: Container(),
-            // ),
+            ).toList(),
           );
         } else {
           return const SizedBox.shrink();

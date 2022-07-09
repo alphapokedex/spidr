@@ -361,7 +361,18 @@ class _CircleMediaScreenState extends State<CircleMediaScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        // leading: myAvatar(),
+        leading: Constants.myProfileImg != null
+            ? Padding(
+                padding: const EdgeInsets.only(top: 7.5),
+                child: CircleAvatar(
+                  radius: 30,
+                  backgroundImage:
+                      Constants.myProfileImg.startsWith('assets', 0)
+                          ? AssetImage(Constants.myProfileImg)
+                          : NetworkImage(Constants.myProfileImg),
+                ),
+              )
+            : const Icon(Icons.person),
         backgroundColor: Colors.black,
         elevation: 0.0,
         centerTitle: true,
@@ -379,7 +390,15 @@ class _CircleMediaScreenState extends State<CircleMediaScreen> {
                         color: Colors.orange,
                         fontWeight: FontWeight.bold,
                         fontSize: 18)),
-        actions: [snippetBtt(context, platform)],
+        actions: [
+          IconButton(
+            onPressed: null,
+            icon: Icon(
+              Icons.help,
+              color: Colors.orange,
+            ),
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -405,7 +424,7 @@ class _CircleMediaScreenState extends State<CircleMediaScreen> {
                     });
                     getGCMedia();
                   },
-                  items: ['Media', 'Audio', 'PDF']
+                  items: ['All', 'Media', 'Audio', 'PDF']
                       .map((e) => DropdownMenuItem(
                           value: e,
                           child: Text(e,

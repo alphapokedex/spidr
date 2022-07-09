@@ -32,7 +32,8 @@ Widget auxiliaryDisplay(
       gifs != null && gifs.isNotEmpty
           ? displayGifs
               ? Stack(
-                  children: gifs,
+                  children:
+                      gifs.map((e) => Image.network(e['gifUrl'])).toList(),
                 )
               : gifIndicator()
           : const SizedBox.shrink(),

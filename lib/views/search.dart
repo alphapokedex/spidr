@@ -57,11 +57,29 @@ class _SearchScreenState extends State<SearchScreen>
                     searchText = val;
                   });
                 },
-                decoration: const InputDecoration(
-                    icon: Icon(Icons.search),
-                    border: InputBorder.none,
-                    hintText: 'Search',
-                    hintStyle: TextStyle(color: Colors.grey)),
+                decoration: InputDecoration(
+                  icon: const Icon(Icons.search),
+                  border: InputBorder.none,
+                  hintText: 'Search for groups...',
+                  hintStyle: const TextStyle(color: Colors.grey),
+                  suffix: GestureDetector(
+                    onTap: () {
+                      searchEditingController.clear();
+                    },
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.red,
+                      ),
+                      padding: const EdgeInsets.all(1),
+                      child: const Icon(
+                        Icons.clear,
+                        color: Colors.white,
+                        size: 15,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
             bottom: TabBar(

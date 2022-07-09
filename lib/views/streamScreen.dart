@@ -235,8 +235,9 @@ class _StreamScreenState extends State<StreamScreen>
                       return Center(
                           child: Image.asset('assets/images/convoExample.png'));
                     } else {
-                      return Center(
-                          child: Image.asset('assets/icon/Spidr_News.png'));
+                      // return Center(
+                      //     child: Image.asset('assets/icon/Spidr_News.png'));
+                      return Container();
                     }
                   }
                 });
@@ -500,6 +501,18 @@ class _StreamScreenState extends State<StreamScreen>
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
+        leading: Constants.myProfileImg != null
+            ? Padding(
+                padding: const EdgeInsets.only(top: 7.5),
+                child: CircleAvatar(
+                  radius: 30,
+                  backgroundImage:
+                      Constants.myProfileImg.startsWith('assets', 0)
+                          ? AssetImage(Constants.myProfileImg)
+                          : NetworkImage(Constants.myProfileImg),
+                ),
+              )
+            : const Icon(Icons.person),
         title: Container(
           padding: const EdgeInsets.symmetric(horizontal: 18),
           decoration: BoxDecoration(
@@ -516,10 +529,19 @@ class _StreamScreenState extends State<StreamScreen>
             decoration: const InputDecoration(
                 icon: Icon(Icons.search),
                 border: InputBorder.none,
-                hintText: 'Search',
+                hintText: 'Search for circles',
                 hintStyle: TextStyle(color: Colors.grey)),
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: null,
+            icon: Icon(
+              Icons.help,
+              color: Colors.orange,
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: [

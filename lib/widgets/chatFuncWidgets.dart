@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +16,13 @@ Widget filesPickerBtt(
     String personalChatId,
     bool friend,
     String contactId,
-    bool disabled}) {
+    bool disabled,
+    Color color}) {
   return IconButton(
-      icon: const Icon(Icons.add_circle),
+      icon: Icon(
+        Icons.add_circle,
+        color: color,
+      ),
       onPressed: disabled == null || !disabled
           ? () {
               openUploadBttSheet(
@@ -39,6 +45,7 @@ Widget callBtt({
   ClientRole role,
   bool disabled = false,
   Map inCallUsers,
+    Color color
   // String loudUser
 }) {
   inCallUsers.removeWhere(
@@ -66,7 +73,9 @@ Widget callBtt({
       ? IconButton(
           icon: Icon(platform == TargetPlatform.android
               ? Icons.phone
-              : CupertinoIcons.phone_fill),
+                : CupertinoIcons.phone_fill,
+            color: color,
+          ),
           onPressed: !disabled ? toChat : null,
         )
       : GestureDetector(
@@ -114,5 +123,31 @@ Widget sendChatBtt(
             }
           : null,
     ),
+  );
+}
+
+Widget newsendChatBtt(
+    {BuildContext context,
+    TargetPlatform platform,
+    Function sendMessage,
+    Map replyInfo,
+    bool disabled}) {
+  return IconButton(
+    icon: Icon(
+      Platform.isAndroid ? Icons.send : CupertinoIcons.arrow_up_circle_fill,
+      color: Colors.orange,
+    ),
+    iconSize: 25.0,
+    color: Colors.white,
+    key: UniqueKey(),
+    onPressed: disabled == null || !disabled
+        ? () {
+            if (replyInfo == null || replyInfo.isEmpty) {
+              sendMessage();
+            } else {
+              sendMessage(inChatReply: replyInfo);
+            }
+          }
+        : null,
   );
 }

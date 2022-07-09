@@ -493,268 +493,212 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           Stack(
                             alignment: Alignment.topCenter,
                             children: [
-                              banner != null && banner.isNotEmpty
-                                  ? bannerSlide(
-                                      context: context,
-                                      height: height * 0.35,
-                                      banner: banner,
-                                      userId: Constants.myUserId,
-                                      delTag: deleteMyTag,
-                                      editTag: addOrEditMyTag,
-                                      editAboutMe: editAboutMe,
-                                      formKey: formKey,
-                                      quoteController: quoteController,
-                                      tagController: tagController,
-                                    )
-                                  : GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    BannerScreen(
-                                                      userId:
-                                                          Constants.myUserId,
-                                                      delTag: deleteMyTag,
-                                                      editTag: addOrEditMyTag,
-                                                      editAboutMe: editAboutMe,
-                                                      formKey: formKey,
-                                                      quoteController:
-                                                          quoteController,
-                                                      tagController:
-                                                          tagController,
-                                                    )));
-                                      },
-                                      child: Container(
-                                        height: height * 0.35,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        color: Theme.of(context)
-                                            .scaffoldBackgroundColor,
-                                        child: Center(
-                                          child: Text(
-                                            'Add Photos :)',
-                                            textAlign: TextAlign.center,
-                                            style: GoogleFonts.varelaRound(
-                                              color: Colors.orange,
-                                              fontWeight: FontWeight.bold,
+                              ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                  bottomLeft: Radius.circular(20),
+                                  bottomRight: Radius.circular(20),
+                                ),
+                                child: banner != null && banner.isNotEmpty
+                                    ? bannerSlide(
+                                        context: context,
+                                        height: height * 0.3,
+                                        banner: banner,
+                                        userId: Constants.myUserId,
+                                        delTag: deleteMyTag,
+                                        editTag: addOrEditMyTag,
+                                        editAboutMe: editAboutMe,
+                                        formKey: formKey,
+                                        quoteController: quoteController,
+                                        tagController: tagController,
+                                      )
+                                    : GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      BannerScreen(
+                                                        userId:
+                                                            Constants.myUserId,
+                                                        delTag: deleteMyTag,
+                                                        editTag: addOrEditMyTag,
+                                                        editAboutMe:
+                                                            editAboutMe,
+                                                        formKey: formKey,
+                                                        quoteController:
+                                                            quoteController,
+                                                        tagController:
+                                                            tagController,
+                                                      )));
+                                        },
+                                        child: Container(
+                                          height: height * 0.3,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          color: Theme.of(context)
+                                              .scaffoldBackgroundColor,
+                                          child: Center(
+                                            child: Text(
+                                              'Add Photos :)',
+                                              textAlign: TextAlign.center,
+                                              style: GoogleFonts.varelaRound(
+                                                color: Colors.orange,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
+                              ),
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const SizedBox(
-                                    width: 54,
-                                  ),
                                   Container(
-                                    height: 81,
-                                    width: 81,
-                                    margin:
-                                        EdgeInsets.only(top: height * 0.275),
+                                    height: 200,
+                                    width: 200,
+                                    margin: EdgeInsets.only(top: height * 0.16),
                                     decoration: const BoxDecoration(
                                       color: Colors.white,
                                       shape: BoxShape.circle,
                                       // boxShadow: [circleShadow],
                                     ),
                                     child: Stack(
+                                      clipBehavior: Clip.none,
                                       children: [
                                         Padding(
                                           key: key2,
                                           padding: const EdgeInsets.all(4.5),
                                           child:
-                                              avatarImg(profileImg, 36, false),
+                                              avatarImg(profileImg, 150, false),
                                         ),
-                                        GestureDetector(
-                                          onTap: () async {
-                                            if (!uploading) {
-                                              setState(() {
-                                                uploading = true;
-                                              });
-                                              String imgUrl =
-                                                  await UploadMethods(
-                                                          profileImg:
-                                                              profileImg)
-                                                      .pickAndUploadMedia(
-                                                          'USER_PROFILE_IMG',
-                                                          false);
-                                              setState(() {
-                                                uploading = false;
-                                              });
-                                              if (imgUrl != null) {
+                                        Positioned(
+                                          bottom: 5,
+                                          right: 5,
+                                          child: GestureDetector(
+                                            onTap: () async {
+                                              int newImgIndex =
+                                                  await showDialog(
+                                                      context: context,
+                                                      builder: (BuildContext
+                                                          context) {
+                                                        return SelectAnonImgDialog(
+                                                            imgIndex);
+                                                      });
+                                              if (newImgIndex != null &&
+                                                  imgIndex != newImgIndex) {
                                                 DatabaseMethods(
                                                         uid: Constants.myUserId)
-                                                    .replaceUserPic(imgUrl);
+                                                    .replaceUserAnonPic(
+                                                        newImgIndex);
                                               }
-                                            }
-                                          },
-                                          child: Align(
-                                              alignment: Alignment.bottomRight,
-                                              child: !uploading
-                                                  ? imgEditBtt()
-                                                  : SizedBox(
-                                                      height: 25,
-                                                      width: 25,
-                                                      child:
-                                                          sectionLoadingIndicator())),
+                                            },
+                                            child: Container(
+                                              height: 54,
+                                              width: 54,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                shape: BoxShape.circle,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.5),
+                                                    blurRadius: 7,
+                                                    offset: const Offset(
+                                                      0,
+                                                      3,
+                                                    ), // changes position of shadow
+                                                  ),
+                                                ],
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(4.5),
+                                                child: avatarImg(
+                                                    anonImg, 24, false),
+                                              ),
+                                            ),
+                                          ),
                                         )
                                       ],
-                                    ),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () async {
-                                      int newImgIndex = await showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return SelectAnonImgDialog(
-                                                imgIndex);
-                                          });
-                                      if (newImgIndex != null &&
-                                          imgIndex != newImgIndex) {
-                                        DatabaseMethods(uid: Constants.myUserId)
-                                            .replaceUserAnonPic(newImgIndex);
-                                      }
-                                    },
-                                    child: Container(
-                                      height: 54,
-                                      width: 54,
-                                      margin:
-                                          EdgeInsets.only(top: height * 0.3),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.5),
-                                            spreadRadius: 5,
-                                            blurRadius: 7,
-                                            offset: const Offset(0,
-                                                3), // changes position of shadow
-                                          ),
-                                        ],
-                                      ),
-                                      child: Stack(
-                                        key: key1,
-                                        alignment: Alignment.center,
-                                        clipBehavior: Clip.none,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(4.5),
-                                            child:
-                                                avatarImg(anonImg, 24, false),
-                                          ),
-                                          Positioned(
-                                            top: 54,
-                                            child: Image.asset(
-                                                'assets/icon/icons8-anonymous-mask-50.png',
-                                                scale: 2.5),
-                                          )
-                                        ],
-                                      ),
                                     ),
                                   ),
                                 ],
                               ),
                             ],
                           ),
-                          Column(
-                            children: [
-                              Text(
-                                Constants.myName,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
-                              ),
-                              Text(
-                                Constants.myEmail,
-                                style: const TextStyle(color: Colors.black),
-                              ),
-                            ],
+                          SizedBox(
+                            height: height * 0.01,
+                          ),
+                          Text(
+                            "@" + Constants.myName,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                                color: Colors.black),
                           ),
                           SizedBox(
-                            height: height * 0.05,
+                            height: height * 0.01,
                           ),
-                          quote.isEmpty
-                              ? GestureDetector(
-                                  key: key3,
-                                  onTap: () {
-                                    showTextBoxDialog(
-                                        context: context,
-                                        text: 'About Me',
-                                        textEditingController: quoteController,
-                                        errorText:
-                                            'Sorry, this can not be empty',
-                                        editQuote: editAboutMe,
-                                        formKey: formKey);
-                                  },
-                                  child: infoEditBtt(
-                                      context: context, text: 'About Me'),
-                                )
-                              : Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 36),
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        infoText(
-                                            text: quote,
-                                            textAlign: TextAlign.center),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        GestureDetector(
-                                            onTap: () {
-                                              showTextBoxDialog(
-                                                  context: context,
-                                                  text: 'About Me',
-                                                  textEditingController:
-                                                      quoteController,
-                                                  errorText:
-                                                      'Sorry, about me can not be empty',
-                                                  editQuote: editAboutMe,
-                                                  formKey: formKey);
-                                            },
-                                            child: infoEditIcon())
-                                      ]),
-                                ),
+                          Text(
+                            quote,
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            height: height * 0.01,
+                          ),
+                          ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.orange,
+                              onSurface: Colors.white,
+                              minimumSize: Size(width * 0.7, 50),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            icon: const Icon(Icons.edit),
+                            onPressed: () {
+                              showTextBoxDialog(
+                                  context: context,
+                                  text: 'About Me',
+                                  textEditingController: quoteController,
+                                  errorText: 'Sorry, about me can not be empty',
+                                  editQuote: editAboutMe,
+                                  formKey: formKey);
+                            },
+                            label: const Text('Edit Profile'),
+                          ),
                           SizedBox(
                             height: height * 0.025,
                           ),
-                          storyStreamWrapper(
-                            storyStream: storyStream,
-                            align: Alignment.center,
-                          ),
-                          SizedBox(
-                            height: height * 0.015,
-                          ),
                           Container(
-                              key: key4,
-                              height: 45,
-                              alignment: Alignment.center,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 18),
-                              child: ProfileTagList(
-                                  editable: true,
-                                  tagController: tagController,
-                                  tags: tags,
-                                  editTag: addOrEditMyTag,
-                                  delTag: deleteMyTag,
-                                  formKey: formKey,
-                                  tagNum: tags.length < Constants.maxTags
-                                      ? tags.length + 1
-                                      : Constants.maxTags)),
+                            key: key4,
+                            height: 45,
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.symmetric(horizontal: 18),
+                            child: ProfileTagList(
+                              editable: true,
+                              tagController: tagController,
+                              tags: tags,
+                              editTag: addOrEditMyTag,
+                              delTag: deleteMyTag,
+                              formKey: formKey,
+                              tagNum: tags.length < Constants.maxTags
+                                  ? tags.length + 1
+                                  : Constants.maxTags,
+                            ),
+                          ),
                           SizedBox(
                             height: height * 0.05,
                           ),
                           Container(
-                              key: key5,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 27),
-                              child: groupList(Constants.myUserId))
+                            key: key5,
+                            padding: const EdgeInsets.symmetric(horizontal: 27),
+                            child: groupList(Constants.myUserId),
+                          )
                         ],
                       ),
                     ),

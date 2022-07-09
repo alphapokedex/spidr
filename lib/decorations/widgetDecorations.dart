@@ -187,6 +187,88 @@ msgInputDec({
   );
 }
 
+darkMsgInputDec({
+  BuildContext context,
+  String hintText,
+  String groupChatId,
+  String personalChatId,
+  bool friend,
+  String contactId,
+  bool disabled,
+  bool gif = false,
+  hintColor = Colors.orange,
+  fillColor = Colors.black,
+}) {
+  return InputDecoration(
+    hintText: hintText,
+    hintStyle: TextStyle(
+        fontSize: 14.0, color: hintColor, fontStyle: FontStyle.italic),
+    filled: true,
+    fillColor: fillColor,
+    suffixIcon: gif
+        ? IconButton(
+            icon: const Icon(
+              Icons.gif,
+              color: Colors.orange,
+            ),
+            onPressed: disabled == null || !disabled
+                ? () async {
+                    GiphyGif gif = await GiphyGet.getGif(
+                        context: context,
+                        apiKey: Constants.giphyAPIKey,
+                        tabColor: Colors.orange,
+                        searchText: 'Search GIPHY');
+                    if (gif != null) {
+                      if (gif.images.original.webp != null) {
+                        Map imgObj = {
+                          'imgUrl': gif.images.original.webp,
+                          'imgName': gif.title,
+                          'gif': gif.isSticker == 0,
+                          'sticker': gif.isSticker == 1
+                        };
+                        DateTime now = DateTime.now();
+
+                        if (groupChatId != null) {
+                          DatabaseMethods().addConversationMessages(
+                            groupChatId: groupChatId,
+                            message: '',
+                            username: Constants.myName,
+                            userId: Constants.myUserId,
+                            time: now.microsecondsSinceEpoch,
+                            imgObj: imgObj,
+                          );
+                        } else {
+                          DatabaseMethods(uid: Constants.myUserId)
+                              .addPersonalMessage(
+                                  personalChatId: personalChatId,
+                                  text: '',
+                                  userName: Constants.myName,
+                                  sendTime: now.microsecondsSinceEpoch,
+                                  imgMap: imgObj,
+                                  contactId: contactId,
+                                  friend: friend);
+                        }
+                      } else {
+                        Fluttertoast.showToast(
+                          msg: 'Sorry, this gif is corrupted',
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.SNACKBAR,
+                          timeInSecForIosWeb: 3,
+                          backgroundColor: Colors.black,
+                          textColor: Colors.white,
+                          fontSize: 14.0,
+                        );
+                      }
+                    }
+                  }
+                : null,
+          )
+        : null,
+    contentPadding:
+        const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+  );
+}
+
 BoxDecoration shadowEffect(double radius) {
   return BoxDecoration(
     borderRadius: BorderRadius.all(Radius.circular(radius)),
